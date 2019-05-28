@@ -1,10 +1,10 @@
-package Controller;
+ package Controller;
 
 /**
  *
  * @author Joaquin
  */
-public class GestorImportación {
+public class GestorImportacion {
     private String NombreArchivo;
     private Controlador Ctrl = Controlador.getInstance();
     
@@ -12,6 +12,9 @@ public class GestorImportación {
         this.NombreArchivo = NombreArchivo;
     }
     
-    public void LineaArchivo(){
+    public void LineaArchivo(String TareaPadre){
+        /*Aqui van todos los atributos*/
+        Ctrl.getDTOActividad().getUnaActividad().setTareaPadre(TareaPadre);
+        
     }    
 }
