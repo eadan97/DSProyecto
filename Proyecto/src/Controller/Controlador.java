@@ -6,12 +6,16 @@ package Controller;
  */
 public class Controlador {
     private static Controlador singleton;
-    private GestorImportación gImportacion;
+    private GestorImportacion gImportacion;
+    private GestorActividad gActividad;
     private DTOProyecto DTOProyecto;
+    private DTOActividad DTOActividad;
     
     private Controlador(){
-        gImportacion = new GestorImportación();
+        gImportacion = new GestorImportacion();
+        gActividad = new GestorActividad(); 
         DTOProyecto = new DTOProyecto();
+        DTOActividad = new DTOActividad();
     }
     
     private synchronized static void setInstance(){
@@ -31,6 +35,14 @@ public class Controlador {
     
     public DTOProyecto getDTOProyecto() {
         return DTOProyecto;
+    }
+    
+    public DTOActividad getDTOActividad(){
+        return DTOActividad;
+    }
+    
+    public void CrearActividad(){
+        gActividad.CrearActividad(DTOActividad.getUnaActividad());
     }
     
     
