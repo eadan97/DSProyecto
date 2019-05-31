@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Proyecto/src/Controller/DTOActividad.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Proyecto/src/Controller/DTOProyecto.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Proyecto/src/proyecto/Proyecto.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Proyecto/src/Controller/GestorActividad.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Proyecto/src/Controller/Controlador.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Proyecto/src/Model/Actividad.java</file>
-            <file>file:/C:/Users/Usuario/Documents/NetBeansProjects/Proyecto/src/Model/Proyecto.java</file>
+            <file>file:/C:/Users/Usuario/Documents/Diseño%20Software/proyecto1/DSProyecto/Proyecto/src/Controller/GestorActividad.java</file>
+            <file>file:/C:/Users/Usuario/Documents/Diseño%20Software/proyecto1/DSProyecto/Proyecto/src/Controller/DTOActividad.java</file>
+            <file>file:/C:/Users/Usuario/Documents/Diseño%20Software/proyecto1/DSProyecto/Proyecto/src/Controller/Controlador.java</file>
+            <file>file:/C:/Users/Usuario/Documents/Diseño%20Software/proyecto1/DSProyecto/Proyecto/src/Controller/GestorImportacion.java</file>
+            <file>file:/C:/Users/Usuario/Documents/Diseño%20Software/proyecto1/DSProyecto/Proyecto/src/Model/Actividad.java</file>
+            <file>file:/C:/Users/Usuario/Documents/Diseño%20Software/proyecto1/DSProyecto/Proyecto/src/Controller/DTOProyecto.java</file>
         </group>
     </open-files>
 </project-private>
