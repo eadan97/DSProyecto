@@ -12,7 +12,7 @@ public class GestorImportacion {
         this.NombreArchivo = NombreArchivo;
     }
     
-    public void LineaArchivo(String TareaPadre){
+    public void LineaArchivo(int TareaPadre){
         /*Aqui van todos los atributos*/
         Ctrl.getDTOActividad().getUnaActividad().setTareaPadre(TareaPadre);
         
