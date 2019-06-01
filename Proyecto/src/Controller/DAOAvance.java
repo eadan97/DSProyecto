@@ -5,17 +5,42 @@
  */
 package Controller;
 
+import Model.Avance;
+import Model.ConexionBD;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Joaquin
  */
 class DAOAvance implements DAOInterface {
-
+    Connection conn;
+    
+    public DAOAvance(){
+        this.conn = null;
+    }
+    
     @Override
     public boolean Registrar(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Avance avan = (Avance) obj;
+        System.out.println("Proceso de registrar un avance");
+        try {
+            this.conn = ConexionBD.getInstance().getConexion();
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(DAOActividad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //cierra la conexion
+        ConexionBD.getInstance().desconectar();
+        return true;
     }
 
     @Override
@@ -27,5 +52,145 @@ class DAOAvance implements DAOInterface {
     public Object Recuperar(Object clave) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+        /*Propio de cada gestor*/
+    private java.sql.Date sqlDate(Date d) {
+        return d!=null ? new java.sql.Date(d.getTime()) : null;
+    }
+    
+    public void insertarAvance(Avance a) {
+        CallableStatement cstmt = null;
+        try {
+            cstmt = conn.prepareCall("{call insertarAvance(?,?,?,?,?,?)}");
+
+            cstmt.setObject(1, a.getIdAvance(), Types.INTEGER);
+            cstmt.setObject(2, a.getIdActividad(), Types.INTEGER);
+            cstmt.setDate(3, sqlDate((Date) a.getFechaAvance()));
+            cstmt.setObject(4, a.getHorasDedicadas(), Types.INTEGER);
+            cstmt.setObject(5, a.getTipoAvance(), Types.INTEGER);
+            cstmt.setString(6, a.getDescripcion());
+
+            cstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cstmt!=null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        }
+    }
+
+    public Avance leerAvance(Integer idAvance) {
+        CallableStatement cstmt = null;
+        Avance a = new Avance();
+        try {
+            cstmt = conn.prepareCall("{call leerAvance(?)}");
+            
+            cstmt.setObject(1, idAvance, Types.INTEGER);
+            ResultSet rs = cstmt.executeQuery();
+            rs.next();
+            a = new Avance(idAvance,
+                    (Integer) rs.getObject(1),
+                    rs.getDate(2),
+                    (Integer) rs.getObject(3),
+                    (Integer) rs.getObject(4),
+                    rs.getString(5));
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cstmt!=null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        }
+        return a;
+    }
+
+    public void actualizarAvance(Avance a) {
+        CallableStatement cstmt = null;
+        try {
+            cstmt = conn.prepareCall("{call actualizarAvance(?,?,?,?,?,?)}");
+            
+            cstmt.setObject(1, a.getIdAvance(), Types.INTEGER);
+            cstmt.setObject(2, a.getIdActividad(), Types.INTEGER);
+            cstmt.setDate(3, sqlDate((Date) a.getFechaAvance()));
+            cstmt.setObject(4, a.getHorasDedicadas(), Types.INTEGER);
+            cstmt.setObject(5, a.getTipoAvance(), Types.INTEGER);
+            cstmt.setString(6, a.getDescripcion());
+
+            cstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cstmt!=null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        }
+    }
+
+    public void borrarAvance(Integer idAvance) {
+        CallableStatement cstmt = null;
+        try {;
+            cstmt = conn.prepareCall("{call borrarAvance(?)}");
+
+            cstmt.setObject(1, idAvance, Types.INTEGER);
+            
+            cstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cstmt!=null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        }
+    }
+
+
     
 }

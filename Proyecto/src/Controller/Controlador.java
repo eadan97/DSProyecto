@@ -56,8 +56,5 @@ public class Controlador {
     public void CrearAvance(){
         gAvance.CrearAvance(DTOAvance.getUnAvance());
     }
-    
-    
-    
-    
+
 }
