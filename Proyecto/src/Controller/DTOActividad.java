@@ -14,7 +14,7 @@ public class DTOActividad {
         unaActividad = new Actividad();
     }
     
-   public Actividad getUnaActivida() {
+   public Actividad getUnaActividad() {
         return unaActividad;
     }
 
