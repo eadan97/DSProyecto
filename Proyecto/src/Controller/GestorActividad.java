@@ -9,11 +9,15 @@ import Model.Actividad;
 public class GestorActividad {
     private  DAOActividad DAOAct;
     
-    public void CrearActividad(Actividad actividad){
+    public GestorActividad(){
+        this.DAOAct = new DAOActividad();
+    } 
+    
+    public boolean CrearActividad(Actividad actividad){
+        return DAOAct.Registrar(actividad);
     }
     
     public void ConsultarActividad(int TaskId){
         
     }
-    
 }

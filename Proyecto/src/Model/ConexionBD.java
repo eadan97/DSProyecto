@@ -21,7 +21,8 @@ import java.util.logging.Logger;
  */
 public class ConexionBD {
     private static ConexionBD instance;
-    //String connectionUrl = "jdbc:sqlserver://(localdb)\\MSSQLLocalDB;databaseName=Diseño;integratedSecurity=true";
+    Connection conn ;
+    
     private String connectionUrl = "jdbc:jtds:sqlserver://.;instance=LOCALDB#BDEC231B;databaseName=Diseño;namedPipe=true;integratedSecurity=true";
     
     private ConexionBD () {
@@ -34,175 +35,27 @@ public class ConexionBD {
         return instance;
     }
     
+    public Connection getConexion() throws SQLException{
+        // se conecta a la bd y devuelve la conexion
+        conn = DriverManager.getConnection(connectionUrl);
+        return conn;
+    }
+    
+    public boolean desconectar(){
+        // se conecta a la bd y devuelve la conexion
+        conn = null;
+        return true;
+    }
+    
+    
+    
+    /*Propio de cada gestor*/
     private java.sql.Date sqlDate(Date d) {
         return d!=null ? new java.sql.Date(d.getTime()) : null;
     }
     
-    public void insertarActividad(Actividad a) {
-        Connection con = null;
-        CallableStatement cstmt = null;
-        try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call insertarActividad(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+    
 
-            cstmt.setObject(1, a.getIdActividad(), Types.INTEGER);
-            cstmt.setObject(2, a.getIdTarea(), Types.INTEGER);
-            cstmt.setDate(3, sqlDate(a.getFechaCreacion()));
-            cstmt.setDate(4, sqlDate(a.getFechaCompletado()));
-            cstmt.setDate(5,  sqlDate(a.getFechaUltimaModificacion()));
-            cstmt.setString(6, a.getNombreTarea());
-            cstmt.setObject(7, a.getIdUsuario(), Types.INTEGER);
-            cstmt.setString(8, a.getEmailAsignado());
-            cstmt.setDate(9, sqlDate(a.getFechaInicio()));
-            cstmt.setDate(10,  sqlDate(a.getFechaFin()));
-            cstmt.setString(11, a.getEtiqueta());
-            cstmt.setString(12, a.getNota());
-            cstmt.setObject(13, a.getIdProyecto(), Types.INTEGER);
-            cstmt.setObject(14, a.getTareaPadre(), Types.INTEGER);
-
-            cstmt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if(cstmt!=null) {
-                try {
-                    cstmt.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
-        }
-    }
-
-    public Actividad leerActividad(Integer idActividad) {
-        Actividad a = null;
-        Connection con = null;
-        CallableStatement cstmt = null;
-        try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call leerActividad(?)}");
-            
-            cstmt.setObject(1, idActividad, Types.INTEGER);
-            ResultSet rs = cstmt.executeQuery();
-            rs.next();
-            a = new Actividad(idActividad,
-                    (Integer) rs.getObject(1),
-                    rs.getDate(2),
-                    rs.getDate(3),
-                    rs.getDate(4),
-                    rs.getString(5),
-                    (Integer) rs.getObject(6),
-                    rs.getString(7),
-                    rs.getDate(8),
-                    rs.getDate(9),
-                    rs.getString(10),
-                    rs.getString(11),
-                    (Integer) rs.getObject(12),
-                    (Integer) rs.getObject(13));
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if(cstmt!=null) {
-                try {
-                    cstmt.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
-        }
-        return a;
-    }
-
-    public void actualizarActividad(Actividad a) {
-        Connection con = null;
-        CallableStatement cstmt = null;
-        try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call actualizarActividad(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
-            
-            cstmt.setObject(1, a.getIdActividad(), Types.INTEGER);
-            cstmt.setObject(2, a.getIdTarea(), Types.INTEGER);
-            cstmt.setDate(3, sqlDate(a.getFechaCreacion()));
-            cstmt.setDate(4, sqlDate(a.getFechaCompletado()));
-            cstmt.setDate(5,  sqlDate(a.getFechaUltimaModificacion()));
-            cstmt.setString(6, a.getNombreTarea());
-            cstmt.setObject(7, a.getIdUsuario(), Types.INTEGER);
-            cstmt.setString(8, a.getEmailAsignado());
-            cstmt.setDate(9,  sqlDate(a.getFechaInicio()));
-            cstmt.setDate(10,  sqlDate(a.getFechaFin()));
-            cstmt.setString(11, a.getEtiqueta());
-            cstmt.setString(12, a.getNota());
-            cstmt.setObject(13, a.getIdProyecto(), Types.INTEGER);
-            cstmt.setObject(14, a.getTareaPadre(), Types.INTEGER);
-
-            cstmt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if(cstmt!=null) {
-                try {
-                    cstmt.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
-        }
-    }
-
-    public void borrarActividad(Integer idActividad) {
-        Connection con = null;
-        CallableStatement cstmt = null;
-        try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call borrarActividad(?)}");
-            
-            cstmt.setObject(1, idActividad, Types.INTEGER);
-
-            cstmt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if(cstmt!=null) {
-                try {
-                    cstmt.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
-        }
-    }
 
     public void insertarAvance(Avance a) {
         Connection con = null;

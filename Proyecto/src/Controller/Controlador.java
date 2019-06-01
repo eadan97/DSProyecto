@@ -8,14 +8,18 @@ public class Controlador {
     private static Controlador singleton;
     private GestorImportacion gImportacion;
     private GestorActividad gActividad;
+    private GestorAvance gAvance;
     private DTOProyecto DTOProyecto;
     private DTOActividad DTOActividad;
+    private DTOAvance DTOAvance;
     
     private Controlador(){
         gImportacion = new GestorImportacion();
         gActividad = new GestorActividad(); 
+        gAvance = new GestorAvance();
         DTOProyecto = new DTOProyecto();
         DTOActividad = new DTOActividad();
+        DTOAvance = new DTOAvance();
     }
     
     private synchronized static void setInstance(){
@@ -41,9 +45,19 @@ public class Controlador {
         return DTOActividad;
     }
     
+    public DTOAvance getDTOAvance(){
+        return DTOAvance;
+    }
+    
     public void CrearActividad(){
         gActividad.CrearActividad(DTOActividad.getUnaActividad());
     }
+    
+    public void CrearAvance(){
+        gAvance.CrearAvance(DTOAvance.getUnAvance());
+    }
+    
+    
     
     
 }
