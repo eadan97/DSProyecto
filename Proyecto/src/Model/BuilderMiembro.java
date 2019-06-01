@@ -9,7 +9,7 @@ package Model;
  *
  * @author aleta
  */
-public class BuilderMiembro implements ReporteBuilder {
+public class BuilderMiembro extends ReporteBuilder {
 
     @Override
     public void Consultar() {

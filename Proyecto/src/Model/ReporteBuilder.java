@@ -9,6 +9,8 @@ package Model;
  *
  * @author aleta
  */
-public class ReporteBuilder {
+public abstract class ReporteBuilder {
     
+   abstract void Consultar();
+   abstract void GenerarReporte();
 }
