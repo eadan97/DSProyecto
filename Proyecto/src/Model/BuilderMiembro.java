@@ -5,21 +5,27 @@
  */
 package Model;
 
+import java.util.Scanner;
+
 /**
  *
  * @author aleta
  */
 public class BuilderMiembro extends ReporteBuilder {
 
-    @Override
-    public void Consultar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
-    public void GenerarReporte() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        public void GenerarReporte() {
+        
+        String Miembro;
+       
+        Scanner entrada = new Scanner (System.in);
+        
+        System.out.println("Generando Reporte con Respecto a usuario Especifico");
+        System.out.println("Cual es el Nombre del Usuario");
+        Miembro= entrada.nextLine();
+        
+        //llamar a base y hacer query
+        
     }
-    
-    
 }

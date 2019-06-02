@@ -5,10 +5,34 @@
  */
 package Model;
 
+import java.util.Date;
+
 /**
  *
  * @author aleta
  */
 public class Reporte {
+
+    private Date FechaSolicitudReporte;
     
+    
+            
+    
+  /*
+    
+    public  void   ReporteBD () {
+            System.out.println("mandar a pedir reporte a la base");
+            
+}
+    public void ReporteFechaBD(){
+        
+    }
+    public void MostrarPDF(){
+        
+    }
+    
+    public void MostrarPantalla(){
+        
+    }
+    */
 }

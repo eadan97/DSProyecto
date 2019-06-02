@@ -11,6 +11,17 @@ package Model;
  */
 public abstract class ReporteBuilder {
     
-   abstract void Consultar();
+   protected Reporte Reporte;
+   
+   public Reporte getReporte(){
+    return Reporte;
+}
+   
+   public void crearReporte (){
+       Reporte= new Reporte();
+   }
+    
+
    abstract void GenerarReporte();
+   
 }

@@ -23,7 +23,9 @@ public class ConexionBD {
     private static ConexionBD instance;
     Connection conn ;
     
-    private String connectionUrl = "jdbc:jtds:sqlserver://.;instance=LOCALDB#BDEC231B;databaseName=Diseño;namedPipe=true;integratedSecurity=true";
+    //private String connectionUrl = "jdbc:jtds:sqlserver://.;instance=LOCALDB#BDEC231B;databaseName=Diseño;namedPipe=true;integratedSecurity=true";
+     String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=Diseño";
+
     
     private ConexionBD () {
     }

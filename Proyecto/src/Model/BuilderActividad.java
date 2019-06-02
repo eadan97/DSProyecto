@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.Scanner;
+
 /**
  *
  * @author aleta
@@ -12,13 +14,17 @@ package Model;
 public class BuilderActividad extends ReporteBuilder{
 
     @Override
-    public void Consultar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void GenerarReporte() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        String Actividad;
+        Scanner entrada = new Scanner (System.in);
+        
+        System.out.println("Generando Reporte con Respecto a Actividad Especifica");
+        System.out.println("Cual es el Nombre de la Actividad");
+        Actividad= entrada.nextLine();
+        
+        //llamar a base y hacer query
+        
     }
     
 }
