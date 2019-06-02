@@ -34,7 +34,13 @@ public class Controlador {
     }
     
     public void ImportarArchivo(String path){
-        gImportacion.LeerArchivo(path);
+        try{
+            gImportacion.LeerArchivo(path);
+        }
+        catch(Exception e){
+            // TODO: Reportar el error
+        }
+        
     }
     
     public DTOProyecto getDTOProyecto() {
