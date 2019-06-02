@@ -68,6 +68,7 @@ public class Proyecto {
         System.out.println("Se agrego correctamente");  
         
         conexion.desconectar();
+        System.out.println("nuevo borrar");
     }
     
 }
