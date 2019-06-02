@@ -27,7 +27,6 @@ public class Actividad {
     private int idProyecto;
     private int tareaPadre;
 
-    private int nuevo;
     
     public Actividad() {
     }
