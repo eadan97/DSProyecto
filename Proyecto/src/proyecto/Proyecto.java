@@ -5,11 +5,14 @@
  */
 package proyecto;
 
+import Controller.GestorImportacion;
 import Model.ConexionBD;
 
 import Model.Usuario;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Scanner;
 
 
@@ -23,13 +26,13 @@ public class Proyecto {
      * @param args the command line arguments
      */
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, IOException, ParseException {
         // TODO code application logic here
         /*Simulador Agregar Actividades*/
         System.out.println("BIENVENIDO AL SISTEMA DE INTEGRACION");
-        //ImportarProyecto();
-        int userID = 1;
-        modificarPerfilUsuario(userID);
+        ImportarProyecto();
+        //int userID = 1;
+      //  modificarPerfilUsuario(userID);
         
     }
     public void menuInteligente(){
@@ -38,12 +41,14 @@ public class Proyecto {
         System.out.println("Iniciar Sessión en Proyecto existente");
     }
     
-    public static void ImportarProyecto(){
+    public static void ImportarProyecto() throws IOException, ParseException{
         System.out.println("Digite la ruta donde se encuentra el archivo JSON");
         String path = "";
-        Scanner entradaScanner = new Scanner(System.in);
-        path = entradaScanner.nextLine();
-        System.out.println ("Entrada recibida por teclado es: \"" + path +"\"");
+//        Scanner entradaScanner = new Scanner(System.in);
+//        path = entradaScanner.nextLine();
+//        System.out.println ("Entrada recibida por teclado es: \"" + path +"\"");
+        GestorImportacion g = new GestorImportacion();
+        g.LeerArchivo("../archivo.json");
     }
     
     public static void modificarPerfilUsuario(int idUsuario) throws SQLException{
