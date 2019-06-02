@@ -10,7 +10,7 @@ package Model;
  * @author aleta
  */
 public class BuilderFecha extends ReporteBuilder {
-
+    public Reporte Reporte;
     @Override
     public void Consultar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -18,7 +18,11 @@ public class BuilderFecha extends ReporteBuilder {
 
     @Override
     public void GenerarReporte() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Generando Reporte con Respecto a fechas");
+        // ir a reporte y generar avance
+        
+        Reporte.ReporteBD();
+                
     }
     
 }

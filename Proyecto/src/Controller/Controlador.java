@@ -1,5 +1,8 @@
 package Controller;
 
+import Model.DirectorReporte;
+
+
 /**
  *
  * @author Joaquin
@@ -12,6 +15,9 @@ public class Controlador {
     private DTOProyecto DTOProyecto;
     private DTOActividad DTOActividad;
     private DTOAvance DTOAvance;
+    private DirectorReporte DReporte;
+    
+    
     
     private Controlador(){
         gImportacion = new GestorImportacion();
@@ -55,6 +61,10 @@ public class Controlador {
     
     public void CrearAvance(){
         gAvance.CrearAvance(DTOAvance.getUnAvance());
+    }
+    
+    public void CrearReporte(){
+        DReporte.getReporte();
     }
 
 }
