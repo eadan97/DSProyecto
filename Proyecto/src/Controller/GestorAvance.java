@@ -11,7 +11,7 @@ public class GestorAvance {
     private Controlador Ctrl = Controlador.getInstance();
     private  DAOAvance DAOAvan;
     
-    
+    /*Esta parte sera hecho desde la interfaz de agregar Avance*/
     public void RegistrarAvance(int idAvance,int idActividad,Date fechaAvance,
             int horasDedicadas,int tipoAvance,String descripcion){
         Ctrl.getDTOAvance().getUnAvance().setIdAvance(idAvance);

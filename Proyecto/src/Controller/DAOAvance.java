@@ -27,14 +27,9 @@ class DAOAvance implements DAOInterface {
     public boolean Registrar(Object obj) {
         Avance avan = (Avance) obj;
         System.out.println("Proceso de registrar un avance");
-        try {
-            this.conn = ConexionBD.getInstance().getConexion();
-        } 
-        catch (SQLException ex) {
-            Logger.getLogger(DAOActividad.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.conn = ConexionBD.getInstance().getConexion();
         //cierra la conexion
-        ConexionBD.getInstance().desconectar();
+        //ConexionBD.getInstance().desconectar();
         return true;
     }
 
@@ -55,9 +50,8 @@ class DAOAvance implements DAOInterface {
     public void insertarAvance(Avance a) {
         CallableStatement cstmt = null;
         try {
-            cstmt = conn.prepareCall("{call insertarAvance(?,?,?,?,?,?)}");
+            cstmt = conn.prepareCall("{call insertarAvance(?,?,?,?,?)}");
 
-            cstmt.setObject(1, a.getIdAvance(), Types.INTEGER);
             cstmt.setObject(2, a.getIdActividad(), Types.INTEGER);
             cstmt.setDate(3, sqlDate((Date) a.getFechaAvance()));
             cstmt.setObject(4, a.getHorasDedicadas(), Types.INTEGER);

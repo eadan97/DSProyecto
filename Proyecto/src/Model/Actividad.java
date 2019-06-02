@@ -13,25 +13,24 @@ import java.util.Date;
  */
 public class Actividad {
     private Integer idActividad;
-    private Integer idTarea;
+    private int idTarea;
     private Date fechaCreacion;
     private Date fechaCompletado;
     private Date fechaUltimaModificacion;
     private String nombreTarea;
-    private Integer idUsuario;
+    private int idUsuario;
     private String emailAsignado;
     private Date fechaInicio;
     private Date fechaFin;
     private String etiqueta;
     private String nota;
-    private Integer idProyecto;
-    private Integer tareaPadre;
+    private int idProyecto;
+    private int tareaPadre;
 
     public Actividad() {
     }
 
-    public Actividad(Integer idActividad, Integer idTarea, Date fechaCreacion, Date fechaCompletado, Date fechaUltimaModificacion, String nombreTarea, Integer idUsuario, String emailAsignado, Date fechaInicio, Date fechaFin, String etiqueta, String nota, Integer idProyecto, Integer tareaPadre) {
-        this.idActividad = idActividad;
+    public Actividad(int idTarea, Date fechaCreacion, Date fechaCompletado, Date fechaUltimaModificacion, String nombreTarea, int idUsuario, String emailAsignado, Date fechaInicio, Date fechaFin, String etiqueta, String nota, int idProyecto, int tareaPadre) {
         this.idTarea = idTarea;
         this.fechaCreacion = fechaCreacion;
         this.fechaCompletado = fechaCompletado;
@@ -46,7 +45,7 @@ public class Actividad {
         this.idProyecto = idProyecto;
         this.tareaPadre = tareaPadre;
     }
-
+    
     public Integer getIdActividad() {
         return idActividad;
     }
@@ -55,11 +54,11 @@ public class Actividad {
         this.idActividad = idActividad;
     }
 
-    public Integer getIdTarea() {
+    public int getIdTarea() {
         return idTarea;
     }
 
-    public void setIdTarea(Integer idTarea) {
+    public void setIdTarea(int idTarea) {
         this.idTarea = idTarea;
     }
 
@@ -95,11 +94,11 @@ public class Actividad {
         this.nombreTarea = nombreTarea;
     }
 
-    public Integer getIdUsuario() {
+    public int getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
+    public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -143,15 +142,15 @@ public class Actividad {
         this.nota = nota;
     }
 
-    public Integer getIdProyecto() {
+    public int getIdProyecto() {
         return idProyecto;
     }
 
-    public void setIdProyecto(Integer idProyecto) {
+    public void setIdProyecto(int idProyecto) {
         this.idProyecto = idProyecto;
     }
 
-    public Integer getTareaPadre() {
+    public int getTareaPadre() {
         return tareaPadre;
     }
 

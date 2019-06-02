@@ -40,7 +40,13 @@ public class Controlador {
     }
     
     public void ImportarArchivo(String path){
-        gImportacion.LeerArchivo(path);
+        try{
+            gImportacion.LeerArchivo(path);
+        }
+        catch(Exception e){
+            // TODO: Reportar el error
+        }
+        
     }
     
     public DTOProyecto getDTOProyecto() {
@@ -63,8 +69,13 @@ public class Controlador {
         gAvance.CrearAvance(DTOAvance.getUnAvance());
     }
     
+
     public void CrearReporte(){
         DReporte.getReporte();
+    }
+    
+    public void AdjuntarEvidencia(Object obj,int IdAvance){              
+
     }
 
 }

@@ -14,17 +14,24 @@ import java.sql.Types;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
+
 
 /**
  *
  * @author mcai
  */
 public class ConexionBD {
-    private static ConexionBD instance;
-    Connection conn ;
     
+
     //private String connectionUrl = "jdbc:jtds:sqlserver://.;instance=LOCALDB#BDEC231B;databaseName=Diseño;namedPipe=true;integratedSecurity=true";
      String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=Diseño";
+
+
+    private static ConexionBD instance;
+    static Connection conn = null;
 
     
     private ConexionBD () {
@@ -37,19 +44,29 @@ public class ConexionBD {
         return instance;
     }
     
-    public Connection getConexion() throws SQLException{
-        // se conecta a la bd y devuelve la conexion
-        conn = DriverManager.getConnection(connectionUrl);
+    public static Connection getConexion(){
+        //String Url = "jdbc:sqlserver://JOAQUIN:1433;databaseName=Diseño";
+        String Url = "jdbc:sqlserver://localhost:1433;databaseName=Diseño";
+        try{
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        }catch (ClassNotFoundException e){
+            JOptionPane.showMessageDialog(null, "No se pudo establecer la conexion" + e.getMessage(),
+            "Error de Conexion",JOptionPane.ERROR_MESSAGE);
+            
+        }
+        try{
+            conn = DriverManager.getConnection(Url,"sa","123");
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "ERROR" + e.getMessage(),
+            "Error de Conexion",JOptionPane.ERROR_MESSAGE);
+        }
         return conn;
     }
     
-    public boolean desconectar(){
-        // se conecta a la bd y devuelve la conexion
-        conn = null;
-        return true;
+    public void desconectar() throws SQLException{
+        conn.close();
     }
-    
-    
+        
     
     /*Propio de cada gestor*/
     private java.sql.Date sqlDate(Date d) {
@@ -62,11 +79,9 @@ public class ConexionBD {
 
 
     public void insertarEvidencia(Evidencia e) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call insertarEvidencia(?,?,?)}");
+            cstmt = conn.prepareCall("{call insertarEvidencia(?,?,?)}");
 
             cstmt.setObject(1, e.getIdEvidencia(), Types.INTEGER);
             cstmt.setObject(2, e.getIdAvance(), Types.INTEGER);
@@ -83,24 +98,14 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public Evidencia leerEvidencia(Integer idEvidencia) {
         Evidencia e = new Evidencia();
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call leerEvidencia(?)}");
+            cstmt = conn.prepareCall("{call leerEvidencia(?)}");
             
             cstmt.setObject(1, idEvidencia, Types.INTEGER);
             ResultSet rs = cstmt.executeQuery();
@@ -118,24 +123,14 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
         return e;
     }
 
     public void actualizarEvidencia(Evidencia e) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call actualizarEvidencia(?,?,?)}");
+            cstmt = conn.prepareCall("{call actualizarEvidencia(?,?,?)}");
             
             cstmt.setObject(1, e.getIdEvidencia(), Types.INTEGER);
             cstmt.setObject(2, e.getIdAvance(), Types.INTEGER);
@@ -152,23 +147,13 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public void borrarEvidencia(Integer idEvidencia) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call borrarEvidencia(?)}");
+            cstmt = conn.prepareCall("{call borrarEvidencia(?)}");
 
             cstmt.setObject(1, idEvidencia, Types.INTEGER);
             
@@ -183,23 +168,13 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public void insertarPermiso(Permiso p) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call insertarPermiso(?,?)}");
+            cstmt = conn.prepareCall("{call insertarPermiso(?,?)}");
 
             cstmt.setObject(1, p.getIdPermiso(), Types.INTEGER);
             cstmt.setString(2, p.getNombre());
@@ -215,24 +190,14 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public Permiso leerPermiso(Integer idPermiso) {
         Permiso p = new Permiso();
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call leerPermiso(?)}");
+            cstmt = conn.prepareCall("{call leerPermiso(?)}");
             
             cstmt.setObject(1, idPermiso, Types.INTEGER);
             ResultSet rs = cstmt.executeQuery();
@@ -249,24 +214,14 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
         return p;
     }
 
     public void actualizarPermiso(Permiso p) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call actualizarPermiso(?,?)}");
+            cstmt = conn.prepareCall("{call actualizarPermiso(?,?)}");
             
             cstmt.setObject(1, p.getIdPermiso(), Types.INTEGER);
             cstmt.setString(2, p.getNombre());
@@ -282,23 +237,13 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public void borrarPermiso(Integer idPermiso) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call borrarPermiso(?)}");
+            cstmt = conn.prepareCall("{call borrarPermiso(?)}");
 
             cstmt.setObject(1, idPermiso, Types.INTEGER);
             
@@ -313,23 +258,13 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public void insertarPermisoUsuarios(PermisoUsuarios p) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call insertarPermisoUsuarios(?,?,?)}");
+            cstmt = conn.prepareCall("{call insertarPermisoUsuarios(?,?,?)}");
 
             cstmt.setObject(1, p.getIdPermisoUsuario(), Types.INTEGER);
             cstmt.setObject(2, p.getIdUsuario(), Types.INTEGER);
@@ -346,24 +281,14 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public PermisoUsuarios leerPermisoUsuarios(Integer idPermisoUsuarios) {
         PermisoUsuarios p = new PermisoUsuarios();
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call leerPermisoUsuarios(?)}");
+            cstmt = conn.prepareCall("{call leerPermisoUsuarios(?)}");
             
             cstmt.setObject(1, idPermisoUsuarios, Types.INTEGER);
             ResultSet rs = cstmt.executeQuery();
@@ -381,24 +306,14 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
         return p;
     }
 
     public void actualizarPermisoUsuarios(PermisoUsuarios p) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call actualizarPermisoUsuarios(?,?,?)}");
+            cstmt = conn.prepareCall("{call actualizarPermisoUsuarios(?,?,?)}");
             
             cstmt.setObject(1, p.getIdPermisoUsuario(), Types.INTEGER);
             cstmt.setObject(2, p.getIdUsuario(), Types.INTEGER);
@@ -415,23 +330,13 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public void borrarPermisoUsuarios(Integer idPermisoUsuarios) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call borrarPermisoUsuarios(?)}");
+            cstmt = conn.prepareCall("{call borrarPermisoUsuarios(?)}");
             
             cstmt.setObject(1, idPermisoUsuarios, Types.INTEGER);
 
@@ -446,23 +351,13 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public void insertarProyecto(Proyecto p) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call insertarProyecto(?,?)}");
+            cstmt = conn.prepareCall("{call insertarProyecto(?,?)}");
 
             cstmt.setObject(1, p.getCodigoProyecto(), Types.INTEGER);
             cstmt.setString(2, p.getNombreProyecto());
@@ -478,24 +373,14 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public Proyecto leerProyecto(Integer idProyecto) {
         Proyecto p = new Proyecto();
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call leerProyecto(?)}");
+            cstmt = conn.prepareCall("{call leerProyecto(?)}");
             
             cstmt.setObject(1, idProyecto, Types.INTEGER);
             ResultSet rs = cstmt.executeQuery();
@@ -512,24 +397,14 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
         return p;
     }
 
     public void actualizarProyecto(Proyecto p) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call actualizarProyecto(?,?)}");
+            cstmt = conn.prepareCall("{call actualizarProyecto(?,?)}");
             
             cstmt.setObject(1, p.getCodigoProyecto(), Types.INTEGER);
             cstmt.setString(2, p.getNombreProyecto());
@@ -545,23 +420,13 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public void borrarProyecto(Integer idProyecto) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call borrarProyecto(?)}");
+            cstmt = conn.prepareCall("{call borrarProyecto(?)}");
             
             cstmt.setObject(1, idProyecto, Types.INTEGER);
 
@@ -576,23 +441,13 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public void insertarRol(Rol r) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call insertarRol(?,?)}");
+            cstmt = conn.prepareCall("{call insertarRol(?,?)}");
 
             cstmt.setObject(1, r.getIdRol(), Types.INTEGER);
             cstmt.setString(2, r.getNombre());
@@ -608,24 +463,14 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public Rol leerRol(Integer idRol) {
         Rol r = new Rol();
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call leerRol(?)}");
+            cstmt = conn.prepareCall("{call leerRol(?)}");
             
             cstmt.setObject(1, idRol, Types.INTEGER);
             ResultSet rs = cstmt.executeQuery();
@@ -642,24 +487,14 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
         return r;
     }
 
     public void actualizarRol(Rol r) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call actualizarRol(?,?)}");
+            cstmt = conn.prepareCall("{call actualizarRol(?,?)}");
             
             cstmt.setObject(1, r.getIdRol(), Types.INTEGER);
             cstmt.setString(2, r.getNombre());
@@ -675,23 +510,13 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public void borrarRol(Integer idRol) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call borrarRol(?)}");
+            cstmt = conn.prepareCall("{call borrarRol(?)}");
             
             cstmt.setObject(1, idRol, Types.INTEGER);
 
@@ -706,23 +531,13 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public void insertarRolUsuario(RolUsuario r) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call insertarRolUsuario(?,?,?)}");
+            cstmt = conn.prepareCall("{call insertarRolUsuario(?,?,?)}");
 
             cstmt.setObject(1, r.getIdRolUsuario(), Types.INTEGER);
             cstmt.setObject(2, r.getIdUsuario(), Types.INTEGER);
@@ -739,24 +554,14 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public RolUsuario leerRolUsuario(Integer idRolUsuario) {
         RolUsuario r = new RolUsuario();
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call leerRolUsuario(?)}");
+            cstmt = conn.prepareCall("{call leerRolUsuario(?)}");
             
             cstmt.setObject(1, idRolUsuario, Types.INTEGER);
             ResultSet rs = cstmt.executeQuery();
@@ -774,24 +579,14 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
         return r;
     }
 
     public void actualizarRolUsuario(RolUsuario r) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call actualizarRolUsuario(?,?,?)}");
+            cstmt = conn.prepareCall("{call actualizarRolUsuario(?,?,?)}");
             
             cstmt.setObject(1, r.getIdRolUsuario(), Types.INTEGER);
             cstmt.setObject(2, r.getIdUsuario(), Types.INTEGER);
@@ -808,23 +603,13 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public void borrarRolUsuario(Integer idRolUsuario) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call borrarRolUsuario(?)}");
+            cstmt = conn.prepareCall("{call borrarRolUsuario(?)}");
             
             cstmt.setObject(1, idRolUsuario, Types.INTEGER);
 
@@ -839,23 +624,13 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public void insertarTipoAvance(TipoAvance t) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call insertarTipoAvance(?,?)}");
+            cstmt = conn.prepareCall("{call insertarTipoAvance(?,?)}");
 
             cstmt.setObject(1, t.getIdTipoAvance(), Types.INTEGER);
             cstmt.setString(2, t.getNombre());
@@ -871,24 +646,14 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public TipoAvance leerTipoAvance(Integer idTipoAvance) {
         TipoAvance t = new TipoAvance();
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call leerTipoAvance(?)}");
+            cstmt = conn.prepareCall("{call leerTipoAvance(?)}");
             
             cstmt.setObject(1, idTipoAvance, Types.INTEGER);
             ResultSet rs = cstmt.executeQuery();
@@ -905,24 +670,14 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
         return t;
     }
 
     public void actualizarTipoAvance(TipoAvance t) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call actualizarTipoAvance(?,?)}");
+            cstmt = conn.prepareCall("{call actualizarTipoAvance(?,?)}");
             
             cstmt.setObject(1, t.getIdTipoAvance(), Types.INTEGER);
             cstmt.setString(2, t.getNombre());
@@ -938,23 +693,13 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public void borrarTipoAvance(Integer idTipoAvance) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call borrarTipoAvance(?)}");
+            cstmt = conn.prepareCall("{call borrarTipoAvance(?)}");
             
             cstmt.setObject(1, idTipoAvance, Types.INTEGER);
 
@@ -969,27 +714,15 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public void insertarUsuario(Usuario u) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call insertarUsuario(?,?,?)}");
-
-            cstmt.setObject(1, u.getIdUsuario(), Types.INTEGER);
-            cstmt.setString(2, u.getNombre());
-            cstmt.setString(3, u.getCorreo());
+            cstmt = conn.prepareCall("{call insertarUsuario(?,?)}");
+            cstmt.setString(1, u.getNombre());
+            cstmt.setString(2, u.getCorreo());
 
             cstmt.executeUpdate();
         } catch (SQLException ex) {
@@ -1002,24 +735,14 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
     }
 
     public Usuario leerUsuario(Integer idUsuario) {
         Usuario u = new Usuario();
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call leerUsuario(?)}");
+            cstmt = conn.prepareCall("{call leerUsuario(?)}");
             
             cstmt.setObject(1, idUsuario, Types.INTEGER);
             ResultSet rs = cstmt.executeQuery();
@@ -1037,24 +760,14 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-            }
         }
         return u;
     }
 
     public void actualizarUsuario(Usuario u) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call actualizarUsuario(?,?,?)}");
+            cstmt = conn.prepareCall("{call actualizarUsuario(?,?,?)}");
             
             cstmt.setObject(1, u.getIdUsuario(), Types.INTEGER);
             cstmt.setString(2, u.getNombre());
@@ -1071,22 +784,13 @@ public class ConexionBD {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            if(con!=null) {
-                try {
-                    con.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
         }
     }
 
     public void borrarUsuario(Integer idUsuario) {
-        Connection con = null;
         CallableStatement cstmt = null;
         try {
-            con = DriverManager.getConnection(connectionUrl);
-            cstmt = con.prepareCall("{call borrarUsuario(?)}");
+            cstmt = conn.prepareCall("{call borrarUsuario(?)}");
             
             cstmt.setObject(1, idUsuario, Types.INTEGER);
 
@@ -1097,13 +801,6 @@ public class ConexionBD {
             if(cstmt!=null) {
                 try {
                     cstmt.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            if(con!=null) {
-                try {
-                    con.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
