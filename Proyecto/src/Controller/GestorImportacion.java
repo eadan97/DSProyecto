@@ -16,12 +16,11 @@ public class GestorImportacion {
         /*Enviar a LineaArchivo cada una de las líneas leídas*/
     }
     
-    public void LineaArchivo(int IdActividadad,int idTarea, Date fechaCreacion,
+    public void LineaArchivo(int idTarea, Date fechaCreacion,
             Date fechaCompletado, Date fechaUltimaModificacion, String nombreTarea,
             int idUsuario,String emailAsignado,Date fechaInicio,Date fechaFin,
             String etiqueta, String nota,int idProyecto, int tareaPadre){
         
-        Ctrl.getDTOActividad().getUnaActividad().setIdActividad(IdActividadad);
         Ctrl.getDTOActividad().getUnaActividad().setIdTarea(idTarea);
         Ctrl.getDTOActividad().getUnaActividad().setFechaCreacion(fechaCreacion);
         Ctrl.getDTOActividad().getUnaActividad().setFechaCompletado(fechaCompletado);

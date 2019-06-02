@@ -27,14 +27,9 @@ public class DAOActividad implements DAOInterface {
     public boolean Registrar(Object obj) {
         Actividad act = (Actividad) obj;
         System.out.println("Proceso de registrar una actividad");
-        try {
-            this.conn = ConexionBD.getInstance().getConexion();
-        } 
-        catch (SQLException ex) {
-            Logger.getLogger(DAOActividad.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.conn = ConexionBD.getConexion();
         //cierra la conexion
-        ConexionBD.getInstance().desconectar();
+        //ConexionBD.getInstance().desconectar();
         return true;
 
     }
@@ -57,22 +52,21 @@ public class DAOActividad implements DAOInterface {
     public void insertarActividad(Actividad a) {
         CallableStatement cstmt = null;
         try {
-            cstmt = conn.prepareCall("{call insertarActividad(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
+            cstmt = conn.prepareCall("{call insertarActividad(?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 
-            cstmt.setObject(1, a.getIdActividad(), Types.INTEGER);
-            cstmt.setObject(2, a.getIdTarea(), Types.INTEGER);
-            cstmt.setDate(3, sqlDate(a.getFechaCreacion()));
-            cstmt.setDate(4, sqlDate(a.getFechaCompletado()));
-            cstmt.setDate(5,  sqlDate(a.getFechaUltimaModificacion()));
-            cstmt.setString(6, a.getNombreTarea());
-            cstmt.setObject(7, a.getIdUsuario(), Types.INTEGER);
-            cstmt.setString(8, a.getEmailAsignado());
-            cstmt.setDate(9, sqlDate(a.getFechaInicio()));
-            cstmt.setDate(10,  sqlDate(a.getFechaFin()));
-            cstmt.setString(11, a.getEtiqueta());
-            cstmt.setString(12, a.getNota());
-            cstmt.setObject(13, a.getIdProyecto(), Types.INTEGER);
-            cstmt.setObject(14, a.getTareaPadre(), Types.INTEGER);
+            cstmt.setObject(1, a.getIdTarea(), Types.INTEGER);
+            cstmt.setDate(2, sqlDate(a.getFechaCreacion()));
+            cstmt.setDate(3, sqlDate(a.getFechaCompletado()));
+            cstmt.setDate(4,  sqlDate(a.getFechaUltimaModificacion()));
+            cstmt.setString(5, a.getNombreTarea());
+            cstmt.setObject(6, a.getIdUsuario(), Types.INTEGER);
+            cstmt.setString(7, a.getEmailAsignado());
+            cstmt.setDate(8, sqlDate(a.getFechaInicio()));
+            cstmt.setDate(9,  sqlDate(a.getFechaFin()));
+            cstmt.setString(10, a.getEtiqueta());
+            cstmt.setString(11, a.getNota());
+            cstmt.setObject(12, a.getIdProyecto(), Types.INTEGER);
+            cstmt.setObject(13, a.getTareaPadre(), Types.INTEGER);
 
             cstmt.executeUpdate();
         } catch (SQLException ex) {
@@ -105,7 +99,7 @@ public class DAOActividad implements DAOInterface {
             cstmt.setObject(1, idActividad, Types.INTEGER);
             ResultSet rs = cstmt.executeQuery();
             rs.next();
-            a = new Actividad(idActividad,
+            a = new Actividad(
                     (Integer) rs.getObject(1),
                     rs.getDate(2),
                     rs.getDate(3),
@@ -145,7 +139,6 @@ public class DAOActividad implements DAOInterface {
         CallableStatement cstmt = null;
         try {
             cstmt = conn.prepareCall("{call actualizarActividad(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
-            
             cstmt.setObject(1, a.getIdActividad(), Types.INTEGER);
             cstmt.setObject(2, a.getIdTarea(), Types.INTEGER);
             cstmt.setDate(3, sqlDate(a.getFechaCreacion()));

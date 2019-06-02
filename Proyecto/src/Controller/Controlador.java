@@ -56,5 +56,10 @@ public class Controlador {
     public void CrearAvance(){
         gAvance.CrearAvance(DTOAvance.getUnAvance());
     }
+    
+    public void AdjuntarEvidencia(Object obj,int IdAvance){
+        
+        
+    }
 
 }
