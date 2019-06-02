@@ -28,6 +28,7 @@ public class DAOActividad implements DAOInterface {
         Actividad act = (Actividad) obj;
         System.out.println("Proceso de registrar una actividad");
         this.conn = ConexionBD.getConexion();
+        insertarActividad(act);
         //cierra la conexion
         //ConexionBD.getInstance().desconectar();
         return true;
