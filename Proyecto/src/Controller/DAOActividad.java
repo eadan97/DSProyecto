@@ -27,14 +27,9 @@ public class DAOActividad implements DAOInterface {
     public boolean Registrar(Object obj) {
         Actividad act = (Actividad) obj;
         System.out.println("Proceso de registrar una actividad");
-        try {
-            this.conn = ConexionBD.getInstance().getConexion();
-        } 
-        catch (SQLException ex) {
-            Logger.getLogger(DAOActividad.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.conn = ConexionBD.getConexion();
         //cierra la conexion
-        ConexionBD.getInstance().desconectar();
+        //ConexionBD.getInstance().desconectar();
         return true;
 
     }

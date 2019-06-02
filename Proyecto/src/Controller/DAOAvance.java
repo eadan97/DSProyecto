@@ -27,14 +27,9 @@ class DAOAvance implements DAOInterface {
     public boolean Registrar(Object obj) {
         Avance avan = (Avance) obj;
         System.out.println("Proceso de registrar un avance");
-        try {
-            this.conn = ConexionBD.getInstance().getConexion();
-        } 
-        catch (SQLException ex) {
-            Logger.getLogger(DAOActividad.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.conn = ConexionBD.getInstance().getConexion();
         //cierra la conexion
-        ConexionBD.getInstance().desconectar();
+        //ConexionBD.getInstance().desconectar();
         return true;
     }
 
