@@ -17,7 +17,14 @@ public class Proyecto {
     public static void main(String[] args) {
         // TODO code application logic here
         /*Simulador Agregar Actividades*/
+        System.out.println("BIENVENIDO AL SISTEMA DE INTEGRACION");
         
+        
+    }
+    public void menuInteligente(){
+        System.out.println("Seleccione la operación que desea realizar");
+        System.out.println("Importar un Nuevo Proyecto");
+        System.out.println("Iniciar Sessión en Proyecto existente");
     }
     
 }
