@@ -55,9 +55,8 @@ class DAOAvance implements DAOInterface {
     public void insertarAvance(Avance a) {
         CallableStatement cstmt = null;
         try {
-            cstmt = conn.prepareCall("{call insertarAvance(?,?,?,?,?,?)}");
+            cstmt = conn.prepareCall("{call insertarAvance(?,?,?,?,?)}");
 
-            cstmt.setObject(1, a.getIdAvance(), Types.INTEGER);
             cstmt.setObject(2, a.getIdActividad(), Types.INTEGER);
             cstmt.setDate(3, sqlDate((Date) a.getFechaAvance()));
             cstmt.setObject(4, a.getHorasDedicadas(), Types.INTEGER);

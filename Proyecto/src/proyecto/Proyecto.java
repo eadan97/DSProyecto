@@ -5,6 +5,9 @@
  */
 package proyecto;
 
+import Model.ConexionBD;
+import Model.Usuario;
+
 /**
  *
  * @author Joaquin
@@ -25,6 +28,29 @@ public class Proyecto {
         System.out.println("Seleccione la operación que desea realizar");
         System.out.println("Importar un Nuevo Proyecto");
         System.out.println("Iniciar Sessión en Proyecto existente");
+    }
+    
+    public static void modificarPerfilUsuario(int idUsuario){
+        ConexionBD conn =  ConexionBD.getInstance();
+        
+        Usuario user = conn.leerUsuario(idUsuario);
+        int idUsuarioBD;
+        String nombre;
+        String correo;
+        //
+        idUsuarioBD = user.getIdUsuario();
+        nombre = user.getNombre();
+        correo = user.getCorreo();
+        //
+        System.out.println(idUsuarioBD);
+        System.out.println(nombre);
+        System.out.println(correo);
+        //
+        user.setCorreo("joaquinmena.84@gmail.com");
+        //
+        conn.actualizarUsuario(user);
+        System.out.println("Se actualizo correctamente");
+        
     }
     
 }
