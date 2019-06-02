@@ -9,6 +9,7 @@ import Model.ConexionBD;
 import Model.Usuario;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 /**
  *
@@ -23,6 +24,7 @@ public class Proyecto {
         // TODO code application logic here
         /*Simulador Agregar Actividades*/
         System.out.println("BIENVENIDO AL SISTEMA DE INTEGRACION");
+        //ImportarProyecto();
         int userID = 1;
         modificarPerfilUsuario(userID);
         
@@ -31,6 +33,14 @@ public class Proyecto {
         System.out.println("Seleccione la operación que desea realizar");
         System.out.println("Importar un Nuevo Proyecto");
         System.out.println("Iniciar Sessión en Proyecto existente");
+    }
+    
+    public static void ImportarProyecto(){
+        System.out.println("Digite la ruta donde se encuentra el archivo JSON");
+        String path = "";
+        Scanner entradaScanner = new Scanner(System.in);
+        path = entradaScanner.nextLine();
+        System.out.println ("Entrada recibida por teclado es: \"" + path +"\"");
     }
     
     public static void modificarPerfilUsuario(int idUsuario) throws SQLException{
@@ -46,14 +56,14 @@ public class Proyecto {
         nombre = userL.getNombre();
         correo = userL.getCorreo();
 //        
-        user.setNombre("Maria");
-        user.setCorreo("maria@gmail.com");
+        user.setNombre("Pedro");
+        user.setCorreo("pedro@gmail.com");
         //
         System.out.println(idUsuarioBD);
         System.out.println(nombre);
         System.out.println(correo);
 //        
-        //user.setCorreo("joaquinmena.84@gmail.com");
+        user.setCorreo("joaquinmena.84@gmail.com");
         conexion.insertarUsuario(user);
         System.out.println("Se agrego correctamente");  
         

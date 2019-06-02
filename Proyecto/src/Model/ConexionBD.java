@@ -39,7 +39,8 @@ public class ConexionBD {
     }
     
     public static Connection getConexion(){
-        String Url = "jdbc:sqlserver://JOAQUIN:1433;databaseName=Diseño";
+        //String Url = "jdbc:sqlserver://JOAQUIN:1433;databaseName=Diseño";
+        String Url = "jdbc:sqlserver://localhost:1433;databaseName=Diseño";
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         }catch (ClassNotFoundException e){
