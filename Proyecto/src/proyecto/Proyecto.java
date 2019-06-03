@@ -53,7 +53,6 @@ public class Proyecto {
         //gImportacion.LeerArchivo(path);
         //System.out.println ("Entrada recibida por teclado es: \"" + path +"\"");
     }
-    
     public static void modificarPerfilUsuario(int idUsuario) throws SQLException{
         ConexionBD conexion =  ConexionBD.getInstance();
         Connection conn = conexion.getConexion();
