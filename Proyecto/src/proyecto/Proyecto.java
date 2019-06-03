@@ -42,7 +42,7 @@ public class Proyecto {
         //Controlador Ctrl = Controlador.getInstance();
         //ImportarProyecto();
         //AgregarAvance();
-        AgregarEvidencia();
+       //AgregarEvidencia();
         
     }
     public void menuInteligente() throws IOException, ParseException{
