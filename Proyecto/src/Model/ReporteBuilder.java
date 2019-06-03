@@ -5,6 +5,8 @@
  */
 package Model;
 
+import Controller.GestorAvance;
+
 /**
  *
  * @author aleta
@@ -12,6 +14,7 @@ package Model;
 public abstract class ReporteBuilder {
     
    protected Reporte Reporte;
+   GestorAvance gAvance;
    
    public Reporte getReporte(){
     return Reporte;
