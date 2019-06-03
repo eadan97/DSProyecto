@@ -36,13 +36,13 @@ public class GestorImportacion {
                   Date fechaCompletado;
                   try{
                       fechaCompletado = ParseDayFromJson((String)tasks.getJSONObject(i).get("completed_at"));
-                  }catch(JSONException e){
+                  }catch(Exception e){
                       fechaCompletado = null;
                   }
                   Date fechaUltimaModificacion;
                   try{
                       fechaUltimaModificacion = ParseDayFromJson((String)tasks.getJSONObject(i).get("modified_at"));
-                  }catch(JSONException e){
+                  }catch(Exception e){
                       fechaUltimaModificacion = null;
                   }
                   String nombreTarea = (String) tasks.getJSONObject(i).get("name");
@@ -52,13 +52,13 @@ public class GestorImportacion {
                   Date fechaInicio;
                   try{
                       fechaInicio=ParseDayFromJson((String)tasks.getJSONObject(i).get("due_on"));
-                  }catch(JSONException e){
+                  }catch(Exception e){
                       fechaInicio = null;
                   }
                   Date fechaFin;
                   try{
                       fechaFin = ParseDayFromJson((String)tasks.getJSONObject(i).get("due_at"));
-                  }catch(JSONException e){
+                  }catch(Exception e){
                       fechaFin = null;
                   }
                   String etiqueta = "";
@@ -74,7 +74,7 @@ public class GestorImportacion {
                   String tareaPadre ;
                   try{
                       tareaPadre = (String) ((JSONObject) tasks.getJSONObject(i).get("parent")).get("gid");
-                  }catch(JSONException e){
+                  }catch(Exception e){
                       tareaPadre = null;
                   }
                 

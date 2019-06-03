@@ -45,8 +45,9 @@ public class Proyecto {
     public static void ImportarProyecto() throws IOException, ParseException{
         System.out.println("Digite la ruta donde se encuentra el archivo JSON");
         String path = "";
-        Scanner entradaScanner = new Scanner(System.in);
-        path = entradaScanner.nextLine();
+        //Scanner entradaScanner = new Scanner(System.in);
+        //path = entradaScanner.nextLine();
+        path = "../archivo.json";
         Ctrl.ImportarArchivo(path);
         //GestorImportacion gImportacion = new GestorImportacion();
         //gImportacion.LeerArchivo(path);
