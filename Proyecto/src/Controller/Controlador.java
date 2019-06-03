@@ -9,17 +9,21 @@ public class Controlador {
     private GestorImportacion gImportacion;
     private GestorActividad gActividad;
     private GestorAvance gAvance;
+    private GestorEvidencia gEvidencia;
     private DTOProyecto DTOProyecto;
     private DTOActividad DTOActividad;
     private DTOAvance DTOAvance;
+    private DTOEvidencia DTOEvidencia;
     
     public Controlador(){
         gImportacion = new GestorImportacion();
         gActividad = new GestorActividad(); 
         gAvance = new GestorAvance();
+        gEvidencia = new GestorEvidencia();
         DTOProyecto = new DTOProyecto();
         DTOActividad = new DTOActividad();
         DTOAvance = new DTOAvance();
+        DTOEvidencia = new DTOEvidencia();
     }
   
     public static Controlador getInstance(){
@@ -52,6 +56,14 @@ public class Controlador {
     public DTOAvance getDTOAvance(){
         return DTOAvance;
     }
+
+    public DTOEvidencia getDTOEvidencia() {
+        return DTOEvidencia;
+    }
+
+    public void setDTOEvidencia(DTOEvidencia DTOEvidencia) {
+        this.DTOEvidencia = DTOEvidencia;
+    }
     
     public void CrearActividad(){
         gActividad.CrearActividad(DTOActividad.getUnaActividad());
@@ -61,9 +73,7 @@ public class Controlador {
         gAvance.CrearAvance(DTOAvance.getUnAvance());
     }
     
-    public void AdjuntarEvidencia(Object obj,int IdAvance){
-        
-        
+    public void CrearEvidencia(){
+        gEvidencia.CrearEvidencia(DTOEvidencia.getUnaEvidencia());
     }
-
 }

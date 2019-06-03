@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author Joaquin
  */
-class DAOAvance implements DAOInterface {
+public class DAOAvance implements DAOInterface {
     Connection conn;
     
     public DAOAvance(){
@@ -28,6 +28,7 @@ class DAOAvance implements DAOInterface {
         Avance avan = (Avance) obj;
         System.out.println("Proceso de registrar un avance");
         this.conn = ConexionBD.getInstance().getConexion();
+        insertarAvance(avan);
         //cierra la conexion
         //ConexionBD.getInstance().desconectar();
         return true;
@@ -52,11 +53,11 @@ class DAOAvance implements DAOInterface {
         try {
             cstmt = conn.prepareCall("{call insertarAvance(?,?,?,?,?)}");
 
-            cstmt.setObject(2, a.getIdActividad(), Types.INTEGER);
-            cstmt.setDate(3, sqlDate((Date) a.getFechaAvance()));
-            cstmt.setObject(4, a.getHorasDedicadas(), Types.INTEGER);
-            cstmt.setObject(5, a.getTipoAvance(), Types.INTEGER);
-            cstmt.setString(6, a.getDescripcion());
+            cstmt.setObject(1, a.getIdActividad(), Types.INTEGER);
+            cstmt.setDate(2, sqlDate((Date) a.getFechaAvance()));
+            cstmt.setObject(3, a.getHorasDedicadas(), Types.INTEGER);
+            cstmt.setObject(4, a.getTipoAvance(), Types.INTEGER);
+            cstmt.setString(5, a.getDescripcion());
 
             cstmt.executeUpdate();
         } catch (SQLException ex) {
