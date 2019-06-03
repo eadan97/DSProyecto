@@ -24,4 +24,8 @@ class GestorUsuario {
         return daoUsr.Registrar(unUsuario);
     }
     
+    public Usuario ObtenerUsusario(int id){
+        return daoUsr.leerUsuario(id);
+    }
+    
 }
