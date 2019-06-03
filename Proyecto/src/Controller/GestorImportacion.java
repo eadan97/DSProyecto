@@ -1,17 +1,13 @@
  package Controller;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -21,9 +17,6 @@ import org.json.JSONObject;
 public class GestorImportacion {
     private String filename;
     //private Controlador Ctrl = Controlador.getInstance();
-//    SimpleDateFormat dt = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-//    SimpleDateFormat dt1 = new SimpleDateFormat("yyyy-mm-dd");
-    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     
     
     private String jsonAsStr;
@@ -38,18 +31,18 @@ public class GestorImportacion {
         // Iterator tasksIterator = tasks.iterator();
         for(int i = 0; i<tasks.length(); ++i){
  
-                  String idTarea                     = (String) tasks.getJSONObject(i).get("gid");
-                  Date fechaCreacion              = ParseDayFromJson((String)tasks.getJSONObject(i).get("created_at")); 
+                  String idTarea = (String) tasks.getJSONObject(i).get("gid");
+                  Date fechaCreacion = ParseDayFromJson((String)tasks.getJSONObject(i).get("created_at")); 
                   Date fechaCompletado;
                   try{
                       fechaCompletado = ParseDayFromJson((String)tasks.getJSONObject(i).get("completed_at"));
-                  }catch(Exception e){
+                  }catch(JSONException e){
                       fechaCompletado = null;
                   }
                   Date fechaUltimaModificacion;
                   try{
                       fechaUltimaModificacion = ParseDayFromJson((String)tasks.getJSONObject(i).get("modified_at"));
-                  }catch(Exception e){
+                  }catch(JSONException e){
                       fechaUltimaModificacion = null;
                   }
                   String nombreTarea = (String) tasks.getJSONObject(i).get("name");
@@ -59,16 +52,16 @@ public class GestorImportacion {
                   Date fechaInicio;
                   try{
                       fechaInicio=ParseDayFromJson((String)tasks.getJSONObject(i).get("due_on"));
-                  }catch(Exception e){
+                  }catch(JSONException e){
                       fechaInicio = null;
                   }
                   Date fechaFin;
                   try{
                       fechaFin = ParseDayFromJson((String)tasks.getJSONObject(i).get("due_at"));
-                  }catch(Exception e){
+                  }catch(JSONException e){
                       fechaFin = null;
                   }
-                  String etiqueta                 = "";
+                  String etiqueta = "";
                   JSONArray tags                  = (JSONArray) tasks.getJSONObject(i).get("tags");
                   for (int j=0; i<tags.length(); ++i){
                     etiqueta+=tags.get(j);
@@ -77,11 +70,11 @@ public class GestorImportacion {
                   }
                 
                   String nota = (String) tasks.getJSONObject(i).get("notes");
-                  String idProyecto                  = (String) ((JSONObject) ((JSONArray)tasks.getJSONObject(i).get("projects")).get(0)).get("gid");
+                  String idProyecto = (String) ((JSONObject) ((JSONArray)tasks.getJSONObject(i).get("projects")).get(0)).get("gid");
                   String tareaPadre ;
                   try{
                       tareaPadre = (String) ((JSONObject) tasks.getJSONObject(i).get("parent")).get("gid");
-                  }catch(Exception e){
+                  }catch(JSONException e){
                       tareaPadre = null;
                   }
                 
@@ -109,37 +102,36 @@ public class GestorImportacion {
             Date fechaCompletado, Date fechaUltimaModificacion, String nombreTarea,
             String idUsuario,String emailAsignado,Date fechaInicio,Date fechaFin,
             String etiqueta, String nota,String idProyecto, String tareaPadre){
-        
-        System.out.println(idTarea);
-        System.out.println(fechaCreacion);
-        System.out.println(fechaCompletado);
-        System.out.println(fechaUltimaModificacion);
-        System.out.println(nombreTarea);
-        System.out.println(idUsuario);
-        System.out.println(emailAsignado);
-        System.out.println(fechaInicio);
-        System.out.println(fechaFin);
-        System.out.println(etiqueta);
-        System.out.println(nota);
-        System.out.println(idProyecto);
-        System.out.println(tareaPadre);
-        System.out.println("-----------------------------");
-        
-//        Ctrl.getDTOActividad().getUnaActividad().setIdTarea(idTarea);
-//        Ctrl.getDTOActividad().getUnaActividad().setFechaCreacion(fechaCreacion);
-//        Ctrl.getDTOActividad().getUnaActividad().setFechaCompletado(fechaCompletado);
-//        Ctrl.getDTOActividad().getUnaActividad().setFechaUltimaModificacion(fechaUltimaModificacion);
-//        Ctrl.getDTOActividad().getUnaActividad().setNombreTarea(nombreTarea);
-//        Ctrl.getDTOActividad().getUnaActividad().setIdUsuario(idUsuario);
-//        Ctrl.getDTOActividad().getUnaActividad().setEmailAsignado(emailAsignado);
-//        Ctrl.getDTOActividad().getUnaActividad().setFechaInicio(fechaInicio);
-//        Ctrl.getDTOActividad().getUnaActividad().setFechaFin(fechaFin);
-//        Ctrl.getDTOActividad().getUnaActividad().setEtiqueta(etiqueta);
-//        Ctrl.getDTOActividad().getUnaActividad().setNota(nota);
-//        Ctrl.getDTOActividad().getUnaActividad().setIdProyecto(idProyecto);        
-//        Ctrl.getDTOActividad().getUnaActividad().setTareaPadre(tareaPadre);
+        Controlador Ctrl = Controlador.getInstance();
+//        System.out.println(idTarea);
+//        System.out.println(fechaCreacion);
+//        System.out.println(fechaCompletado);
+//        System.out.println(fechaUltimaModificacion);
+//        System.out.println(nombreTarea);
+//        System.out.println(idUsuario);
+//        System.out.println(emailAsignado);
+//        System.out.println(fechaInicio);
+//        System.out.println(fechaFin);
+//        System.out.println(etiqueta);
+//        System.out.println(nota);
+//        System.out.println(idProyecto);
+//        System.out.println(tareaPadre);
+//        System.out.println("-----------------------------");
 //        
-//        Ctrl.CrearActividad();
-//        
+        Ctrl.getDTOActividad().getUnaActividad().setIdTarea(idTarea);
+        Ctrl.getDTOActividad().getUnaActividad().setFechaCreacion(fechaCreacion);
+        Ctrl.getDTOActividad().getUnaActividad().setFechaCompletado(fechaCompletado);
+        Ctrl.getDTOActividad().getUnaActividad().setFechaUltimaModificacion(fechaUltimaModificacion);
+        Ctrl.getDTOActividad().getUnaActividad().setNombreTarea(nombreTarea);
+        Ctrl.getDTOActividad().getUnaActividad().setIdUsuario(idUsuario);
+        Ctrl.getDTOActividad().getUnaActividad().setEmailAsignado(emailAsignado);
+        Ctrl.getDTOActividad().getUnaActividad().setFechaInicio(fechaInicio);
+        Ctrl.getDTOActividad().getUnaActividad().setFechaFin(fechaFin);
+        Ctrl.getDTOActividad().getUnaActividad().setEtiqueta(etiqueta);
+        Ctrl.getDTOActividad().getUnaActividad().setNota(nota);
+        Ctrl.getDTOActividad().getUnaActividad().setIdProyecto(idProyecto);        
+        Ctrl.getDTOActividad().getUnaActividad().setTareaPadre(tareaPadre);
+        
+        Ctrl.CrearActividad();        
     }    
 }

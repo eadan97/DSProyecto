@@ -5,7 +5,7 @@ package Controller;
  * @author Joaquin
  */
 public class Controlador {
-    private static Controlador singleton;
+    private static Controlador instancia;
     private GestorImportacion gImportacion;
     private GestorActividad gActividad;
     private GestorAvance gAvance;
@@ -13,7 +13,7 @@ public class Controlador {
     private DTOActividad DTOActividad;
     private DTOAvance DTOAvance;
     
-    private Controlador(){
+    public Controlador(){
         gImportacion = new GestorImportacion();
         gActividad = new GestorActividad(); 
         gAvance = new GestorAvance();
@@ -21,26 +21,24 @@ public class Controlador {
         DTOActividad = new DTOActividad();
         DTOAvance = new DTOAvance();
     }
-    
-    private synchronized static void setInstance(){
-        if(singleton==null)
-            singleton=new Controlador();
-    }
-    
+  
     public static Controlador getInstance(){
-        if(singleton==null) 
-            setInstance();
-        return singleton;
-    }
+        if(instancia==null){
+            instancia = new Controlador();
+        }
+        return instancia;
+    }    
     
+    public void imprimirMensaje(){
+        System.out.println("Mensaje prueba");
+    }
     public void ImportarArchivo(String path){
         try{
             gImportacion.LeerArchivo(path);
         }
         catch(Exception e){
             // TODO: Reportar el error
-        }
-        
+        }  
     }
     
     public DTOProyecto getDTOProyecto() {
