@@ -56,6 +56,7 @@ public class Proyecto {
         String act = "";
         Scanner entradaScanner = new Scanner(System.in);
     }
+    
     public static void modificarPerfilUsuario(int idUsuario) throws SQLException{
         ConexionBD conexion =  ConexionBD.getInstance();
         Connection conn = conexion.getConexion();
