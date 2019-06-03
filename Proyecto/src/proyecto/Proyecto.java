@@ -43,6 +43,7 @@ public class Proyecto {
         //ImportarProyecto();
         //AgregarAvance();
         AgregarEvidencia();
+        
     }
     public void menuInteligente() throws IOException, ParseException{
         Ctrl.imprimirMensaje();
