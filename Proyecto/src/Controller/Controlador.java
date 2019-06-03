@@ -10,10 +10,12 @@ public class Controlador {
     private GestorActividad gActividad;
     private GestorAvance gAvance;
     private GestorEvidencia gEvidencia;
+    private GestorUsuario gUsuario;
     private DTOProyecto DTOProyecto;
     private DTOActividad DTOActividad;
     private DTOAvance DTOAvance;
     private DTOEvidencia DTOEvidencia;
+    private DTOUsuario DTOUsuario;
     
     public Controlador(){
         gImportacion = new GestorImportacion();
@@ -75,5 +77,16 @@ public class Controlador {
     
     public void CrearEvidencia(){
         gEvidencia.CrearEvidencia(DTOEvidencia.getUnaEvidencia());
+    }
+
+    public DTOUsuario getDTOUsuario() {
+        return this.DTOUsuario;
+    }
+    public void setDTOUsuario(DTOUsuario newdto){
+        this.DTOUsuario = newdto;                
+    }
+
+    public void CrearUsuario() {
+        gUsuario.CrearUsuario(DTOUsuario.getUnUsuario());
     }
 }
