@@ -89,6 +89,7 @@ public class DAOActividad implements DAOInterface {
     }
 
     public Actividad leerActividad(Integer idActividad) {
+        this.conn = ConexionBD.getConexion();
         Actividad a = null;
         CallableStatement cstmt = null;
         try {

@@ -45,13 +45,16 @@ public class Proyecto {
     public static void ImportarProyecto() throws IOException, ParseException{
         System.out.println("Digite la ruta donde se encuentra el archivo JSON");
         String path = "";
-        //Scanner entradaScanner = new Scanner(System.in);
-        //path = entradaScanner.nextLine();
-        path = "../archivo.json";
-        Ctrl.ImportarArchivo(path);
-        //GestorImportacion gImportacion = new GestorImportacion();
-        //gImportacion.LeerArchivo(path);
-        //System.out.println ("Entrada recibida por teclado es: \"" + path +"\"");
+        Scanner entradaScanner = new Scanner(System.in);
+        path = entradaScanner.nextLine();
+        //path = "../archivo.json";
+        Ctrl.ImportarArchivo(path);        
+    }
+    
+    public static void AgregarAvance(){
+        System.out.println("Seleccione la actividad");
+        String act = "";
+        Scanner entradaScanner = new Scanner(System.in);
     }
     public static void modificarPerfilUsuario(int idUsuario) throws SQLException{
         ConexionBD conexion =  ConexionBD.getInstance();
