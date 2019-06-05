@@ -46,11 +46,7 @@ public class Proyecto {
     
     public static Controlador Ctrl = Controlador.getInstance();
 
-    public static void main(String[] args) throws SQLException, IOException, ParseException {
-
-       //ImportarProyecto();
-       //Ctrl.CrearReporte("Actividad");
-       
+    public static void main(String[] args) throws SQLException, IOException, ParseException {       
         System.out.println("BIENVENIDO AL SISTEMA ASACOM");
         System.out.println("-*-*-*-*-*-*-*-*-**-*-*-*-*-**-");
         mensajesEntrada();
@@ -66,6 +62,7 @@ public class Proyecto {
         System.out.println("Bienvenido a la pantalla de Inicio");
         System.out.println("1-Iniciar Sesión");
         System.out.println("2-Registrarse");
+        System.out.println("3-Salir");
         System.out.println("Seccione el numero de la Operacion que desea realizar");
         Scanner entradaScanner = new Scanner(System.in);
         selected = Integer.parseInt(entradaScanner.nextLine());
@@ -76,8 +73,13 @@ public class Proyecto {
             case 2:
                 Registrarse();
                 break;
+            case 3:
+                System.out.println("----Finalizacion de ASACOM-------");
+                System.exit(0);
+                break;
             default:
                 System.out.println("La opción seleccionada es inválida");
+                mensajesEntrada();
                 break;
         }
     }
