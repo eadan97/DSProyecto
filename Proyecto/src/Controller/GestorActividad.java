@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Actividad;
+import java.sql.SQLException;
 
 /**
  *
@@ -17,7 +18,7 @@ public class GestorActividad {
         return DAOAct.Registrar(actividad);
     }
     
-    public void ConsultarActividad(int TaskId){
-        
+    public void ConsultarActividad(Integer TaskId) throws SQLException{
+        DAOAct.BuscarActividades(TaskId);
     }
 }

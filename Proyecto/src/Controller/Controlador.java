@@ -7,6 +7,7 @@ import Model.BuilderMiembro;
 import Model.DirectorReporte;
 import Model.Reporte;
 import Model.Usuario;
+import java.sql.SQLException;
 
 
 /**
@@ -149,4 +150,7 @@ public class Controlador {
         return gUsuario.validarUsuario(DTOUsuario.getUnUsuario());
     }
     
+    public void ConsultarActividades(int idUsuario) throws SQLException{
+        gActividad.ConsultarActividad(idUsuario);
+    } 
 }

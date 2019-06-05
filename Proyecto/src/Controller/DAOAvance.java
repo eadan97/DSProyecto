@@ -377,30 +377,4 @@ public class DAOAvance implements DAOInterface {
         // generar sp de buscar fechas 
     }    
     
-    public void BuscarActividades(Integer Usario) throws SQLException{
-         this.conn = ConexionBD.getInstance().getConexion();
-        Statement stmt = conn.createStatement();
-       
- 
-        String query="Select * from Actividad\n" +
-                    "where Actividad.IdUsuario ="+Usario + ";";
-        ResultSet rs =stmt.executeQuery(query);
-        while(rs.next()){
-            System.out.println("---------------------------------");
-            System.out.println("          IdActividad: "+rs.getString("IdActividad"));
-            System.out.println("Fecha de Creacion: "+rs.getString("FechaCreacion"));
-            System.out.println("Proyecto: "+rs.getString("NombreProyecto"));
-            System.out.println("Fecha Ultima Modificacion: "+rs.getString("FechaUltimaModificacion"));
-            System.out.println("Tarea: "+rs.getString("NombreTarea"));
-            System.out.println("Usuario: "+rs.getString("Nombre"));
-            
-         
-          //  System.out.println("Imagen: "+rs.getString("Imagen"));
-            System.out.println("---------------------------------");    
-            
-          pdf.generarPDF(rs.getString("IdAvance"),rs.getString("IdActividad"),rs.getString("FechaAvance"),
-                    rs.getString("HorasDedicadas"),rs.getString("TipoAvance"),rs.getString("Nombre"),
-                    rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
-        }
-    }
 }
