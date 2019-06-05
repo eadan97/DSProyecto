@@ -1,6 +1,13 @@
 package Controller;
 
+
+import Model.BuilderActividad;
+import Model.BuilderFecha;
+import Model.BuilderMiembro;
+import Model.DirectorReporte;
+import Model.Reporte;
 import Model.Usuario;
+
 
 /**
  *
@@ -16,8 +23,13 @@ public class Controlador {
     private DTOProyecto DTOProyecto;
     private DTOActividad DTOActividad;
     private DTOAvance DTOAvance;
+    private DirectorReporte DReporte;
+    private BuilderFecha BFecha;
+    private BuilderActividad BActvidad;
+    private BuilderMiembro BMiembro;
     private DTOEvidencia DTOEvidencia;
     private DTOUsuario DTOUsuario;
+
     
     public Controlador(){
         gImportacion = new GestorImportacion();
@@ -28,6 +40,7 @@ public class Controlador {
         DTOProyecto = new DTOProyecto();
         DTOActividad = new DTOActividad();
         DTOAvance = new DTOAvance();
+        DReporte  = new DirectorReporte();
         DTOEvidencia = new DTOEvidencia();
         DTOUsuario = new DTOUsuario();
     }
@@ -79,9 +92,46 @@ public class Controlador {
         gAvance.CrearAvance(DTOAvance.getUnAvance());
     }
     
+
+    public void CrearReporte(String S){
+        System.out.println(S);
+        
+     //   DReporte.setBuilder(DReporte);
+        //DReporte.prepararReporte();
+       switch(S){
+           case "Miembro":
+               System.out.println(S+"addasd");
+               DReporte.setBuilder(BMiembro);
+               //DReporte.prepararReporte();
+               break;
+           case "Actividad":
+               System.out.println("case actividad");
+               DReporte.setBuilder(BActvidad);
+               
+               break;
+           case "Fechas":
+               DReporte.setBuilder(BFecha);
+               
+           default:
+               System.out.println("Reporte no soportado");
+       }
+        
+        DReporte.prepararReporte();
+    }
+    
     public void CrearEvidencia(){
         gEvidencia.CrearEvidencia(DTOEvidencia.getUnaEvidencia());
+
     }
+    
+    public void AdjuntarEvidencia(Object obj,int IdAvance){              
+
+    }
+    
+    public void VerEvidencia(Integer actividad){
+        gAvance.VerAvance(actividad);
+    }
+    
 
     public DTOUsuario getDTOUsuario() {
         return this.DTOUsuario;

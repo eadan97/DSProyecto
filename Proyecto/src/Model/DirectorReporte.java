@@ -10,14 +10,28 @@ package Model;
  * @author aleta
  */
 public class DirectorReporte {
-    
-   public Reporte ReporteBuilder;
-   
-   public void getReporte(){
-       
-       System.out.println("GetReporte");
+           
+   public ReporteBuilder builder;
+
+    public ReporteBuilder getBuilder() {
+        return builder;
+    }
+
+    public void setBuilder(ReporteBuilder builder) {
+        this.builder = builder;
+    }
+
+   public Reporte getReporte(){
+       return builder.getReporte();
+   }
+     
+   public void prepararReporte(){
+       System.out.println("preparar reporte");
+        builder.GenerarReporte();
     
 }
+
+
     
 
 }

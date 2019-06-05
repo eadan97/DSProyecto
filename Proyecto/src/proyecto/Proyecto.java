@@ -5,12 +5,20 @@
  */
 package proyecto;
 
+
+
+
 import Controller.Controlador;
 import Controller.DAOActividad;
+import Controller.DAOAvance;
+
 import Controller.GestorImportacion;
 import Model.Actividad;
 import Model.ConexionBD;
+import Model.Evidencia;
+
 import Model.Usuario;
+
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -25,44 +33,45 @@ import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+
 /**
  *
  * @author Joaquin
  */
 public class Proyecto {
     
-    public static Controlador Ctrl = Controlador.getInstance();
     
 
-    /**
-     * @param args the command line arguments
-     */
+    private DAOAvance DAOAv;
+    
+    public static Controlador Ctrl = Controlador.getInstance();
+
     public static void main(String[] args) throws SQLException, IOException, ParseException {
-        // TODO code application logic here
-        //Controlador Ctrl = Controlador.getInstance();
         ImportarProyecto();
-        //AgregarAvance();
+       // AgregarAvance();
        //AgregarEvidencia();
-       
-        
     }
-    public void menuInteligente() throws IOException, ParseException{
+
+    public  void menuInteligente() throws IOException, ParseException{
         Ctrl.imprimirMensaje();
         System.out.println("Seleccione la operación que desea realizar");
         System.out.println("Importar un Nuevo Proyecto");
         System.out.println("Iniciar Sessión en Proyecto existente");
+     
     }
     
     public static void ImportarProyecto() throws IOException, ParseException{
         System.out.println("Digite la ruta donde se encuentra el archivo JSON");
         String path = "";
-        Scanner entradaScanner = new Scanner(System.in);
-        path = entradaScanner.nextLine();
-        //path = "../archivo.json";
-        Ctrl.ImportarArchivo(path);        
+        //Scanner entradaScanner = new Scanner(System.in);
+        //path = entradaScanner.nextLine();
+           
+        path = "../archivo.json";
+        Ctrl.ImportarArchivo(path);    
     }
     
     public static void AgregarAvance(){
+
         Scanner entradaScanner;
         int act = 0;
         int horas = 0;
@@ -117,6 +126,7 @@ public class Proyecto {
         Ctrl.getDTOEvidencia().getUnaEvidencia().setImagen(data);
         
         Ctrl.CrearEvidencia();
+
     }
     
     
@@ -164,5 +174,4 @@ public class Proyecto {
 //        act.setIdProyecto(1);
 //        dao.Registrar(act);  
     }
-  
 }

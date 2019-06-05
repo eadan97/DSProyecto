@@ -12,10 +12,17 @@ public class GestorAvance {
     private  DAOAvance DAOAvan;
     
     public GestorAvance(){
+
         this.DAOAvan = new DAOAvance();
     }
     
     public boolean CrearAvance(Avance avance){
       return DAOAvan.Registrar(avance);
     }
+    public void VerAvance(Integer actividad){
+        System.out.println("antes de caer");
+        DAOAvan.BuscarAvancesEvidencias(actividad);
+    }
+
+
 }

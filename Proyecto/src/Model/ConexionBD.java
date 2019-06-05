@@ -25,8 +25,14 @@ import javax.swing.JOptionPane;
  */
 public class ConexionBD {
     
+
+    //private String connectionUrl = "jdbc:jtds:sqlserver://.;instance=LOCALDB#BDEC231B;databaseName=Diseño;namedPipe=true;integratedSecurity=true";
+     String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=Diseño";
+
+
     private static ConexionBD instance;
     static Connection conn = null;
+
     
     private ConexionBD () {
     }
@@ -68,6 +74,7 @@ public class ConexionBD {
     }
     
     
+
     public void insertarPermiso(Permiso p) {
         CallableStatement cstmt = null;
         try {

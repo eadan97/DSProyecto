@@ -5,12 +5,26 @@
  */
 package Model;
 
+import Controller.GestorAvance;
+
 /**
  *
  * @author aleta
  */
 public abstract class ReporteBuilder {
     
-   abstract void Consultar();
+   protected Reporte Reporte;
+   GestorAvance gAvance;
+   
+   public Reporte getReporte(){
+    return Reporte;
+}
+   
+   public void crearReporte (){
+       Reporte= new Reporte();
+   }
+    
+
    abstract void GenerarReporte();
+   
 }
