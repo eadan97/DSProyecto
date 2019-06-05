@@ -17,6 +17,15 @@ public class Avance {
     private Date fechaAvance;
     private Integer horasDedicadas;
     private Integer tipoAvance;
+    private Integer idUsuario;
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
     private String descripcion;
 
     public Avance() {
