@@ -47,10 +47,10 @@ public class Proyecto {
     public static Controlador Ctrl = Controlador.getInstance();
 
     public static void main(String[] args) throws SQLException, IOException, ParseException {
-        System.out.println("BIENVENIDO AL SISTMA ASACOM");
+        System.out.println("BIENVENIDO AL SISTEMA ASACOM");
         System.out.println("-*-*-*-*-*-*-*-*-**-*-*-*-*-**-");
-        mensajesEntrada();
-        //ImportarProyecto();
+        //mensajesEntrada();
+        ImportarProyecto();
        //AgregarAvance();
        //AgregarEvidencia();
        //C:\Users\aleta\Pictures\foto.jpg 

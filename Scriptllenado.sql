@@ -8,9 +8,11 @@ INSERT INTO Usuario (Nombre, Correo, CodigoUsuario,Contrasena)
 values ('Esteban','ale@gmail.com','1117456021197123','ale')
 
 INSERT INTO TipoAvance (Nombre)
-Values ('Tipo1')
+Values ('SolucionError')
 INSERT INTO TipoAvance (Nombre)
-VALUES ('TIPO2')
+VALUES ('Actualizacion')
+INSERT INTO TipoAvance (Nombre)
+VALUES ('Finalizacion')
 
 INSERT INTO ROL (Nombre)
 Values ('Administrador')
