@@ -60,7 +60,7 @@ public class Proyecto {
        //C:\Users\aleta\Pictures\foto.jpg 
     }
     
-    public static void mensajesEntrada(){
+    public static void mensajesEntrada() throws IOException, ParseException, SQLException{
         int selected = 0;
 
         System.out.println("Bienvenido a la pantalla de Inicio");
@@ -82,7 +82,7 @@ public class Proyecto {
         }
     }
     
-    public static void IniciarSesion(){
+    public static void IniciarSesion() throws IOException, ParseException, SQLException{
         Scanner entradaScanner;
         String user = "";
         String password = "";
@@ -106,10 +106,11 @@ public class Proyecto {
         }
         else{
             System.out.println("------------ASACOM------------------------");
+            menuInteligente(procesoValidacion);
         }
     }
     
-    public static void Registrarse(){
+    public static void Registrarse() throws IOException, ParseException, SQLException{
         Scanner entradaScanner;
         String user = "";
         String correo = "";
@@ -140,12 +141,92 @@ public class Proyecto {
         mensajesEntrada();
     }
 
-    public  void menuInteligente() throws IOException, ParseException{
-        Ctrl.imprimirMensaje();
+    public static void menuInteligente(int IdUsuario) throws IOException, ParseException, SQLException{
+        Usuario Uingreso;
+        Uingreso = Ctrl.LeerUsuario(IdUsuario);
+        String Nombre;
+        int rolUsuario;
+        int idUsuario;
+        //
+        idUsuario = Uingreso.getIdUsuario();
+        Nombre = Uingreso.getNombre();
+        rolUsuario = Uingreso.getRolUsuario();
+        //
+        System.out.println("Bienvenido " + Nombre);
+        Operaciones(idUsuario,rolUsuario);
+    }
+    
+    
+    public static void mostrarActividadesUsuario(int idUsuario){
+    }
+    
+    public static void Operaciones(int usuario,int rol) throws IOException, ParseException, SQLException{
+        int selected = 0;
         System.out.println("Seleccione la operación que desea realizar");
-        System.out.println("Importar un Nuevo Proyecto");
-        System.out.println("Iniciar Sessión en Proyecto existente");
-     
+
+        System.out.println("1-Mostrar Actividades");
+        System.out.println("2-Agregar Avance");
+        System.out.println("3-Registrar Evidencia a un Avance"); 
+        System.out.println("4-Realizar Reporte");
+        System.out.println("5-Editar Perfil Usuario");
+        if(rol == 1){
+            System.out.println("6-Importar Proyecto");
+        }
+
+        System.out.println("Seccione el numero de la Operacion que desea realizar");
+        Scanner entradaScanner = new Scanner(System.in);
+        selected = Integer.parseInt(entradaScanner.nextLine());
+        switch (selected) {
+            case 1:
+                mostrarActividadesUsuario(usuario);
+                break;
+            case 2:
+                AgregarAvance();
+                break;
+            case 3:
+                AgregarEvidencia();
+                break;
+            case 4:
+                ObtenerReportes(usuario);
+                break;
+            case 5:
+                modificarPerfilUsuario(usuario);
+                break;
+            case 6:
+                ImportarProyecto();
+                break;
+
+            default:
+                System.out.println("La opción seleccionada es inválida");
+                Operaciones(usuario,rol);
+                break;
+        }
+        Operaciones(usuario,rol);
+    }
+    
+    public static void ObtenerReportes(int usuario){
+        int selected = 0;
+        System.out.println("Seleccione el reporte que desea realizar");
+        System.out.println("1-Reporte por Usuario");
+        System.out.println("2-Reporte por Fechas");
+        System.out.println("3-Reporte por Actividad");
+        System.out.println("Seccione el numero de la Operacion que desea realizar");
+        Scanner entradaScanner = new Scanner(System.in);
+        selected = Integer.parseInt(entradaScanner.nextLine());
+        switch (selected) {
+            case 1:
+                //Reporte Usuario;
+                break;
+            case 2:
+                //Reporte Fechas;
+                break;
+            case 3:
+                //Reporte Actividad;
+                break;
+            default:
+                System.out.println("La opción seleccionada es inválida");
+                break;
+        }
     }
     
     public static void ImportarProyecto() throws IOException, ParseException{
@@ -223,33 +304,25 @@ public class Proyecto {
     }
     
     
-//    public static void modificarPerfilUsuario(int idUsuario) throws SQLException{
-//        ConexionBD conexion =  ConexionBD.getInstance();
-//        Connection conn = conexion.getConexion();
-//        Usuario user = new Usuario();
-//        Usuario userL = Ctrl.LeerUsuario(idUsuario);
-//        int idUsuarioBD;
-//        String nombre;
-//        String correo;
-//
-//        //idUsuarioBD = userL.getIdUsuario();
-//        nombre = userL.getNombre();
-//        correo = userL.getCorreo();
-////        
-//        user.setNombre("Pedro");
-//        user.setCorreo("pedro@gmail.com");
-//        //
-//        System.out.println(idUsuarioBD);
-//        System.out.println(nombre);
-//        System.out.println(correo);
-////        
-//        user.setCorreo("joaquinmena.84@gmail.com");
-//        Ctrl.getDTOUsuario().setUnUsuario(user);
-//        Ctrl.CrearUsuario();
-//        System.out.println("Se agrego correctamente");  
-//        
-//        conexion.desconectar();
-//    }
+    public static void modificarPerfilUsuario(int idUsuario) throws SQLException{
+        Usuario user;
+        Usuario userL = Ctrl.LeerUsuario(idUsuario);
+        int idUsuarioBD;
+        String nombre;
+        String correo;
+        String password;
+
+        //idUsuarioBD = userL.getIdUsuario();
+        nombre = userL.getNombre();
+        correo = userL.getCorreo();
+        password = userL.getPassword();
+        //
+        System.out.println(nombre);
+        System.out.println(correo);
+        System.out.println(password);
+        //
+        
+    }
     
     private static java.sql.Date sqlDate(Date d) {
         return d!=null ? new java.sql.Date(d.getTime()) : null;

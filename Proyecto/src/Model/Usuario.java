@@ -14,17 +14,17 @@ public class Usuario {
     private String CodigoUsuario = "incompleto";
     private String nombre = "incompleto";
     private String correo = "incompleto";
-    private String password = "incompleto";
+    private String password = "admin";
     private int rolUsuario = 1;
 
     public Usuario() {
     }
 
-    public Usuario(Integer idUsuario, String nombre, String correo) {
+    public Usuario(Integer idUsuario, String nombre, String correo,int rolUsuario) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.correo = correo;
-        this.password = password;
+        this.rolUsuario = rolUsuario;
     }
 
     public Integer getIdUsuario() {

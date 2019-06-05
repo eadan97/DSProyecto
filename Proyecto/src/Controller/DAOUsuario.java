@@ -64,6 +64,7 @@ public class DAOUsuario implements DAOInterface{
     }
 
     public Usuario leerUsuario(Integer idUsuario) {
+        this.conn = ConexionBD.getConexion();
         Usuario u = new Usuario();
         CallableStatement cstmt = null;
         try {
@@ -74,7 +75,8 @@ public class DAOUsuario implements DAOInterface{
             rs.next();
             u = new Usuario(idUsuario,
                     rs.getString(1),
-                    rs.getString(2));
+                    rs.getString(2),
+                    rs.getInt(3));
         } catch (SQLException ex) {
             Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -92,11 +94,12 @@ public class DAOUsuario implements DAOInterface{
     public void actualizarUsuario(Usuario u) {
         CallableStatement cstmt = null;
         try {
-            cstmt = conn.prepareCall("{call actualizarUsuario(?,?,?)}");
+            cstmt = conn.prepareCall("{call actualizarUsuario(?,?,?,?)}");
             
             cstmt.setObject(1, u.getIdUsuario(), Types.INTEGER);
             cstmt.setString(2, u.getNombre());
             cstmt.setString(3, u.getCorreo());
+            cstmt.setString(4, u.getPassword());
 
             cstmt.executeUpdate();
         } catch (SQLException ex) {
