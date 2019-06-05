@@ -375,8 +375,5 @@ public class DAOAvance implements DAOInterface {
                     rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
         }
         // generar sp de buscar fechas 
-    }
-
-
-          
+    }    
 }

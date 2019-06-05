@@ -28,4 +28,8 @@ class GestorUsuario {
         return daoUsr.leerUsuario(id);
     }
     
+    public int validarUsuario(Usuario unUsuario){
+        return daoUsr.verificarUsuario(unUsuario);
+    }
+    
 }

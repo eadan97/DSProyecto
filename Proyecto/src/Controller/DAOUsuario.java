@@ -6,6 +6,7 @@
 package Controller;
 
 import Model.ConexionBD;
+import Model.RolUsuario;
 import Model.Usuario;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -41,11 +42,14 @@ public class DAOUsuario implements DAOInterface{
     public void insertarUsuario(Usuario u) {
         CallableStatement cstmt = null;
         try {
-            cstmt = conn.prepareCall("{call insertarUsuario(?,?)}");
+            cstmt = conn.prepareCall("{call insertarUsuario(?,?,?,?)}");
             cstmt.setString(1, u.getCodigoUsuario());
             cstmt.setString(2, u.getNombre());
+            cstmt.setString(3, u.getCorreo());
+            cstmt.setString(4, u.getPassword());
 
             cstmt.executeUpdate();
+            insertarRolUsuario(u.getRolUsuario());
         } catch (SQLException ex) {
             Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -129,14 +133,17 @@ public class DAOUsuario implements DAOInterface{
         }
     }
     
-    public int verificarUsuario(String nombre, String password) {
+    public int verificarUsuario(Usuario u) {
+        this.conn = ConexionBD.getConexion();
+        String password = u.getPassword();
+        String nombre = u.getNombre();
         int res = -1;
         CallableStatement cstmt = null;
         try {
             cstmt = conn.prepareCall("{call validarUsuario(?,?)}");
             
-            cstmt.setString(1, nombre);
-            cstmt.setString(2, password);
+            cstmt.setString(1, u.getNombre());
+            cstmt.setString(2, u.getPassword());
             ResultSet rs = cstmt.executeQuery();
             rs.next();
             res = (Integer) rs.getObject(1);
@@ -159,6 +166,98 @@ public class DAOUsuario implements DAOInterface{
                 
             }
         }
+        //System.out.println("Valor recibido "+res);
         return res;
     }
+     public void insertarRolUsuario(Integer rol) {
+        CallableStatement cstmt = null;
+        try {
+            cstmt = conn.prepareCall("{call insertarRolUsuario(?)}");
+
+            cstmt.setObject(1,rol, Types.INTEGER);
+
+            cstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cstmt!=null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    public RolUsuario leerRolUsuario(Integer idRolUsuario) {
+        RolUsuario r = new RolUsuario();
+        CallableStatement cstmt = null;
+        try {
+            cstmt = conn.prepareCall("{call leerRolUsuario(?)}");
+            
+            cstmt.setObject(1, idRolUsuario, Types.INTEGER);
+            ResultSet rs = cstmt.executeQuery();
+            rs.next();
+            r = new RolUsuario(idRolUsuario,
+                    (Integer) rs.getObject(1),
+                    (Integer) rs.getObject(2));
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cstmt!=null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return r;
+    }
+
+    public void actualizarRolUsuario(RolUsuario r) {
+        CallableStatement cstmt = null;
+        try {
+            cstmt = conn.prepareCall("{call actualizarRolUsuario(?,?,?)}");
+            
+            cstmt.setObject(1, r.getIdRolUsuario(), Types.INTEGER);
+            cstmt.setObject(2, r.getIdUsuario(), Types.INTEGER);
+            cstmt.setObject(3, r.getIdRol(), Types.INTEGER);
+
+            cstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cstmt!=null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    public void borrarRolUsuario(Integer idRolUsuario) {
+        CallableStatement cstmt = null;
+        try {
+            cstmt = conn.prepareCall("{call borrarRolUsuario(?)}");
+            
+            cstmt.setObject(1, idRolUsuario, Types.INTEGER);
+
+            cstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cstmt!=null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
 }

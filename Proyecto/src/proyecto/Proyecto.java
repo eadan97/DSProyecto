@@ -49,12 +49,95 @@ public class Proyecto {
     public static void main(String[] args) throws SQLException, IOException, ParseException {
 
        //ImportarProyecto();
-       Ctrl.CrearReporte("Actividad");
+       //Ctrl.CrearReporte("Actividad");
        
+        System.out.println("BIENVENIDO AL SISTEMA ASACOM");
+        System.out.println("-*-*-*-*-*-*-*-*-**-*-*-*-*-**-");
+        mensajesEntrada();
+        //ImportarProyecto();
        //AgregarAvance();
        //AgregarEvidencia();
-       //C:\Users\aleta\Pictures\foto.jpg
-       
+       //C:\Users\aleta\Pictures\foto.jpg 
+    }
+    
+    public static void mensajesEntrada(){
+        int selected = 0;
+
+        System.out.println("Bienvenido a la pantalla de Inicio");
+        System.out.println("1-Iniciar Sesión");
+        System.out.println("2-Registrarse");
+        System.out.println("Seccione el numero de la Operacion que desea realizar");
+        Scanner entradaScanner = new Scanner(System.in);
+        selected = Integer.parseInt(entradaScanner.nextLine());
+        switch (selected) {
+            case 1:
+                IniciarSesion();
+                break;
+            case 2:
+                Registrarse();
+                break;
+            default:
+                System.out.println("La opción seleccionada es inválida");
+                break;
+        }
+    }
+    
+    public static void IniciarSesion(){
+        Scanner entradaScanner;
+        String user = "";
+        String password = "";
+        System.out.println("Digite el nombre de Usuario");
+        entradaScanner = new Scanner(System.in);
+        user = entradaScanner.nextLine();
+        System.out.println("Digite su Contraseña");
+        entradaScanner = new Scanner(System.in);
+        password = entradaScanner.nextLine();
+        //
+        Ctrl.getDTOUsuario().getUnUsuario().setNombre(user);
+        Ctrl.getDTOUsuario().getUnUsuario().setPassword(password);
+        
+        int procesoValidacion;
+        procesoValidacion = Ctrl.validarUsuario();
+                
+        if(procesoValidacion == -1){
+            System.out.println("Los datos ingresados son invalidos o "
+                    + "el usuario no existe");
+            IniciarSesion();
+        }
+        else{
+            System.out.println("------------ASACOM------------------------");
+        }
+    }
+    
+    public static void Registrarse(){
+        Scanner entradaScanner;
+        String user = "";
+        String correo = "";
+        String codigoUsuario = "111111111111111";
+        String password = "";
+        
+        //
+        System.out.println("Digite el nombre de Usuario");
+        entradaScanner = new Scanner(System.in);
+        user = entradaScanner.nextLine();
+        //
+        System.out.println("Digite correo electronico");
+        entradaScanner = new Scanner(System.in);
+        correo = entradaScanner.nextLine();
+        //
+        System.out.println("Digite su Contraseña");
+        entradaScanner = new Scanner(System.in);
+        password = entradaScanner.nextLine();
+        
+        Ctrl.getDTOUsuario().getUnUsuario().setCodigoUsuario(codigoUsuario);
+        Ctrl.getDTOUsuario().getUnUsuario().setCorreo(correo);
+        Ctrl.getDTOUsuario().getUnUsuario().setNombre(user);
+        Ctrl.getDTOUsuario().getUnUsuario().setPassword(password);
+        Ctrl.getDTOUsuario().getUnUsuario().setRolUsuario(1);
+        
+        Ctrl.CrearUsuario();
+        System.out.println("El usuario ha sido ingresado con exito");  
+        mensajesEntrada();
     }
 
     public  void menuInteligente() throws IOException, ParseException{
@@ -172,16 +255,4 @@ public class Proyecto {
         return d!=null ? new java.sql.Date(d.getTime()) : null;
     }
     
-    public void agregarActividad(){
-        DAOActividad dao = new DAOActividad();
-        Ctrl.imprimirMensaje();
-        //ConexionBD conexion =  ConexionBD.getInstance();
-        //Connection conn = conexion.getConexion();
-//        Actividad act = new Actividad();
-//        //act.setIdUsuario(1);
-//        Date dt = new Date ("Fri Apr 05 00:00:00 CST 2019");
-//        act.setFechaCreacion(dt);
-//        act.setIdProyecto(1);
-//        dao.Registrar(act);  
-    }
 }

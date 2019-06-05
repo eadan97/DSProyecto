@@ -42,7 +42,6 @@ public class GestorImportacion {
                 fechaUltimaModificacion = null;
             }
             String nombreTarea = (String) tasks.getJSONObject(i).get("name");
-            System.out.println(nombreTarea);
             String CodigoUsuario = (String) ((JSONObject) tasks.getJSONObject(i).get("assignee")).get("gid");
             String nombreUsuario = tasks.getJSONObject(i).getJSONObject("assignee").getString("name");
             String emailAsignado = null;
@@ -74,9 +73,8 @@ public class GestorImportacion {
             } catch (Exception e) {
                 tareaPadre = null;
             }
-            //int Usuario = Integer.parseInt(idUsuario);
+            
             SolicitarRegistroUsuario(CodigoUsuario, nombreUsuario);
-            //System.out.println(Usuario);
 
             LineaArchivo(idTarea, fechaCreacion, fechaCompletado,
                     fechaUltimaModificacion, nombreTarea, CodigoUsuario,
@@ -91,20 +89,6 @@ public class GestorImportacion {
             String etiqueta, String nota, String idProyecto, String tareaPadre) {
 
         Controlador Ctrl = Controlador.getInstance();
-
-//        System.out.println(fechaCreacion);
-//        System.out.println(fechaCompletado);
-//        System.out.println(fechaUltimaModificacion);
-//        System.out.println(nombreTarea);
-//        System.out.println(idUsuario);
-//        System.out.println(emailAsignado);
-//        System.out.println(fechaInicio);
-//        System.out.println(fechaFin);
-//        System.out.println(etiqueta);
-//        System.out.println(nota);
-//        System.out.println(idProyecto);
-//        System.out.println(tareaPadre);
-//        System.out.println("-----------------------------");
 
         Ctrl.getDTOActividad().getUnaActividad().setIdTarea(idTarea);
         Ctrl.getDTOActividad().getUnaActividad().setFechaCreacion(fechaCreacion);
@@ -139,85 +123,7 @@ public class GestorImportacion {
         Controlador Ctrl = Controlador.getInstance();
         Ctrl.getDTOUsuario().getUnUsuario().setCodigoUsuario(codigoUsuario);
         Ctrl.getDTOUsuario().getUnUsuario().setNombre(nombre);
+        Ctrl.getDTOUsuario().getUnUsuario().setRolUsuario(2);
         Ctrl.CrearUsuario();
     }
 }
-
-//                System.out.println("for");
-//                String idTarea = tasks.getJSONObject(i).getString("gid");
-//                String nombreTarea = tasks.getJSONObject(i).getString("name");
-//                System.out.println(nombreTarea);
-//                String nota = tasks.getJSONObject(i).getString("notes");
-////                String idProyecto = tasks.getJSONObject(i).getJSONArray("projects").getJSONObject(0).getString("gid");
-////                String tareaPadre = tasks.getJSONObject(i).getJSONObject("parent").getString("gid");
-////                
-//                Date fechaCreacion = ParseDayFromJson(tasks.getJSONObject(i).getString("created_at")); 
-////                Date fechaCompletado = ParseDayFromJson(tasks.getJSONObject(i).getString("completed_at"));
-//                Date fechaUltimaModificacion = ParseDayFromJson(tasks.getJSONObject(i).getString("modified_at"));
-//                Date fechaInicio = ParseDayFromJson(tasks.getJSONObject(i).getString("due_on"));
-////                Date fechaFin = ParseDayFromJson(tasks.getJSONObject(i).getString("due_at"));  
-////                
-////                String etiqueta = "";
-////                JSONArray tags = tasks.getJSONObject(i).getJSONArray("tags");
-////                for (int j=0; i<tags.length(); ++i){
-////                    etiqueta+=tags.getString(j);
-////                    if(j< tags.length()-1)
-////                    etiqueta+=", ";
-////                }
-//                
-//                System.out.println("antes de linea de archivo");
-//Integer idUsuario = Integer.parseInt((String) ((JSONObject) tasks.getJSONObject(i).get("assignee")).get("gid"));
-//    int idUsuario = tasks.getJSONObject(i).getJSONObject("assignee").getInt("id");
-//     String nombreUsuario = tasks.getJSONObject(i).getJSONObject("assignee").getString("name");
-// String emailAsignado = null;
-//  SolicitarRegistroUsuario(idUsuario, nombreUsuario);
-// String  idUsuario = 1;
-/*
-                * Deberia registrar acá los followers a una tarea?
- */
-// Entonces id usuario es integer o string? 
-//                LineaArchivo(idTarea, fechaCreacion, fechaCompletado, 
-//                        fechaUltimaModificacion, nombreTarea, idUsuario,
-//                        fechaInicio, fechaFin, etiqueta,
-//                        nota, idProyecto, tareaPadre);
-// 
-////------------------------------------------------------------------------------------------------------------------
-//    public void LineaArchivo(String idTarea, Date fechaCreacion,
-//            Date fechaCompletado, Date fechaUltimaModificacion, String nombreTarea,
-//            String idUsuario,Date fechaInicio,Date fechaFin,
-//            String etiqueta, String nota,String idProyecto, String tareaPadre){
-//         System.out.println("afafafd");   
-//        Controlador Ctrl = Controlador.getInstance();
-//        System.out.println(idTarea);
-//        System.out.println(fechaCreacion);
-//        System.out.println(fechaCompletado);
-//        System.out.println(fechaUltimaModificacion);
-//        System.out.println(nombreTarea);
-//        System.out.println(idUsuario);
-//        //System.out.println(emailAsignado);
-//        System.out.println(fechaInicio);
-//        System.out.println(fechaFin);
-//        System.out.println(etiqueta);
-//        System.out.println(nota);
-//        System.out.println(idProyecto);
-//        System.out.println(tareaPadre);
-//            System.out.println("-----------------------------");
-//
-////        
-////        Ctrl.getDTOActividad().getUnaActividad().setIdTarea(idTarea);
-////        Ctrl.getDTOActividad().getUnaActividad().setFechaCreacion(fechaCreacion);
-////        Ctrl.getDTOActividad().getUnaActividad().setFechaCompletado(fechaCompletado);
-////        Ctrl.getDTOActividad().getUnaActividad().setFechaUltimaModificacion(fechaUltimaModificacion);
-////        Ctrl.getDTOActividad().getUnaActividad().setNombreTarea(nombreTarea);
-////       // Ctrl.getDTOActividad().getUnaActividad().setIdUsuario(idUsuario);
-////        // Que no hay emails en el json! Ctrl.getDTOActividad().getUnaActividad().setEmailAsignado(emailAsignado);
-////        Ctrl.getDTOActividad().getUnaActividad().setFechaInicio(fechaInicio);
-////        Ctrl.getDTOActividad().getUnaActividad().setFechaFin(fechaFin);
-////        Ctrl.getDTOActividad().getUnaActividad().setEtiqueta(etiqueta);
-////        Ctrl.getDTOActividad().getUnaActividad().setNota(nota);
-////        Ctrl.getDTOActividad().getUnaActividad().setIdProyecto(idProyecto);        
-////        Ctrl.getDTOActividad().getUnaActividad().setTareaPadre(tareaPadre);
-////        
-//        Ctrl.CrearActividad();        
-//    }    
-

@@ -32,6 +32,8 @@ public class ConexionBD {
 
     private static ConexionBD instance;
     static Connection conn = null;
+    public Statement statement = null;
+    private ResultSet rs = null;
 
     
     private ConexionBD () {
@@ -66,7 +68,7 @@ public class ConexionBD {
     public void desconectar() throws SQLException{
         conn.close();
     }
-        
+       
     
     /*Propio de cada gestor*/
     private java.sql.Date sqlDate(Date d) {
@@ -438,99 +440,7 @@ public class ConexionBD {
         }
     }
 
-    public void insertarRolUsuario(RolUsuario r) {
-        CallableStatement cstmt = null;
-        try {
-            cstmt = conn.prepareCall("{call insertarRolUsuario(?,?,?)}");
-
-            cstmt.setObject(1, r.getIdRolUsuario(), Types.INTEGER);
-            cstmt.setObject(2, r.getIdUsuario(), Types.INTEGER);
-            cstmt.setObject(3, r.getIdRol(), Types.INTEGER);
-
-            cstmt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if(cstmt!=null) {
-                try {
-                    cstmt.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-    }
-
-    public RolUsuario leerRolUsuario(Integer idRolUsuario) {
-        RolUsuario r = new RolUsuario();
-        CallableStatement cstmt = null;
-        try {
-            cstmt = conn.prepareCall("{call leerRolUsuario(?)}");
-            
-            cstmt.setObject(1, idRolUsuario, Types.INTEGER);
-            ResultSet rs = cstmt.executeQuery();
-            rs.next();
-            r = new RolUsuario(idRolUsuario,
-                    (Integer) rs.getObject(1),
-                    (Integer) rs.getObject(2));
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if(cstmt!=null) {
-                try {
-                    cstmt.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        return r;
-    }
-
-    public void actualizarRolUsuario(RolUsuario r) {
-        CallableStatement cstmt = null;
-        try {
-            cstmt = conn.prepareCall("{call actualizarRolUsuario(?,?,?)}");
-            
-            cstmt.setObject(1, r.getIdRolUsuario(), Types.INTEGER);
-            cstmt.setObject(2, r.getIdUsuario(), Types.INTEGER);
-            cstmt.setObject(3, r.getIdRol(), Types.INTEGER);
-
-            cstmt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if(cstmt!=null) {
-                try {
-                    cstmt.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-    }
-
-    public void borrarRolUsuario(Integer idRolUsuario) {
-        CallableStatement cstmt = null;
-        try {
-            cstmt = conn.prepareCall("{call borrarRolUsuario(?)}");
-            
-            cstmt.setObject(1, idRolUsuario, Types.INTEGER);
-
-            cstmt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if(cstmt!=null) {
-                try {
-                    cstmt.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-    }
-
+   
     public void insertarTipoAvance(TipoAvance t) {
         CallableStatement cstmt = null;
         try {
