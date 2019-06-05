@@ -59,7 +59,8 @@ public class Proyecto {
         Scanner entradaScanner = new Scanner(System.in);
         path = entradaScanner.nextLine();
         //path = "../archivo.json";
-        Ctrl.ImportarArchivo(path);        
+        Ctrl.ImportarArchivo(path);
+        System.out.println("bien");
     }
     
     public static void AgregarAvance(){
