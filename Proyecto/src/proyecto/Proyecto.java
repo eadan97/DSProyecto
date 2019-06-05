@@ -40,8 +40,8 @@ public class Proyecto {
     public static void main(String[] args) throws SQLException, IOException, ParseException {
         // TODO code application logic here
         //Controlador Ctrl = Controlador.getInstance();
-        //ImportarProyecto();
-        AgregarAvance();
+        ImportarProyecto();
+        //AgregarAvance();
        //AgregarEvidencia();
        
         
