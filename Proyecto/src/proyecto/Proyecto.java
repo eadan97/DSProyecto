@@ -159,7 +159,7 @@ public class Proyecto {
     }
     
     
-    public static void mostrarActividadesUsuario(int idUsuario){
+    public static void mostrarActividadesUsuario(int idUsuario) throws SQLException{
         Ctrl.ConsultarActividades(idUsuario);
     }
     
