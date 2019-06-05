@@ -149,4 +149,8 @@ public class Controlador {
         return gUsuario.validarUsuario(DTOUsuario.getUnUsuario());
     }
     
+    public void ConsultarActividades(int idUsuario){
+        gActividad.ConsultarActividad(idUsuario);
+    }
+    
 }
