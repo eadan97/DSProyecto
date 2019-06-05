@@ -215,13 +215,13 @@ public class Proyecto {
         selected = Integer.parseInt(entradaScanner.nextLine());
         switch (selected) {
             case 1:
-                //Reporte Usuario;
+                Ctrl.CrearReporte("Usuario");
                 break;
             case 2:
-                //Reporte Fechas;
+                Ctrl.CrearReporte("Fechas");
                 break;
             case 3:
-                //Reporte Actividad;
+                Ctrl.CrearReporte("Actividad");
                 break;
             default:
                 System.out.println("La opción seleccionada es inválida");

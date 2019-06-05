@@ -1,11 +1,4 @@
-INSERT INTO Usuario (Nombre, Correo, CodigoUsuario,Contrasena)
-values ('Alejandro','ale@gmail.com','697592342995982','ale')
-
-INSERT INTO Usuario (Nombre, Correo, CodigoUsuario,Contrasena)
-values ('Joaquin','joa@gmail.com','1117338481215044','ale')
-
-INSERT INTO Usuario (Nombre, Correo, CodigoUsuario,Contrasena)
-values ('Esteban','ale@gmail.com','1117456021197123','ale')
+use Diseño
 
 INSERT INTO TipoAvance (Nombre)
 Values ('SolucionError')
