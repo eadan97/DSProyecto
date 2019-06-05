@@ -47,9 +47,12 @@ public class Proyecto {
     public static Controlador Ctrl = Controlador.getInstance();
 
     public static void main(String[] args) throws SQLException, IOException, ParseException {
-        ImportarProyecto();
-       // AgregarAvance();
+
+       // ImportarProyecto();
+       AgregarAvance();
        //AgregarEvidencia();
+       //C:\Users\aleta\Pictures\foto.jpg
+       
     }
 
     public  void menuInteligente() throws IOException, ParseException{
@@ -76,6 +79,7 @@ public class Proyecto {
         int horas = 0;
         int tipAvance = 0;
         String descrip = "";
+        int idUsuario=0;
         Date Fecha = new Date();
         java.sql.Date FechaMod = sqlDate(Fecha);
         
@@ -91,6 +95,10 @@ public class Proyecto {
         entradaScanner = new Scanner(System.in);
         tipAvance = Integer.parseInt(entradaScanner.nextLine());
         //
+         System.out.println("Digite el usuario");
+        entradaScanner = new Scanner(System.in);
+        idUsuario = Integer.parseInt(entradaScanner.nextLine());
+        //
         System.out.println("Digite descripcion del avance Avance");
         entradaScanner = new Scanner(System.in);
         descrip = entradaScanner.nextLine();
@@ -99,6 +107,7 @@ public class Proyecto {
         Ctrl.getDTOAvance().getUnAvance().setFechaAvance(FechaMod);
         Ctrl.getDTOAvance().getUnAvance().setHorasDedicadas(horas);
         Ctrl.getDTOAvance().getUnAvance().setTipoAvance(tipAvance);
+        Ctrl.getDTOAvance().getUnAvance().setIdUsuario(idUsuario);
         Ctrl.getDTOAvance().getUnAvance().setDescripcion(descrip);
         
         Ctrl.CrearAvance();
