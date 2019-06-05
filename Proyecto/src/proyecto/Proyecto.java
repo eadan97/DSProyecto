@@ -76,7 +76,8 @@ public class Proyecto {
         gImportacion.LeerArchivo(path);
         //System.out.println ("Entrada recibida por teclado es: \"" + path +"\"");
         //path = "../archivo.json";
-        Ctrl.ImportarArchivo(path);        
+        Ctrl.ImportarArchivo(path);
+        System.out.println("bien");
     }
     
     public static void AgregarAvance(){

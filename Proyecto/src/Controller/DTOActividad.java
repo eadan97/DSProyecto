@@ -8,8 +8,7 @@ import Model.Actividad;
  */
 public class DTOActividad {
     private Actividad unaActividad;
-    
-    
+        
     public DTOActividad(){
         unaActividad = new Actividad();
     }
