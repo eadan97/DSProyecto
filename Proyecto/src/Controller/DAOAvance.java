@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.List;
 import java.util.logging.Level;
@@ -313,6 +314,5 @@ public class DAOAvance implements DAOInterface {
     }
     public void BuscarAvanceFechas(Date Inicio, Date Final){
         // generar sp de buscar fechas 
-    }
-          
+    }    
 }

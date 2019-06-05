@@ -13,9 +13,9 @@ INSERT INTO TipoAvance (Nombre)
 VALUES ('TIPO2')
 
 INSERT INTO ROL (Nombre)
-Values ('roL1')
+Values ('Administrador')
 INSERT INTO ROL (Nombre)
-VALUES ('ROL2')
+VALUES ('Usuario')
 
 INSERT INTO Proyecto(NombreProyecto,CodigoProyecto)
 Values ('ProyectoAsana','1117454522649269')

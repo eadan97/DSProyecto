@@ -147,4 +147,9 @@ public class Controlador {
     public Usuario LeerUsuario(int idUsuario) {
         return gUsuario.ObtenerUsusario(idUsuario);
     }
+    
+    public int validarUsuario(){
+        return gUsuario.validarUsuario(DTOUsuario.getUnUsuario());
+    }
+    
 }

@@ -11,10 +11,10 @@ package Model;
  */
 public class Usuario {
     private Integer idUsuario;
-    private String CodigoUsuario;
-    private String nombre;
-    private String correo;
-    private String password;
+    private String CodigoUsuario = "incompleto";
+    private String nombre = "incompleto";
+    private String correo = "incompleto";
+    private String password = "incompleto";
 
     public Usuario() {
     }

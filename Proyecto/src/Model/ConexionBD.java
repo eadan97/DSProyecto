@@ -32,6 +32,8 @@ public class ConexionBD {
 
     private static ConexionBD instance;
     static Connection conn = null;
+    public Statement statement = null;
+    private ResultSet rs = null;
 
     
     private ConexionBD () {
@@ -66,7 +68,7 @@ public class ConexionBD {
     public void desconectar() throws SQLException{
         conn.close();
     }
-        
+       
     
     /*Propio de cada gestor*/
     private java.sql.Date sqlDate(Date d) {

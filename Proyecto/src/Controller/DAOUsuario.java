@@ -41,9 +41,11 @@ public class DAOUsuario implements DAOInterface{
     public void insertarUsuario(Usuario u) {
         CallableStatement cstmt = null;
         try {
-            cstmt = conn.prepareCall("{call insertarUsuario(?,?)}");
+            cstmt = conn.prepareCall("{call insertarUsuario(?,?,?,?)}");
             cstmt.setString(1, u.getCodigoUsuario());
             cstmt.setString(2, u.getNombre());
+            cstmt.setString(3, u.getCorreo());
+            cstmt.setString(4, u.getPassword());
 
             cstmt.executeUpdate();
         } catch (SQLException ex) {
@@ -129,7 +131,9 @@ public class DAOUsuario implements DAOInterface{
         }
     }
     
-    public int verificarUsuario(String nombre, String password) {
+    public int verificarUsuario(Usuario u) {
+        String password = u.getPassword();
+        String nombre = u.getNombre();
         int res = -1;
         CallableStatement cstmt = null;
         try {
