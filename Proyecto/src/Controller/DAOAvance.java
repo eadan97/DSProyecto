@@ -377,7 +377,6 @@ public class DAOAvance implements DAOInterface {
         // generar sp de buscar fechas 
     }    
     
-<<<<<<< HEAD
     public void BuscarActividades(Integer Usario) throws SQLException{
          this.conn = ConexionBD.getInstance().getConexion();
         Statement stmt = conn.createStatement();
@@ -406,6 +405,5 @@ public class DAOAvance implements DAOInterface {
                     rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
         }
     }
-=======
->>>>>>> 98c2ffea4d9957ec518a389bc17e76b240450779
+
 }
