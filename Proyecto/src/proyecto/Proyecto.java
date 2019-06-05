@@ -172,6 +172,7 @@ public class Proyecto {
         System.out.println("3-Registrar Evidencia a un Avance"); 
         System.out.println("4-Realizar Reporte");
         System.out.println("5-Editar Perfil Usuario");
+        System.out.println("7-Salir");
         if(rol == 1){
             System.out.println("6-Importar Proyecto");
         }
@@ -190,13 +191,16 @@ public class Proyecto {
                 AgregarEvidencia();
                 break;
             case 4:
-                ObtenerReportes(usuario);
+                ObtenerReportes(usuario,rol);
                 break;
             case 5:
                 modificarPerfilUsuario(usuario);
                 break;
             case 6:
                 ImportarProyecto();
+                break;
+            case 7:
+                System.exit(0);
                 break;
 
             default:
@@ -207,12 +211,14 @@ public class Proyecto {
         Operaciones(usuario,rol);
     }
     
-    public static void ObtenerReportes(int usuario){
+    public static void ObtenerReportes(int usuario,int rol) throws IOException, ParseException, SQLException{
         int selected = 0;
         System.out.println("Seleccione el reporte que desea realizar");
         System.out.println("1-Reporte por Usuario");
         System.out.println("2-Reporte por Fechas");
         System.out.println("3-Reporte por Actividad");
+        System.out.println("4-Salir");
+        
         System.out.println("Seccione el numero de la Operacion que desea realizar");
         Scanner entradaScanner = new Scanner(System.in);
         selected = Integer.parseInt(entradaScanner.nextLine());
@@ -226,6 +232,10 @@ public class Proyecto {
             case 3:
                 Ctrl.CrearReporte("Actividad");
                 break;
+            case 4:
+                Operaciones(usuario,rol);
+                break;
+                
             default:
                 System.out.println("La opción seleccionada es inválida");
                 break;
@@ -269,7 +279,7 @@ public class Proyecto {
         entradaScanner = new Scanner(System.in);
         idUsuario = Integer.parseInt(entradaScanner.nextLine());
         //
-        System.out.println("Digite descripcion del avance Avance");
+        System.out.println("Digite descripcion del  Avance");
         entradaScanner = new Scanner(System.in);
         descrip = entradaScanner.nextLine();
         
