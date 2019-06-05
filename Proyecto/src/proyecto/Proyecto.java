@@ -63,7 +63,7 @@ public class Proyecto {
         System.out.println("1-Iniciar Sesión");
         System.out.println("2-Registrarse");
         System.out.println("3-Salir");
-        System.out.println("Seccione el numero de la Operacion que desea realizar");
+        System.out.println("/n/n/nSeccione el numero de la Operacion que desea realizar");
         Scanner entradaScanner = new Scanner(System.in);
         selected = Integer.parseInt(entradaScanner.nextLine());
         switch (selected) {
@@ -107,7 +107,7 @@ public class Proyecto {
             IniciarSesion();
         }
         else{
-            System.out.println("------------ASACOM------------------------");
+            System.out.println("------------ASACOM------------------------\n\n\n\n\n");
             menuInteligente(procesoValidacion);
         }
     }
