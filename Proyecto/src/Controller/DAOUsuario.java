@@ -161,6 +161,4 @@ public class DAOUsuario implements DAOInterface{
         }
         return res;
     }
-
-
 }
