@@ -32,7 +32,9 @@ public class Controlador {
     private DTOUsuario DTOUsuario;
 
     
-    public Controlador(){
+    
+    
+    private Controlador(){
         gImportacion = new GestorImportacion();
         gActividad = new GestorActividad(); 
         gAvance = new GestorAvance();
