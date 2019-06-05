@@ -11,7 +11,5 @@ public interface DAOInterface {
     boolean Registrar(Object obj);
     List Recuperar();
     Object Recuperar(Object clave);
-    
-    
-    
+   
 }
