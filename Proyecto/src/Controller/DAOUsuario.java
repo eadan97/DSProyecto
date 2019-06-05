@@ -134,6 +134,7 @@ public class DAOUsuario implements DAOInterface{
     }
     
     public int verificarUsuario(Usuario u) {
+        this.conn = ConexionBD.getConexion();
         String password = u.getPassword();
         String nombre = u.getNombre();
         int res = -1;
@@ -141,8 +142,8 @@ public class DAOUsuario implements DAOInterface{
         try {
             cstmt = conn.prepareCall("{call validarUsuario(?,?)}");
             
-            cstmt.setString(1, nombre);
-            cstmt.setString(2, password);
+            cstmt.setString(1, u.getNombre());
+            cstmt.setString(2, u.getPassword());
             ResultSet rs = cstmt.executeQuery();
             rs.next();
             res = (Integer) rs.getObject(1);
@@ -165,6 +166,7 @@ public class DAOUsuario implements DAOInterface{
                 
             }
         }
+        //System.out.println("Valor recibido "+res);
         return res;
     }
      public void insertarRolUsuario(Integer rol) {

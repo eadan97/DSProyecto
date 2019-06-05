@@ -49,8 +49,8 @@ public class Proyecto {
     public static void main(String[] args) throws SQLException, IOException, ParseException {
         System.out.println("BIENVENIDO AL SISTEMA ASACOM");
         System.out.println("-*-*-*-*-*-*-*-*-**-*-*-*-*-**-");
-        //mensajesEntrada();
-        ImportarProyecto();
+        mensajesEntrada();
+        //ImportarProyecto();
        //AgregarAvance();
        //AgregarEvidencia();
        //C:\Users\aleta\Pictures\foto.jpg 
@@ -94,7 +94,7 @@ public class Proyecto {
         
         int procesoValidacion;
         procesoValidacion = Ctrl.validarUsuario();
-        
+                
         if(procesoValidacion == -1){
             System.out.println("Los datos ingresados son invalidos o "
                     + "el usuario no existe");
