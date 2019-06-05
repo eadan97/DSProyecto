@@ -13,6 +13,7 @@ public class Usuario {
     private Integer idUsuario;
     private String nombre;
     private String correo;
+    private String password;
 
     public Usuario() {
     }
@@ -21,6 +22,7 @@ public class Usuario {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.correo = correo;
+        this.password = password;
     }
 
     public Integer getIdUsuario() {
@@ -45,6 +47,13 @@ public class Usuario {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+        public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
     

@@ -1,10 +1,12 @@
 package Controller;
 
+
 import Model.BuilderActividad;
 import Model.BuilderFecha;
 import Model.BuilderMiembro;
 import Model.DirectorReporte;
 import Model.Reporte;
+import Model.Usuario;
 
 
 /**
@@ -16,6 +18,8 @@ public class Controlador {
     private GestorImportacion gImportacion;
     private GestorActividad gActividad;
     private GestorAvance gAvance;
+    private GestorEvidencia gEvidencia;
+    private GestorUsuario gUsuario;
     private DTOProyecto DTOProyecto;
     private DTOActividad DTOActividad;
     private DTOAvance DTOAvance;
@@ -23,18 +27,22 @@ public class Controlador {
     private BuilderFecha BFecha;
     private BuilderActividad BActvidad;
     private BuilderMiembro BMiembro;
-    
+    private DTOEvidencia DTOEvidencia;
+    private DTOUsuario DTOUsuario;
 
     
     public Controlador(){
         gImportacion = new GestorImportacion();
         gActividad = new GestorActividad(); 
         gAvance = new GestorAvance();
+        gEvidencia = new GestorEvidencia();
+        gUsuario = new GestorUsuario();
         DTOProyecto = new DTOProyecto();
         DTOActividad = new DTOActividad();
         DTOAvance = new DTOAvance();
         DReporte  = new DirectorReporte();
-        
+        DTOEvidencia = new DTOEvidencia();
+        DTOUsuario = new DTOUsuario();
     }
   
     public static Controlador getInstance(){
@@ -66,6 +74,14 @@ public class Controlador {
     
     public DTOAvance getDTOAvance(){
         return DTOAvance;
+    }
+
+    public DTOEvidencia getDTOEvidencia() {
+        return DTOEvidencia;
+    }
+
+    public void setDTOEvidencia(DTOEvidencia DTOEvidencia) {
+        this.DTOEvidencia = DTOEvidencia;
     }
     
     public void CrearActividad(){
@@ -103,6 +119,11 @@ public class Controlador {
         DReporte.prepararReporte();
     }
     
+    public void CrearEvidencia(){
+        gEvidencia.CrearEvidencia(DTOEvidencia.getUnaEvidencia());
+
+    }
+    
     public void AdjuntarEvidencia(Object obj,int IdAvance){              
 
     }
@@ -112,4 +133,18 @@ public class Controlador {
     }
     
 
+    public DTOUsuario getDTOUsuario() {
+        return this.DTOUsuario;
+    }
+    public void setDTOUsuario(DTOUsuario newdto){
+        this.DTOUsuario = newdto;                
+    }
+
+    public void CrearUsuario() {
+        gUsuario.CrearUsuario(DTOUsuario.getUnUsuario());
+    }
+
+    public Usuario LeerUsuario(int idUsuario) {
+        return gUsuario.ObtenerUsusario(idUsuario);
+    }
 }

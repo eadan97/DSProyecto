@@ -18,13 +18,20 @@ import Model.ConexionBD;
 import Model.Evidencia;
 
 import Model.Usuario;
-import java.awt.MenuItem;
+
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -41,14 +48,16 @@ public class Proyecto {
 
     public static void main(String[] args) throws SQLException, IOException, ParseException {
         // TODO code application logic here
-        Controlador Ctrl = Controlador.getInstance();
+
         //ImportarProyecto();
       // Ctrl.CrearReporte("Actividad");
-        
-        
-
       
+        //Controlador Ctrl = Controlador.getInstance();
+        //ImportarProyecto();
+       // AgregarAvance();
+       //AgregarEvidencia();
     }
+
     public  void menuInteligente() throws IOException, ParseException{
         Ctrl.imprimirMensaje();
         System.out.println("Seleccione la operación que desea realizar");
@@ -71,17 +80,70 @@ public class Proyecto {
     }
     
     public static void AgregarAvance(){
-        System.out.println("Seleccione la actividad");
-        String act = "";
-        Scanner entradaScanner = new Scanner(System.in);
+
+        Scanner entradaScanner;
+        int act = 0;
+        int horas = 0;
+        int tipAvance = 0;
+        String descrip = "";
+        Date Fecha = new Date();
+        java.sql.Date FechaMod = sqlDate(Fecha);
+        
+        System.out.println("Digite Numero de Actividad");
+        entradaScanner = new Scanner(System.in);
+        act = Integer.parseInt(entradaScanner.nextLine());
+        //
+        System.out.println("Digite Numero de Horas dedicadas");
+        entradaScanner = new Scanner(System.in);
+        horas = Integer.parseInt(entradaScanner.nextLine());
+        //
+        System.out.println("Digite tipo de Avance");
+        entradaScanner = new Scanner(System.in);
+        tipAvance = Integer.parseInt(entradaScanner.nextLine());
+        //
+        System.out.println("Digite descripcion del avance Avance");
+        entradaScanner = new Scanner(System.in);
+        descrip = entradaScanner.nextLine();
+        
+        Ctrl.getDTOAvance().getUnAvance().setIdActividad(act);
+        Ctrl.getDTOAvance().getUnAvance().setFechaAvance(FechaMod);
+        Ctrl.getDTOAvance().getUnAvance().setHorasDedicadas(horas);
+        Ctrl.getDTOAvance().getUnAvance().setTipoAvance(tipAvance);
+        Ctrl.getDTOAvance().getUnAvance().setDescripcion(descrip);
+        
+        Ctrl.CrearAvance();
+    }
+    public static void AgregarEvidencia() throws IOException{
+        Scanner entradaScanner;
+        String pathImagen = "";
+        int evd = 0;
+        System.out.println("Digite path de la imagen");
+        entradaScanner = new Scanner(System.in);
+        pathImagen = entradaScanner.nextLine();
+        //Image imagenExterna = new ImageIcon(pathImagen).getImage();
+        BufferedImage bImage = ImageIO.read(new File(pathImagen));
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ImageIO.write(bImage, "jpg", bos );
+        byte [] data = bos.toByteArray();
+        
+        //
+        System.out.println("Digite Numero de Avance");
+        entradaScanner = new Scanner(System.in);
+        evd = Integer.parseInt(entradaScanner.nextLine());
+        //
+        Ctrl.getDTOEvidencia().getUnaEvidencia().setIdAvance(evd);
+        Ctrl.getDTOEvidencia().getUnaEvidencia().setImagen(data);
+        
+        Ctrl.CrearEvidencia();
 
     }
+    
     
     public static void modificarPerfilUsuario(int idUsuario) throws SQLException{
         ConexionBD conexion =  ConexionBD.getInstance();
         Connection conn = conexion.getConexion();
         Usuario user = new Usuario();
-        Usuario userL = conexion.leerUsuario(idUsuario);
+        Usuario userL = Ctrl.LeerUsuario(idUsuario);
         int idUsuarioBD;
         String nombre;
         String correo;
@@ -98,10 +160,15 @@ public class Proyecto {
         System.out.println(correo);
 //        
         user.setCorreo("joaquinmena.84@gmail.com");
-        conexion.insertarUsuario(user);
+        Ctrl.getDTOUsuario().setUnUsuario(user);
+        Ctrl.CrearUsuario();
         System.out.println("Se agrego correctamente");  
         
         conexion.desconectar();
+    }
+    
+    private static java.sql.Date sqlDate(Date d) {
+        return d!=null ? new java.sql.Date(d.getTime()) : null;
     }
     
     public void agregarActividad(){
@@ -116,5 +183,6 @@ public class Proyecto {
 //        act.setIdProyecto(1);
 //        dao.Registrar(act);  
     }
+    
     
 }

@@ -12,8 +12,9 @@ public class GestorAvance {
     private  DAOAvance DAOAvan;
     
     public GestorAvance(){
-        this.DAOAvan= new DAOAvance();
-}
+
+        this.DAOAvan = new DAOAvance();
+    }
     
     public boolean CrearAvance(Avance avance){
       return DAOAvan.Registrar(avance);

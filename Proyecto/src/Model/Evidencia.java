@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.awt.Image;
+
 /**
  *
  * @author curso
