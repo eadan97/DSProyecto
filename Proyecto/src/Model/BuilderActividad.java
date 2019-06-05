@@ -21,7 +21,7 @@ public class BuilderActividad extends ReporteBuilder{
     @Override
     public void GenerarReporte() {
         
-        System.out.println("generando reoirte de actividad");
+        System.out.println("generando reporte de actividad");
         String Actividad;
         Scanner entrada = new Scanner (System.in);
 //        
