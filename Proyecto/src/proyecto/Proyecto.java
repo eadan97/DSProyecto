@@ -48,8 +48,8 @@ public class Proyecto {
 
     public static void main(String[] args) throws SQLException, IOException, ParseException {
 
-       // ImportarProyecto();
-       AgregarAvance();
+       ImportarProyecto();
+       //AgregarAvance();
        //AgregarEvidencia();
        //C:\Users\aleta\Pictures\foto.jpg
        
