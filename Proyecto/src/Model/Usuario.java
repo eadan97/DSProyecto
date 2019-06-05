@@ -15,6 +15,7 @@ public class Usuario {
     private String nombre = "incompleto";
     private String correo = "incompleto";
     private String password = "incompleto";
+    private int rolUsuario = 1;
 
     public Usuario() {
     }
@@ -63,6 +64,14 @@ public class Usuario {
 
     public void setCodigoUsuario(String CodigoUsuario) {
         this.CodigoUsuario = CodigoUsuario;
+    }
+
+    public int getRolUsuario() {
+        return rolUsuario;
+    }
+
+    public void setRolUsuario(int rolUsuario) {
+        this.rolUsuario = rolUsuario;
     }
     
     

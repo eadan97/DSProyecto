@@ -139,6 +139,7 @@ public class GestorImportacion {
         Controlador Ctrl = Controlador.getInstance();
         Ctrl.getDTOUsuario().getUnUsuario().setCodigoUsuario(codigoUsuario);
         Ctrl.getDTOUsuario().getUnUsuario().setNombre(nombre);
+        Ctrl.getDTOUsuario().getUnUsuario().setRolUsuario(2);
         Ctrl.CrearUsuario();
     }
 }

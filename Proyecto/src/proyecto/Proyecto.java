@@ -129,6 +129,7 @@ public class Proyecto {
         Ctrl.getDTOUsuario().getUnUsuario().setCorreo(correo);
         Ctrl.getDTOUsuario().getUnUsuario().setNombre(user);
         Ctrl.getDTOUsuario().getUnUsuario().setPassword(password);
+        Ctrl.getDTOUsuario().getUnUsuario().setRolUsuario(1);
         
         Ctrl.CrearUsuario();
         System.out.println("El usuario ha sido ingresado con exito");  
