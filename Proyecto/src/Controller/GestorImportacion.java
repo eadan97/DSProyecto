@@ -24,7 +24,6 @@ public class GestorImportacion {
 
     public void LeerArchivo(String filename) throws IOException, ParseException {
         this.filename = filename;
-        System.out.println("leer archivo");
         jsonAsStr = new String(Files.readAllBytes(Paths.get(filename)));
         JSONArray tasks = (new JSONObject(jsonAsStr)).getJSONArray("data");
         for (int i = 0; i < tasks.length(); ++i) {
@@ -43,7 +42,9 @@ public class GestorImportacion {
                 fechaUltimaModificacion = null;
             }
             String nombreTarea = (String) tasks.getJSONObject(i).get("name");
-            String idUsuario = (String) ((JSONObject) tasks.getJSONObject(i).get("assignee")).get("gid");
+            System.out.println(nombreTarea);
+            String CodigoUsuario = (String) ((JSONObject) tasks.getJSONObject(i).get("assignee")).get("gid");
+            String nombreUsuario = tasks.getJSONObject(i).getJSONObject("assignee").getString("name");
             String emailAsignado = null;
             Date fechaInicio;
             try {
@@ -73,9 +74,12 @@ public class GestorImportacion {
             } catch (Exception e) {
                 tareaPadre = null;
             }
+            //int Usuario = Integer.parseInt(idUsuario);
+            SolicitarRegistroUsuario(CodigoUsuario, nombreUsuario);
+            //System.out.println(Usuario);
 
             LineaArchivo(idTarea, fechaCreacion, fechaCompletado,
-                    fechaUltimaModificacion, nombreTarea, idUsuario,
+                    fechaUltimaModificacion, nombreTarea, CodigoUsuario,
                     emailAsignado, fechaInicio, fechaFin, etiqueta,
                     nota, idProyecto, tareaPadre);
         }
@@ -131,14 +135,11 @@ public class GestorImportacion {
         }
     }
 
-    public void SolicitarRegistroUsuario(int id, String nombre) {
-        Controlador ctrl = Controlador.getInstance();
-        DTOUsuario dtoUsuario = ctrl.getDTOUsuario();
-        dtoUsuario.getUnUsuario().setIdUsuario(id);
-        dtoUsuario.getUnUsuario().setNombre(nombre);
-        ctrl.CrearUsuario();
-        // El correo no se puede obtener del json
-
+    public void SolicitarRegistroUsuario(String codigoUsuario, String nombre) {
+        Controlador Ctrl = Controlador.getInstance();
+        Ctrl.getDTOUsuario().getUnUsuario().setCodigoUsuario(codigoUsuario);
+        Ctrl.getDTOUsuario().getUnUsuario().setNombre(nombre);
+        Ctrl.CrearUsuario();
     }
 }
 

@@ -19,8 +19,44 @@ import java.util.logging.Logger;
 public class DAOUsuario implements DAOInterface{
     Connection conn;
     
+        @Override
+    public boolean Registrar(Object obj) {
+        Usuario user = (Usuario) obj;
+        System.out.println("Proceso de registrar un Usuario");
+        this.conn = ConexionBD.getConexion();
+        insertarUsuario(user);
+        return true;
+    }
+
+    @Override
+    public List Recuperar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Object Recuperar(Object clave) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     public void insertarUsuario(Usuario u) {
-        
+        CallableStatement cstmt = null;
+        try {
+            cstmt = conn.prepareCall("{call insertarUsuario(?,?)}");
+            cstmt.setString(1, u.getCodigoUsuario());
+            cstmt.setString(2, u.getNombre());
+
+            cstmt.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cstmt!=null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }  
     }
 
     public Usuario leerUsuario(Integer idUsuario) {
@@ -126,38 +162,5 @@ public class DAOUsuario implements DAOInterface{
         return res;
     }
 
-    @Override
-    public boolean Registrar(Object obj) {
-        Usuario u = (Usuario) obj;
-        CallableStatement cstmt = null;
-        try {
-            cstmt = conn.prepareCall("{call insertarUsuario(?,?)}");
-            cstmt.setString(1, u.getNombre());
-            cstmt.setString(2, u.getCorreo());
 
-            cstmt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if(cstmt!=null) {
-                try {
-                    cstmt.close();
-                    return true;
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public List Recuperar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object Recuperar(Object clave) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

@@ -11,6 +11,7 @@ package Model;
  */
 public class Usuario {
     private Integer idUsuario;
+    private String CodigoUsuario;
     private String nombre;
     private String correo;
     private String password;
@@ -54,6 +55,14 @@ public class Usuario {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getCodigoUsuario() {
+        return CodigoUsuario;
+    }
+
+    public void setCodigoUsuario(String CodigoUsuario) {
+        this.CodigoUsuario = CodigoUsuario;
     }
     
     

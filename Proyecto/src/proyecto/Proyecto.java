@@ -129,33 +129,33 @@ public class Proyecto {
     }
     
     
-    public static void modificarPerfilUsuario(int idUsuario) throws SQLException{
-        ConexionBD conexion =  ConexionBD.getInstance();
-        Connection conn = conexion.getConexion();
-        Usuario user = new Usuario();
-        Usuario userL = Ctrl.LeerUsuario(idUsuario);
-        int idUsuarioBD;
-        String nombre;
-        String correo;
-
-        idUsuarioBD = userL.getIdUsuario();
-        nombre = userL.getNombre();
-        correo = userL.getCorreo();
+//    public static void modificarPerfilUsuario(int idUsuario) throws SQLException{
+//        ConexionBD conexion =  ConexionBD.getInstance();
+//        Connection conn = conexion.getConexion();
+//        Usuario user = new Usuario();
+//        Usuario userL = Ctrl.LeerUsuario(idUsuario);
+//        int idUsuarioBD;
+//        String nombre;
+//        String correo;
+//
+//        //idUsuarioBD = userL.getIdUsuario();
+//        nombre = userL.getNombre();
+//        correo = userL.getCorreo();
+////        
+//        user.setNombre("Pedro");
+//        user.setCorreo("pedro@gmail.com");
+//        //
+//        System.out.println(idUsuarioBD);
+//        System.out.println(nombre);
+//        System.out.println(correo);
+////        
+//        user.setCorreo("joaquinmena.84@gmail.com");
+//        Ctrl.getDTOUsuario().setUnUsuario(user);
+//        Ctrl.CrearUsuario();
+//        System.out.println("Se agrego correctamente");  
 //        
-        user.setNombre("Pedro");
-        user.setCorreo("pedro@gmail.com");
-        //
-        System.out.println(idUsuarioBD);
-        System.out.println(nombre);
-        System.out.println(correo);
-//        
-        user.setCorreo("joaquinmena.84@gmail.com");
-        Ctrl.getDTOUsuario().setUnUsuario(user);
-        Ctrl.CrearUsuario();
-        System.out.println("Se agrego correctamente");  
-        
-        conexion.desconectar();
-    }
+//        conexion.desconectar();
+//    }
     
     private static java.sql.Date sqlDate(Date d) {
         return d!=null ? new java.sql.Date(d.getTime()) : null;
