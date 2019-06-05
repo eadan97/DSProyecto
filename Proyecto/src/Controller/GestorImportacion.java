@@ -27,62 +27,107 @@ public class GestorImportacion {
         jsonAsStr = new String(Files.readAllBytes(Paths.get(filename)));
         JSONArray tasks = (new JSONObject(jsonAsStr)).getJSONArray("data");
         for (int i = 0; i < tasks.length(); ++i) {
-            String idTarea = (String) tasks.getJSONObject(i).get("gid");
-            Date fechaCreacion = ParseDayFromJson((String) tasks.getJSONObject(i).get("created_at"));
-            Date fechaCompletado;
-            try {
-                fechaCompletado = ParseDayFromJson((String) tasks.getJSONObject(i).get("completed_at"));
-            } catch (Exception e) {
-                fechaCompletado = null;
-            }
-            Date fechaUltimaModificacion;
-            try {
-                fechaUltimaModificacion = ParseDayFromJson((String) tasks.getJSONObject(i).get("modified_at"));
-            } catch (Exception e) {
-                fechaUltimaModificacion = null;
-            }
-            String nombreTarea = (String) tasks.getJSONObject(i).get("name");
-            String CodigoUsuario = (String) ((JSONObject) tasks.getJSONObject(i).get("assignee")).get("gid");
-            String nombreUsuario = tasks.getJSONObject(i).getJSONObject("assignee").getString("name");
-            String emailAsignado = null;
-            Date fechaInicio;
-            try {
-                fechaInicio = ParseDayFromJson((String) tasks.getJSONObject(i).get("due_on"));
-            } catch (Exception e) {
-                fechaInicio = null;
-            }
-            Date fechaFin;
-            try {
-                fechaFin = ParseDayFromJson((String) tasks.getJSONObject(i).get("due_at"));
-            } catch (Exception e) {
-                fechaFin = null;
-            }
-            String etiqueta = "";
-            JSONArray tags = (JSONArray) tasks.getJSONObject(i).get("tags");
-            for (int j = 0; i < tags.length(); ++i) {
-                etiqueta += tags.get(j);
-                if (j < tags.length() - 1) {
-                    etiqueta += ", ";
-                }
-            }
-            String nota = (String) tasks.getJSONObject(i).get("notes");
-            String idProyecto = (String) ((JSONObject) ((JSONArray) tasks.getJSONObject(i).get("projects")).get(0)).get("gid");
-            String tareaPadre;
-            try {
-                tareaPadre = (String) ((JSONObject) tasks.getJSONObject(i).get("parent")).get("gid");
-            } catch (Exception e) {
-                tareaPadre = null;
-            }
-            
-            SolicitarRegistroUsuario(CodigoUsuario, nombreUsuario);
-
-            LineaArchivo(idTarea, fechaCreacion, fechaCompletado,
-                    fechaUltimaModificacion, nombreTarea, CodigoUsuario,
-                    emailAsignado, fechaInicio, fechaFin, etiqueta,
-                    nota, idProyecto, tareaPadre);
+            JSONObject taskJsonObject = tasks.getJSONObject(i);
+            parseJsonObject(taskJsonObject);
+                  
         }
     }
 
+    void parseJsonObject(JSONObject objetoTask){
+        parseJsonObject(objetoTask, null);
+    }
+    
+    void parseJsonObject(JSONObject objetoTask, String codigoAsigneePadre){
+        String idTarea = (String) objetoTask.get("gid");
+        Date fechaCreacion = ParseDayFromJson((String) objetoTask.get("created_at"));
+        Date fechaCompletado;
+        try {
+            fechaCompletado = ParseDayFromJson((String) objetoTask.get("completed_at"));
+        } catch (Exception e) {
+            fechaCompletado = null;
+        }
+        Date fechaUltimaModificacion;
+        try {
+            fechaUltimaModificacion = ParseDayFromJson((String) objetoTask.get("modified_at"));
+        } catch (Exception e) {
+            fechaUltimaModificacion = null;
+        }
+        String nombreTarea = (String) objetoTask.get("name");
+        
+        Date fechaInicio;
+        try {
+            fechaInicio = ParseDayFromJson((String) objetoTask.get("due_on"));
+        } catch (Exception e) {
+            fechaInicio = null;
+        }
+        Date fechaFin;
+        try {
+            fechaFin = ParseDayFromJson((String) objetoTask.get("due_at"));
+        } catch (Exception e) {
+            fechaFin = null;
+        }
+        String etiqueta = "";
+        JSONArray tags = (JSONArray) objetoTask.get("tags");
+        for (int j = 0; j < tags.length(); ++j) {
+            etiqueta += tags.getJSONObject(j).getString("name");
+            if (j < tags.length() - 1) {
+                etiqueta += ", ";
+            }
+        }
+        String nota = (String) objetoTask.get("notes");
+        String idProyecto;
+        try{
+          
+            idProyecto = (String) ((JSONObject) ((JSONArray) objetoTask.get("projects")).get(0)).get("gid");
+        }catch(Exception e){
+            idProyecto=null;
+        }
+        
+        String tareaPadre;
+        try {
+            tareaPadre = (String) ((JSONObject) objetoTask.get("parent")).get("gid");
+        } catch (Exception e) {
+            tareaPadre = null;
+        }
+        String emailAsignado;
+        String CodigoUsuario;
+        String nombreUsuario;
+
+        try{
+            CodigoUsuario = (String) ((JSONObject) objetoTask.get("assignee")).get("gid");
+            nombreUsuario = objetoTask.getJSONObject("assignee").getString("name");
+            SolicitarRegistroUsuario(CodigoUsuario, nombreUsuario);
+        }catch(Exception e){
+            CodigoUsuario=codigoAsigneePadre;
+        }
+        emailAsignado = null;
+        
+        
+        
+        
+
+
+        LineaArchivo(idTarea, fechaCreacion, fechaCompletado,
+                fechaUltimaModificacion, nombreTarea, CodigoUsuario,
+                emailAsignado, fechaInicio, fechaFin, etiqueta,
+                nota, idProyecto, tareaPadre);
+        
+        /**
+         * Obtencion de las subtareas
+         */
+        try{
+            JSONArray subtasks = objetoTask.getJSONArray("subtasks");
+            for(int j =0; j<subtasks.length();++j){
+                JSONObject subtask = subtasks.getJSONObject(j);
+                parseJsonObject(subtask, CodigoUsuario);
+            }
+        }catch(Exception e){
+        }
+            
+    }
+    
+    
+    
     public void LineaArchivo(String idTarea, Date fechaCreacion,
             Date fechaCompletado, Date fechaUltimaModificacion, String nombreTarea,
             String idUsuario, String emailAsignado, Date fechaInicio, Date fechaFin,
