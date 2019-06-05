@@ -6,6 +6,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.Date;
 import java.util.List;
@@ -201,6 +202,29 @@ public class DAOActividad implements DAOInterface {
                 }
                 
             }
+        }
+    }
+    public void BuscarActividades(Integer Usario) throws SQLException{
+         this.conn = ConexionBD.getInstance().getConexion();
+        Statement stmt = conn.createStatement();
+        String query="Select *,u.Nombre FROM Actividad A\n" +
+         "inner join Usuario U on U.IdUsuario =  A.IdUsuario\n" +
+         "inner join Proyecto P on P.IdProyecto =A.IdProyecto\n" +
+         "where A.IdUsuario ="+Usario + ";";
+        ResultSet rs =stmt.executeQuery(query);
+        while(rs.next()){
+            System.out.println("---------------------------------");
+            System.out.println("          IdActividad: "+rs.getString("IdActividad"));
+            System.out.println("Fecha de Creacion: "+rs.getString("FechaCreacion"));
+            System.out.println("Proyecto: "+rs.getString("NombreProyecto"));
+            System.out.println("Fecha Ultima Modificacion: "+rs.getString("FechaUltimaModificacion"));
+            System.out.println("Tarea: "+rs.getString("NombreTarea"));
+            System.out.println("Usuario: "+rs.getString("Nombre"));
+            
+         
+          //  System.out.println("Imagen: "+rs.getString("Imagen"));
+            System.out.println("---------------------------------");    
+            
         }
     }
 }
