@@ -94,29 +94,26 @@ public class Controlador {
     
 
     public void CrearReporte(String S){
-        System.out.println(S);
-        
-     //   DReporte.setBuilder(DReporte);
-        //DReporte.prepararReporte();
+
        switch(S){
            case "Miembro":
-               System.out.println(S+"addasd");
+               BMiembro = new BuilderMiembro();
                DReporte.setBuilder(BMiembro);
-               //DReporte.prepararReporte();
                break;
            case "Actividad":
-               System.out.println("case actividad");
+               BActvidad = new BuilderActividad();
                DReporte.setBuilder(BActvidad);
-               
                break;
            case "Fechas":
+               BFecha = new BuilderFecha();
                DReporte.setBuilder(BFecha);
+               break;
                
            default:
                System.out.println("Reporte no soportado");
        }
         
-        DReporte.prepararReporte();
+       DReporte.prepararReporte();
     }
     
     public void CrearEvidencia(){

@@ -21,7 +21,7 @@ public class GestorAvance {
     }
     public void VerAvance(Integer actividad){
         System.out.println("antes de caer");
-        DAOAvan.BuscarAvancesEvidencias(actividad);
+        //DAOAvan.BuscarAvancesEvidencias(actividad);
     }
 
 

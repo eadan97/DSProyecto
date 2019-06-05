@@ -5,9 +5,10 @@ import Model.ConexionBD;
 import Model.Evidencia;
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,6 +20,7 @@ import java.util.logging.Logger;
  */
 public class DAOAvance implements DAOInterface {
     Connection conn;
+    GeneradorPDF pdf =new GeneradorPDF();
     
     public DAOAvance(){
         this.conn = null;
@@ -276,43 +278,105 @@ public class DAOAvance implements DAOInterface {
         }
     }
 
-    public Evidencia BuscarAvancesEvidencias ( Integer IdAvance){
-    Evidencia e = new Evidencia();
-    System.out.println("BUSCAR AVANCES EVIDENCIAS");
-    CallableStatement cstmt = null;
-        try {
-            System.out.println("entro al try "+IdAvance);
-            cstmt = conn.prepareCall("{call BuscarEvidencias(?)}");            
-                    
-            cstmt.setObject(1, IdAvance, Types.INTEGER);            
-            ResultSet rs = cstmt.executeQuery();
-          //  while (rs.next()){
-                System.out.println("while");
-//            e = new Evidencia(IdAvance,
-//                    (Integer) rs.getObject(1),
-//                    rs.getBytes(2));
-               // System.out.println(e.getIdAvance());
-//            
-            cstmt.executeUpdate();
-           // }
-        } catch (SQLException ex) {
-            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if(cstmt!=null) {
-                try {
-                    cstmt.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+    public void BuscarAvancesMiembro ( Integer IdUsuario) throws SQLException {
+        this.conn = ConexionBD.getInstance().getConexion();
+        Statement stmt = conn.createStatement();
+        String query="	SELECT IdActividad,FechaAvance,HorasDedicadas,T.Nombre as TipoAvance,U.Nombre,Descripción, IdEvidencia,\n" +
+"	a.IdAvance,Imagen,U.Correo FROM Avance A  full outer join Evidencia E\n" +
+"	on A.IdAvance = E.IdEvidencia\n" +
+"	join Usuario U on U.IdUsuario = A.IdUsuario\n" +
+"	join TipoAvance T on T.IdTipoAvance = A.TipoAvance\n" +
+"	Where A.idUsuario = " +IdUsuario+ ";";
+       ResultSet rs =stmt.executeQuery(query);
+        while(rs.next()){
+            System.out.println("---------------------------------");
+            System.out.print("IdAvance: "+ rs.getString("IdAvance"));
+            System.out.println("          IdActividad: "+rs.getString("IdActividad"));
+            System.out.println("Fecha del Avance: "+rs.getString("FechaAvance"));
+            System.out.println("Total de horas: "+rs.getString("HorasDedicadas"));
+            System.out.println("Tipo de Avance: "+rs.getString("TipoAvance"));
+            System.out.println("Usuario: "+rs.getString("Nombre"));
+            System.out.println("Correo: "+rs.getString("Correo"));
+            System.out.println("Descripcion : "+rs.getString("Descripción"));
+            System.out.println("Codigo Evidencia: "+rs.getString("IdEvidencia"));
+          //  System.out.println("Imagen: "+rs.getString("Imagen"));
+            System.out.println("---------------------------------");   
+            
+             pdf.generarPDF(rs.getString("IdAvance"),rs.getString("IdActividad"),rs.getString("FechaAvance"),
+                    rs.getString("HorasDedicadas"),rs.getString("TipoAvance"),rs.getString("Nombre"),
+                    rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
+        }
+    }    
+    
+    public void BuscarAvancesActividad (Integer IdActiviad) throws SQLException{
+         this.conn = ConexionBD.getInstance().getConexion();
+        Statement stmt = conn.createStatement();
+        String query="	SELECT A.IdAvance,IdActividad,FechaAvance,HorasDedicadas,U.Nombre, T.Nombre AS TipoAvance,\n" +
+"	Descripción,IdEvidencia,Imagen,U.Correo FROM Avance A  full outer join Evidencia E\n" +
+"	on A.IdAvance = E.IdEvidencia\n" +
+"	join Usuario U on A.IdUsuario = U.IdUsuario\n" +
+"	join TipoAvance T on T.IdTipoAvance = A.TipoAvance\n" +
+"	Where A.IdActividad ="+IdActiviad+";";
+       ResultSet rs =stmt.executeQuery(query);
+        while(rs.next()){
+            System.out.println("---------------------------------");
+            System.out.print("IdAvance: "+ rs.getString("IdAvance"));
+            System.out.println("          IdActividad: "+rs.getString("IdActividad"));
+            System.out.println("Fecha del Avance: "+rs.getString("FechaAvance"));
+            System.out.println("Total de horas: "+rs.getString("HorasDedicadas"));
+            System.out.println("Tipo de Avance: "+rs.getString("TipoAvance"));
+            System.out.println("Usuario: "+rs.getString("Nombre"));
+            System.out.println("Correo: "+rs.getString("Correo"));
+            System.out.println("Descripcion : "+rs.getString("Descripción"));
+            System.out.println("Codigo Evidencia: "+rs.getString("IdEvidencia"));
+            
+          //  System.out.println("Imagen: "+rs.getString("Imagen"));
+            System.out.println("---------------------------------");   
+            
+            pdf.generarPDF(rs.getString("IdAvance"),rs.getString("IdActividad"),rs.getString("FechaAvance"),
+                    rs.getString("HorasDedicadas"),rs.getString("TipoAvance"),rs.getString("Nombre"),
+                    rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
         }
         
-        //mandar a llamar a la base de datos, al store Procedure
-        return null;
-        
-    }
-    public void BuscarAvanceFechas(Date Inicio, Date Final){
+    }    
+    
+
+    public void BuscarAvanceFechas(String Inicio, String Final) throws SQLException {
+        this.conn = ConexionBD.getInstance().getConexion();
+        Statement stmt = conn.createStatement();
+        System.out.println("inicio"+Inicio);
+        java.sql.Date d1 = java.sql.Date.valueOf(Inicio);
+        java.sql.Date d2 = java.sql.Date.valueOf(Final);
+        String query="	SELECT A.IdAvance,IdActividad,FechaAvance,HorasDedicadas,U.Nombre, T.Nombre AS TipoAvance,\n" +
+"	Descripción,IdEvidencia,Imagen,U.Correo		\n" +
+"	FROM Avance A full outer join\n" +
+"	Evidencia E on A.IdAvance =E.IdAvance\n" +
+"	join Usuario U on A.IdUsuario = U.IdUsuario\n" +
+"	join TipoAvance T on T.IdTipoAvance = A.TipoAvance\n" +
+//"	Where (FechaAvance BETWEEN " + Inicio + " AND " + Final + ");"; //" +Inicio+ " AND " + Final +")";
+"	Where (FechaAvance BETWEEN '2019-05-06' AND '2019-06-30'); "; //" +Inicio+ " AND " + Final +")";
+        ResultSet rs =stmt.executeQuery(query);
+        while(rs.next()){
+            System.out.println("---------------------------------");
+            System.out.print("IdAvance: "+ rs.getString("IdAvance"));
+            System.out.println("          IdActividad: "+rs.getString("IdActividad"));
+            System.out.println("Fecha del Avance: "+rs.getString("FechaAvance"));
+            System.out.println("Total de horas: "+rs.getString("HorasDedicadas"));
+            System.out.println("Tipo de Avance: "+rs.getString("TipoAvance"));
+            System.out.println("Usuario: "+rs.getString("Nombre"));
+            System.out.println("Correo: "+rs.getString("Correo"));
+            System.out.println("Descripcion : "+rs.getString("Descripción"));
+            System.out.println("Codigo Evidencia: "+rs.getString("IdEvidencia"));
+          //  System.out.println("Imagen: "+rs.getString("Imagen"));
+            System.out.println("---------------------------------");    
+            
+          pdf.generarPDF(rs.getString("IdAvance"),rs.getString("IdActividad"),rs.getString("FechaAvance"),
+                    rs.getString("HorasDedicadas"),rs.getString("TipoAvance"),rs.getString("Nombre"),
+                    rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
+        }
         // generar sp de buscar fechas 
     }
+
+
           
 }

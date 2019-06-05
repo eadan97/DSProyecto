@@ -5,7 +5,11 @@
  */
 package Model;
 
+import Controller.DAOAvance;
+import java.sql.SQLException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,18 +17,22 @@ import java.util.Scanner;
  */
 public class BuilderActividad extends ReporteBuilder{
 
+        DAOAvance DAOAvance= new DAOAvance();
     @Override
     public void GenerarReporte() {
         
         System.out.println("generando reoirte de actividad");
-//        String Actividad;
-//        Scanner entrada = new Scanner (System.in);
+        String Actividad;
+        Scanner entrada = new Scanner (System.in);
 //        
-//        System.out.println("Generando Reporte con Respecto a Actividad Especifica");
-//        System.out.println("Cual es el Nombre de la Actividad");
-//        Actividad= entrada.nextLine();
+        System.out.println("Cual es el numero de la Actividad");
+       Actividad= entrada.nextLine();
         
-        //llamar a base y hacer query
+            try {
+                DAOAvance.BuscarAvancesActividad(Integer.valueOf(Actividad));
+            } catch (SQLException ex) {
+                Logger.getLogger(BuilderActividad.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
     }
     

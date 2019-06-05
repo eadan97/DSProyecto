@@ -48,7 +48,9 @@ public class Proyecto {
 
     public static void main(String[] args) throws SQLException, IOException, ParseException {
 
-       ImportarProyecto();
+       //ImportarProyecto();
+       Ctrl.CrearReporte("Actividad");
+       
        //AgregarAvance();
        //AgregarEvidencia();
        //C:\Users\aleta\Pictures\foto.jpg
