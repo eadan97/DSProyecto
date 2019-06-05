@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Usuario;
+
 /**
  *
  * @author Joaquin
@@ -10,20 +12,24 @@ public class Controlador {
     private GestorActividad gActividad;
     private GestorAvance gAvance;
     private GestorEvidencia gEvidencia;
+    private GestorUsuario gUsuario;
     private DTOProyecto DTOProyecto;
     private DTOActividad DTOActividad;
     private DTOAvance DTOAvance;
     private DTOEvidencia DTOEvidencia;
+    private DTOUsuario DTOUsuario;
     
     public Controlador(){
         gImportacion = new GestorImportacion();
         gActividad = new GestorActividad(); 
         gAvance = new GestorAvance();
         gEvidencia = new GestorEvidencia();
+        gUsuario = new GestorUsuario();
         DTOProyecto = new DTOProyecto();
         DTOActividad = new DTOActividad();
         DTOAvance = new DTOAvance();
         DTOEvidencia = new DTOEvidencia();
+        DTOUsuario = new DTOUsuario();
     }
   
     public static Controlador getInstance(){
@@ -75,5 +81,20 @@ public class Controlador {
     
     public void CrearEvidencia(){
         gEvidencia.CrearEvidencia(DTOEvidencia.getUnaEvidencia());
+    }
+
+    public DTOUsuario getDTOUsuario() {
+        return this.DTOUsuario;
+    }
+    public void setDTOUsuario(DTOUsuario newdto){
+        this.DTOUsuario = newdto;                
+    }
+
+    public void CrearUsuario() {
+        gUsuario.CrearUsuario(DTOUsuario.getUnUsuario());
+    }
+
+    public Usuario LeerUsuario(int idUsuario) {
+        return gUsuario.ObtenerUsusario(idUsuario);
     }
 }

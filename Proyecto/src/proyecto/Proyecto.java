@@ -41,7 +41,7 @@ public class Proyecto {
         // TODO code application logic here
         //Controlador Ctrl = Controlador.getInstance();
         //ImportarProyecto();
-        //AgregarAvance();
+        AgregarAvance();
        //AgregarEvidencia();
        
         
@@ -124,7 +124,7 @@ public class Proyecto {
         ConexionBD conexion =  ConexionBD.getInstance();
         Connection conn = conexion.getConexion();
         Usuario user = new Usuario();
-        Usuario userL = conexion.leerUsuario(idUsuario);
+        Usuario userL = Ctrl.LeerUsuario(idUsuario);
         int idUsuarioBD;
         String nombre;
         String correo;
@@ -141,7 +141,8 @@ public class Proyecto {
         System.out.println(correo);
 //        
         user.setCorreo("joaquinmena.84@gmail.com");
-        conexion.insertarUsuario(user);
+        Ctrl.getDTOUsuario().setUnUsuario(user);
+        Ctrl.CrearUsuario();
         System.out.println("Se agrego correctamente");  
         
         conexion.desconectar();
