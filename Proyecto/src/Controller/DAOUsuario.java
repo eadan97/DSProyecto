@@ -92,6 +92,39 @@ public class DAOUsuario implements DAOInterface{
             }
         }
     }
+    
+    public int verificarUsuario(String nombre, String password) {
+        int res = -1;
+        CallableStatement cstmt = null;
+        try {
+            cstmt = conn.prepareCall("{call validarUsuario(?,?)}");
+            
+            cstmt.setString(1, nombre);
+            cstmt.setString(2, password);
+            ResultSet rs = cstmt.executeQuery();
+            rs.next();
+            res = (Integer) rs.getObject(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cstmt!=null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        }
+        return res;
+    }
 
     @Override
     public boolean Registrar(Object obj) {
