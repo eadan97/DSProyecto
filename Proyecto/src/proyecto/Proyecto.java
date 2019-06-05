@@ -164,5 +164,4 @@ public class Proyecto {
 //        act.setIdProyecto(1);
 //        dao.Registrar(act);  
     }
-  
 }
