@@ -22,67 +22,112 @@ public class GestorImportacion {
     private String jsonAsStr;
     //SimpleDateFormat myformat = new SimpleDateFormat("yyyy-MM--dd");
 
+    /**
+     * Funcion que se encarga de leer un archivo tipo json con el proyecto de Asana
+     * @param filename ruta del archivo
+     * @throws IOException
+     * @throws ParseException 
+     */
     public void LeerArchivo(String filename) throws IOException, ParseException {
         this.filename = filename;
         jsonAsStr = new String(Files.readAllBytes(Paths.get(filename)));
         JSONArray tasks = (new JSONObject(jsonAsStr)).getJSONArray("data");
         for (int i = 0; i < tasks.length(); ++i) {
-            String idTarea = (String) tasks.getJSONObject(i).get("gid");
-            Date fechaCreacion = ParseDayFromJson((String) tasks.getJSONObject(i).get("created_at"));
-            Date fechaCompletado;
-            try {
-                fechaCompletado = ParseDayFromJson((String) tasks.getJSONObject(i).get("completed_at"));
-            } catch (Exception e) {
-                fechaCompletado = null;
-            }
-            Date fechaUltimaModificacion;
-            try {
-                fechaUltimaModificacion = ParseDayFromJson((String) tasks.getJSONObject(i).get("modified_at"));
-            } catch (Exception e) {
-                fechaUltimaModificacion = null;
-            }
-            String nombreTarea = (String) tasks.getJSONObject(i).get("name");
-            String CodigoUsuario = (String) ((JSONObject) tasks.getJSONObject(i).get("assignee")).get("gid");
-            String nombreUsuario = tasks.getJSONObject(i).getJSONObject("assignee").getString("name");
-            String emailAsignado = null;
-            Date fechaInicio;
-            try {
-                fechaInicio = ParseDayFromJson((String) tasks.getJSONObject(i).get("due_on"));
-            } catch (Exception e) {
-                fechaInicio = null;
-            }
-            Date fechaFin;
-            try {
-                fechaFin = ParseDayFromJson((String) tasks.getJSONObject(i).get("due_at"));
-            } catch (Exception e) {
-                fechaFin = null;
-            }
-            String etiqueta = "";
-            JSONArray tags = (JSONArray) tasks.getJSONObject(i).get("tags");
-            for (int j = 0; i < tags.length(); ++i) {
-                etiqueta += tags.get(j);
-                if (j < tags.length() - 1) {
-                    etiqueta += ", ";
-                }
-            }
-            String nota = (String) tasks.getJSONObject(i).get("notes");
-            String idProyecto = (String) ((JSONObject) ((JSONArray) tasks.getJSONObject(i).get("projects")).get(0)).get("gid");
-            String tareaPadre;
-            try {
-                tareaPadre = (String) ((JSONObject) tasks.getJSONObject(i).get("parent")).get("gid");
-            } catch (Exception e) {
-                tareaPadre = null;
-            }
-            
-            SolicitarRegistroUsuario(CodigoUsuario, nombreUsuario);
-
-            LineaArchivo(idTarea, fechaCreacion, fechaCompletado,
-                    fechaUltimaModificacion, nombreTarea, CodigoUsuario,
-                    emailAsignado, fechaInicio, fechaFin, etiqueta,
-                    nota, idProyecto, tareaPadre);
+            JSONObject taskJsonObject = tasks.getJSONObject(i);
+            parseJsonObject(taskJsonObject);
+                  
         }
     }
 
+    /**
+     * Funcion para parsear un JSONObject
+     * @param objetoTask JSONObject a parsear
+     */
+    void parseJsonObject(JSONObject objetoTask){
+        parseJsonObject(objetoTask, null);
+    }
+    
+    /**
+     * Funcion para parsear un JSONObject
+     * @param objetoTask JSONObject a parsear
+     * @param codigoAsigneePadre En caso de no encontrar un asignee, se le asigna este
+     */
+    void parseJsonObject(JSONObject objetoTask, String codigoAsigneePadre){
+        String idTarea = objetoTask.getString("gid");
+        String nombreTarea = objetoTask.getString("name");
+        String nota =  objetoTask.getString("notes");
+        String tareaPadre = tryGetStringFromChildrenJson(objetoTask, "parent", "gid");
+        String emailAsignado = null;
+        String CodigoUsuario = tryGetStringFromChildrenJson(objetoTask, "assignee", "gid");
+        String nombreUsuario = tryGetStringFromChildrenJson(objetoTask, "assignee", "name");
+        if (CodigoUsuario==null)
+            CodigoUsuario=codigoAsigneePadre;
+        else
+            SolicitarRegistroUsuario(CodigoUsuario, nombreUsuario);
+        
+        Date fechaCreacion = ParseDayFromJson(tryGetStringFromJson(objetoTask, "created_at"));
+        Date fechaCompletado = ParseDayFromJson(tryGetStringFromJson(objetoTask, "completed_at"));        
+        Date fechaUltimaModificacion= ParseDayFromJson(tryGetStringFromJson(objetoTask, "modified_at"));        
+        Date fechaInicio=ParseDayFromJson(tryGetStringFromJson(objetoTask, "due_on"));
+        Date fechaFin=ParseDayFromJson(tryGetStringFromJson(objetoTask, "due_at"));
+
+        /**
+         * Lectura de las etiquetas
+         */
+        String etiqueta = "";
+        JSONArray tags = objetoTask.getJSONArray("tags");
+        for (int j = 0; j < tags.length(); ++j) {
+            etiqueta += tags.getJSONObject(j).getString("name");
+            if (j < tags.length() - 1) {
+                etiqueta += ", ";
+            }
+        }
+        
+        /**
+         * El id del proyecto es especial y no puede ser traido con trygetstringfromchild
+         */
+        String idProyecto;
+        try{
+          
+            idProyecto = objetoTask.getJSONArray("projects").getJSONObject(0).getString("gid");
+        }catch(Exception e){
+            idProyecto=null;
+        }
+        
+        LineaArchivo(idTarea, fechaCreacion, fechaCompletado,
+                fechaUltimaModificacion, nombreTarea, CodigoUsuario,
+                emailAsignado, fechaInicio, fechaFin, etiqueta,
+                nota, idProyecto, tareaPadre);
+        
+        /**
+         * Obtencion de las subtareas
+         */
+        try{
+            JSONArray subtasks = objetoTask.getJSONArray("subtasks");
+            for(int j =0; j<subtasks.length();++j){
+                JSONObject subtask = subtasks.getJSONObject(j);
+                parseJsonObject(subtask, CodigoUsuario);
+            }
+        }catch(Exception e){
+        }
+            
+    }
+    
+    /**
+     * Trata de devolver un string en especifico de un JSONObject
+     * @param jsonObject
+     * @param string Clave del string a buscar
+     * @return 
+     */
+    public String tryGetStringFromJson(JSONObject jsonObject, String string){
+        try{
+            return jsonObject.getString(string);
+        }catch(Exception ex){
+            return null;
+        }    
+    }
+    
+    
     public void LineaArchivo(String idTarea, Date fechaCreacion,
             Date fechaCompletado, Date fechaUltimaModificacion, String nombreTarea,
             String idUsuario, String emailAsignado, Date fechaInicio, Date fechaFin,
@@ -110,7 +155,7 @@ public class GestorImportacion {
     // Este metodo no puede retornar una excepcion, todo esta dentro del try.
     private Date ParseDayFromJson(String str) {
         try {
-            return str == JSONObject.NULL ? null : new SimpleDateFormat("yyyy-MM-dd").parse((str.split("T")[0]));
+            return str == JSONObject.NULL||str==null ? null : new SimpleDateFormat("yyyy-MM-dd").parse((str.split("T")[0]));
         } catch (ParseException ex) {
             System.out.println("No encotro fecha");
             Date dt = new Date("Fri Apr 05 00:00:00 CST 2019"); //En base a que esta fecha, y porque aveces esta fecha y aveces null?
@@ -124,6 +169,18 @@ public class GestorImportacion {
         Ctrl.getDTOUsuario().getUnUsuario().setCodigoUsuario(codigoUsuario);
         Ctrl.getDTOUsuario().getUnUsuario().setNombre(nombre);
         Ctrl.getDTOUsuario().getUnUsuario().setRolUsuario(2);
+        Ctrl.getDTOUsuario().getUnUsuario().setCorreo("admin@asacom.com");
+        Ctrl.getDTOUsuario().getUnUsuario().setPassword("admin");
         Ctrl.CrearUsuario();
+    }
+
+
+    private String tryGetStringFromChildrenJson(JSONObject objetoTask, String parent, String gid) {
+        try{
+            return objetoTask.getJSONObject(parent).getString(gid);
+        }catch(Exception e){
+            return null;
+        }
+                
     }
 }

@@ -1,4 +1,4 @@
-use Diseño
+use DiseÃ±o
 
 INSERT INTO TipoAvance (Nombre)
 Values ('SolucionError')
