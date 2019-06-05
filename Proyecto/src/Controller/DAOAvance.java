@@ -382,8 +382,10 @@ public class DAOAvance implements DAOInterface {
         Statement stmt = conn.createStatement();
        
  
-        String query="Select * from Actividad\n" +
-                    "where Actividad.IdUsuario ="+Usario + ";";
+        String query="Select *,u.Nombre FROM Actividad A\n" +
+         "inner join Usuario U on U.IdUsuario =  A.IdUsuario\n" +
+         "inner join Proyecto P on P.IdProyecto =A.IdProyecto\n" +
+         "where A.IdUsuario ="+Usario + ";";
         ResultSet rs =stmt.executeQuery(query);
         while(rs.next()){
             System.out.println("---------------------------------");
