@@ -20,7 +20,7 @@ public class GestorImportacion {
 
     private String filename;
     private String jsonAsStr;
-    SimpleDateFormat myformat = new SimpleDateFormat("yyyy-MM--dd");
+    //SimpleDateFormat myformat = new SimpleDateFormat("yyyy-MM--dd");
 
     public void LeerArchivo(String filename) throws IOException, ParseException {
         this.filename = filename;
@@ -78,7 +78,6 @@ public class GestorImportacion {
                     fechaUltimaModificacion, nombreTarea, idUsuario,
                     emailAsignado, fechaInicio, fechaFin, etiqueta,
                     nota, idProyecto, tareaPadre);
-
         }
     }
 

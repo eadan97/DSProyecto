@@ -47,10 +47,15 @@ public class Proyecto {
     public static Controlador Ctrl = Controlador.getInstance();
 
     public static void main(String[] args) throws SQLException, IOException, ParseException {
+<<<<<<< HEAD
         // TODO code application logic here
 
        // ImportarProyecto();
        AgregarAvance();
+=======
+        ImportarProyecto();
+       // AgregarAvance();
+>>>>>>> 67d0375fa94f0877b61ce8c0e08ffaf9c6bc8971
        //AgregarEvidencia();
        //C:\Users\aleta\Pictures\foto.jpg
        
@@ -67,16 +72,14 @@ public class Proyecto {
     public static void ImportarProyecto() throws IOException, ParseException{
         System.out.println("Digite la ruta donde se encuentra el archivo JSON");
         String path = "";
-        Scanner entradaScanner = new Scanner(System.in);
+        //Scanner entradaScanner = new Scanner(System.in);
         //path = entradaScanner.nextLine();
            
         path = "../archivo.json";
-        Ctrl.ImportarArchivo(path);
-        
+        Ctrl.ImportarArchivo(path);    
     }
     
     public static void AgregarAvance(){
-
         Scanner entradaScanner;
         int act = 0;
         int horas = 0;
