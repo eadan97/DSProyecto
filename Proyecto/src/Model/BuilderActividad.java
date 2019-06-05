@@ -16,12 +16,13 @@ public class BuilderActividad extends ReporteBuilder{
     @Override
     public void GenerarReporte() {
         
-        String Actividad;
-        Scanner entrada = new Scanner (System.in);
-        
-        System.out.println("Generando Reporte con Respecto a Actividad Especifica");
-        System.out.println("Cual es el Nombre de la Actividad");
-        Actividad= entrada.nextLine();
+        System.out.println("generando reoirte de actividad");
+//        String Actividad;
+//        Scanner entrada = new Scanner (System.in);
+//        
+//        System.out.println("Generando Reporte con Respecto a Actividad Especifica");
+//        System.out.println("Cual es el Nombre de la Actividad");
+//        Actividad= entrada.nextLine();
         
         //llamar a base y hacer query
         

@@ -6,13 +6,19 @@
 package proyecto;
 
 
+
+
 import Controller.Controlador;
 import Controller.DAOActividad;
+import Controller.DAOAvance;
+
 import Controller.GestorImportacion;
 import Model.Actividad;
 import Model.ConexionBD;
+import Model.Evidencia;
 
 import Model.Usuario;
+import java.awt.MenuItem;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -26,40 +32,48 @@ import java.util.Scanner;
  * @author Joaquin
  */
 public class Proyecto {
+    
+    
 
-    /**
-     * @param args the command line arguments
-     */
+    private DAOAvance DAOAv;
     
-  
-    
+    public static Controlador Ctrl = Controlador.getInstance();
+
     public static void main(String[] args) throws SQLException, IOException, ParseException {
         // TODO code application logic here
-        /*Simulador Agregar Actividades*/
-        System.out.println("BIENVENIDO AL SISTEMA DE INTEGRACION");
-        //agregarActividad();
-        ImportarProyecto();
-       
-        //int userID = 1;
-        //modificarPerfilUsuario(userID);
+        Controlador Ctrl = Controlador.getInstance();
+        //ImportarProyecto();
+      // Ctrl.CrearReporte("Actividad");
         
+        
+
+      
     }
-    public void menuInteligente(){
+    public  void menuInteligente() throws IOException, ParseException{
+        Ctrl.imprimirMensaje();
         System.out.println("Seleccione la operación que desea realizar");
         System.out.println("Importar un Nuevo Proyecto");
         System.out.println("Iniciar Sessión en Proyecto existente");
+     
     }
     
     public static void ImportarProyecto() throws IOException, ParseException{
         System.out.println("Digite la ruta donde se encuentra el archivo JSON");
         String path = "";
-
         //Scanner entradaScanner = new Scanner(System.in);
         //path = entradaScanner.nextLine();
         GestorImportacion gImportacion = new GestorImportacion();
         path = "../archivo.json";
         gImportacion.LeerArchivo(path);
         //System.out.println ("Entrada recibida por teclado es: \"" + path +"\"");
+        //path = "../archivo.json";
+        Ctrl.ImportarArchivo(path);        
+    }
+    
+    public static void AgregarAvance(){
+        System.out.println("Seleccione la actividad");
+        String act = "";
+        Scanner entradaScanner = new Scanner(System.in);
 
     }
     
@@ -90,16 +104,17 @@ public class Proyecto {
         conexion.desconectar();
     }
     
-    public static void agregarActividad(){
+    public void agregarActividad(){
         DAOActividad dao = new DAOActividad();
+        Ctrl.imprimirMensaje();
         //ConexionBD conexion =  ConexionBD.getInstance();
         //Connection conn = conexion.getConexion();
-        Actividad act = new Actividad();
-        act.setIdUsuario(1);
-        Date dt = new Date ("Fri Apr 05 00:00:00 CST 2019");
-        act.setFechaCreacion(dt);
-        act.setIdProyecto(1);
-        dao.Registrar(act);  
+//        Actividad act = new Actividad();
+//        //act.setIdUsuario(1);
+//        Date dt = new Date ("Fri Apr 05 00:00:00 CST 2019");
+//        act.setFechaCreacion(dt);
+//        act.setIdProyecto(1);
+//        dao.Registrar(act);  
     }
     
 }

@@ -12,26 +12,27 @@ import java.util.Date;
  * @author curso
  */
 public class Actividad {
-    private Integer idActividad;
-    private int idTarea;
+    private int idActividad; 
+    private String idTarea;
     private Date fechaCreacion;
     private Date fechaCompletado;
     private Date fechaUltimaModificacion;
     private String nombreTarea;
-    private int idUsuario;
+    private String idUsuario;
     private String emailAsignado;
     private Date fechaInicio;
     private Date fechaFin;
     private String etiqueta;
     private String nota;
-    private int idProyecto;
-    private int tareaPadre;
+    private String idProyecto;
+    private String tareaPadre;
+    
 
     
     public Actividad() {
     }
 
-    public Actividad(int idTarea, Date fechaCreacion, Date fechaCompletado, Date fechaUltimaModificacion, String nombreTarea, int idUsuario, String emailAsignado, Date fechaInicio, Date fechaFin, String etiqueta, String nota, int idProyecto, int tareaPadre) {
+    public Actividad(String idTarea, Date fechaCreacion, Date fechaCompletado, Date fechaUltimaModificacion, String nombreTarea, String idUsuario, String emailAsignado, Date fechaInicio, Date fechaFin, String etiqueta, String nota, String idProyecto, String tareaPadre) {
         this.idTarea = idTarea;
         this.fechaCreacion = fechaCreacion;
         this.fechaCompletado = fechaCompletado;
@@ -47,19 +48,19 @@ public class Actividad {
         this.tareaPadre = tareaPadre;
     }
     
-    public Integer getIdActividad() {
+    public int getIdActividad() {
         return idActividad;
     }
 
-    public void setIdActividad(Integer idActividad) {
+    public void setIdActividad(int idActividad) {
         this.idActividad = idActividad;
     }
 
-    public int getIdTarea() {
+    public String getIdTarea() {
         return idTarea;
     }
 
-    public void setIdTarea(int idTarea) {
+    public void setIdTarea(String idTarea) {
         this.idTarea = idTarea;
     }
 
@@ -95,11 +96,11 @@ public class Actividad {
         this.nombreTarea = nombreTarea;
     }
 
-    public int getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(int idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -143,19 +144,19 @@ public class Actividad {
         this.nota = nota;
     }
 
-    public int getIdProyecto() {
+    public String getIdProyecto() {
         return idProyecto;
     }
 
-    public void setIdProyecto(int idProyecto) {
+    public void setIdProyecto(String idProyecto) {
         this.idProyecto = idProyecto;
     }
 
-    public int getTareaPadre() {
+    public String getTareaPadre() {
         return tareaPadre;
     }
 
-    public void setTareaPadre(Integer tareaPadre) {
+    public void setTareaPadre(String tareaPadre) {
         this.tareaPadre = tareaPadre;
     }
 

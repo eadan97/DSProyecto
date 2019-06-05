@@ -26,12 +26,12 @@ public class DirectorReporte {
    }
      
    public void prepararReporte(){
-       
-       
-       System.out.println("GetReporte");
-       builder.GenerarReporte();
+       System.out.println("preparar reporte");
+        builder.GenerarReporte();
     
 }
+
+
     
 
 }

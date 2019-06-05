@@ -29,10 +29,7 @@ public class DAOActividad implements DAOInterface {
         System.out.println("Proceso de registrar una actividad");
         this.conn = ConexionBD.getConexion();
         insertarActividad(act);
-        //cierra la conexion
-        //ConexionBD.getInstance().desconectar();
         return true;
-
     }
 
     @Override
@@ -55,19 +52,19 @@ public class DAOActividad implements DAOInterface {
         try {
             cstmt = conn.prepareCall("{call insertarActividad(?,?,?,?,?,?,?,?,?,?,?,?,?)}");
 
-            cstmt.setObject(1, a.getIdTarea(), Types.INTEGER);
+            cstmt.setObject(1, a.getIdTarea());
             cstmt.setDate(2, sqlDate(a.getFechaCreacion()));
             cstmt.setDate(3, sqlDate(a.getFechaCompletado()));
             cstmt.setDate(4,  sqlDate(a.getFechaUltimaModificacion()));
             cstmt.setString(5, a.getNombreTarea());
-            cstmt.setObject(6, a.getIdUsuario(), Types.INTEGER);
+            cstmt.setObject(6, a.getIdUsuario());
             cstmt.setString(7, a.getEmailAsignado());
             cstmt.setDate(8, sqlDate(a.getFechaInicio()));
             cstmt.setDate(9,  sqlDate(a.getFechaFin()));
             cstmt.setString(10, a.getEtiqueta());
             cstmt.setString(11, a.getNota());
-            cstmt.setObject(12, a.getIdProyecto(), Types.INTEGER);
-            cstmt.setObject(13, a.getTareaPadre(), Types.INTEGER);
+            cstmt.setObject(12, a.getIdProyecto());
+            cstmt.setObject(13, a.getTareaPadre());
 
             cstmt.executeUpdate();
         } catch (SQLException ex) {
@@ -92,6 +89,7 @@ public class DAOActividad implements DAOInterface {
     }
 
     public Actividad leerActividad(Integer idActividad) {
+        this.conn = ConexionBD.getConexion();
         Actividad a = null;
         CallableStatement cstmt = null;
         try {
@@ -101,19 +99,19 @@ public class DAOActividad implements DAOInterface {
             ResultSet rs = cstmt.executeQuery();
             rs.next();
             a = new Actividad(
-                    (Integer) rs.getObject(1),
+                    rs.getString(1),
                     rs.getDate(2),
                     rs.getDate(3),
                     rs.getDate(4),
                     rs.getString(5),
-                    (Integer) rs.getObject(6),
+                    rs.getString(6),
                     rs.getString(7),
                     rs.getDate(8),
                     rs.getDate(9),
                     rs.getString(10),
                     rs.getString(11),
-                    (Integer) rs.getObject(12),
-                    (Integer) rs.getObject(13));
+                    rs.getString(12),
+                    rs.getString(13));
         } catch (SQLException ex) {
             Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -141,19 +139,19 @@ public class DAOActividad implements DAOInterface {
         try {
             cstmt = conn.prepareCall("{call actualizarActividad(?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");
             cstmt.setObject(1, a.getIdActividad(), Types.INTEGER);
-            cstmt.setObject(2, a.getIdTarea(), Types.INTEGER);
+            cstmt.setObject(2, a.getIdTarea());
             cstmt.setDate(3, sqlDate(a.getFechaCreacion()));
             cstmt.setDate(4, sqlDate(a.getFechaCompletado()));
             cstmt.setDate(5,  sqlDate(a.getFechaUltimaModificacion()));
             cstmt.setString(6, a.getNombreTarea());
-            cstmt.setObject(7, a.getIdUsuario(), Types.INTEGER);
+            cstmt.setObject(7, a.getIdUsuario());
             cstmt.setString(8, a.getEmailAsignado());
             cstmt.setDate(9,  sqlDate(a.getFechaInicio()));
             cstmt.setDate(10,  sqlDate(a.getFechaFin()));
             cstmt.setString(11, a.getEtiqueta());
             cstmt.setString(12, a.getNota());
-            cstmt.setObject(13, a.getIdProyecto(), Types.INTEGER);
-            cstmt.setObject(14, a.getTareaPadre(), Types.INTEGER);
+            cstmt.setObject(13, a.getIdProyecto());
+            cstmt.setObject(14, a.getTareaPadre());
 
             cstmt.executeUpdate();
         } catch (SQLException ex) {
@@ -205,6 +203,4 @@ public class DAOActividad implements DAOInterface {
             }
         }
     }
-    
-    
 }

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author Joaquin
  */
-class DAOAvance implements DAOInterface {
+public class DAOAvance implements DAOInterface {
     Connection conn;
     
     public DAOAvance(){
@@ -276,19 +276,23 @@ class DAOAvance implements DAOInterface {
 
     public Evidencia BuscarAvancesEvidencias ( Integer IdAvance){
     Evidencia e = new Evidencia();
+    System.out.println("BUSCAR AVANCES EVIDENCIAS");
     CallableStatement cstmt = null;
         try {
-            cstmt = conn.prepareCall("{call BuscarEvidencia(?)}");
-            
-            cstmt.setObject(1, IdAvance, Types.INTEGER);
+            System.out.println("entro al try "+IdAvance);
+            cstmt = conn.prepareCall("{call BuscarEvidencias(?)}");            
+                    
+            cstmt.setObject(1, IdAvance, Types.INTEGER);            
             ResultSet rs = cstmt.executeQuery();
-            rs.next();
-            e = new Evidencia(IdAvance,
-                    (Integer) rs.getObject(1),
-                    rs.getBytes(2));
-            
-            
+          //  while (rs.next()){
+                System.out.println("while");
+//            e = new Evidencia(IdAvance,
+//                    (Integer) rs.getObject(1),
+//                    rs.getBytes(2));
+               // System.out.println(e.getIdAvance());
+//            
             cstmt.executeUpdate();
+           // }
         } catch (SQLException ex) {
             Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -302,7 +306,7 @@ class DAOAvance implements DAOInterface {
         }
         
         //mandar a llamar a la base de datos, al store Procedure
-        return e;
+        return null;
         
     }
     public void BuscarAvanceFechas(Date Inicio, Date Final){
