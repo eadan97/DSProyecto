@@ -71,7 +71,6 @@ public class Proyecto {
     }
     
     public static void AgregarAvance(){
-
         Scanner entradaScanner;
         int act = 0;
         int horas = 0;
