@@ -49,13 +49,11 @@ public class Proyecto {
     public static void main(String[] args) throws SQLException, IOException, ParseException {
         // TODO code application logic here
 
-        ImportarProyecto();
-      // Ctrl.CrearReporte("Actividad");
-      
-        //Controlador Ctrl = Controlador.getInstance();
-        //ImportarProyecto();
-       // AgregarAvance();
+       // ImportarProyecto();
+       AgregarAvance();
        //AgregarEvidencia();
+       //C:\Users\aleta\Pictures\foto.jpg
+       
     }
 
     public  void menuInteligente() throws IOException, ParseException{
