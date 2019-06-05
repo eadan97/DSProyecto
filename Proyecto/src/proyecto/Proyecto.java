@@ -160,6 +160,7 @@ public class Proyecto {
     
     
     public static void mostrarActividadesUsuario(int idUsuario){
+        Ctrl.ConsultarActividades(idUsuario);
     }
     
     public static void Operaciones(int usuario,int rol) throws IOException, ParseException, SQLException{
@@ -239,6 +240,7 @@ public class Proyecto {
            
         path = "../archivo.json";
         Ctrl.ImportarArchivo(path);    
+        System.out.println("El proceso de importacion a finalizado con exito");
     }
     
     public static void AgregarAvance(){
