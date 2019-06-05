@@ -169,6 +169,8 @@ public class GestorImportacion {
         Ctrl.getDTOUsuario().getUnUsuario().setCodigoUsuario(codigoUsuario);
         Ctrl.getDTOUsuario().getUnUsuario().setNombre(nombre);
         Ctrl.getDTOUsuario().getUnUsuario().setRolUsuario(2);
+        Ctrl.getDTOUsuario().getUnUsuario().setCorreo(nombre+"@asacom.com");
+        Ctrl.getDTOUsuario().getUnUsuario().setPassword("admin");
         Ctrl.CrearUsuario();
     }
 }
