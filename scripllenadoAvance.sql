@@ -1,13 +1,13 @@
-Insert into Avance (IdActividad , FechaAvance,HorasDedicadas,TipoAvance,IdUsuario, Descripci髇)
+Insert into Avance (IdActividad , FechaAvance,HorasDedicadas,TipoAvance,IdUsuario, Descripci贸n)
 VALUES (1,'2019-04-28',21,1,2,'Avance numero 1 usuario 2')
 
-Insert into Avance (IdActividad , FechaAvance,HorasDedicadas,TipoAvance,IdUsuario, Descripci髇)
+Insert into Avance (IdActividad , FechaAvance,HorasDedicadas,TipoAvance,IdUsuario, Descripci贸n)
 VALUES (2,'2019-05-28',21,1,3,'Avance numero 2 usuario 3')
 
-Insert into Avance (IdActividad , FechaAvance,HorasDedicadas,TipoAvance,IdUsuario, Descripci髇)
+Insert into Avance (IdActividad , FechaAvance,HorasDedicadas,TipoAvance,IdUsuario, Descripci贸n)
 VALUES (1,'2019-06-28',21,1,2,'Avance numero 3 usuario 2')
 
-Insert into Avance (IdActividad , FechaAvance,HorasDedicadas,TipoAvance,IdUsuario, Descripci髇)
+Insert into Avance (IdActividad , FechaAvance,HorasDedicadas,TipoAvance,IdUsuario, Descripci贸n)
 VALUES (11,'2019-06-28',214,1,3,'Avance numero 1 usuario 3')
 
 
