@@ -49,7 +49,7 @@ public class Proyecto {
     public static void main(String[] args) throws SQLException, IOException, ParseException {
         // TODO code application logic here
 
-        //ImportarProyecto();
+    ImportarProyecto();
       // Ctrl.CrearReporte("Actividad");
       
         //Controlador Ctrl = Controlador.getInstance();
@@ -69,10 +69,10 @@ public class Proyecto {
     public static void ImportarProyecto() throws IOException, ParseException{
         System.out.println("Digite la ruta donde se encuentra el archivo JSON");
         String path = "";
-        //Scanner entradaScanner = new Scanner(System.in);
-        //path = entradaScanner.nextLine();
+        Scanner entradaScanner = new Scanner(System.in);
+        path = entradaScanner.nextLine();
         GestorImportacion gImportacion = new GestorImportacion();
-        path = "../archivo.json";
+        //path = "../archivo.json";
         gImportacion.LeerArchivo(path);
         //System.out.println ("Entrada recibida por teclado es: \"" + path +"\"");
         //path = "../archivo.json";
