@@ -92,6 +92,7 @@ public class DAOUsuario implements DAOInterface{
     }
 
     public void actualizarUsuario(Usuario u) {
+        this.conn = ConexionBD.getConexion();
         CallableStatement cstmt = null;
         try {
             cstmt = conn.prepareCall("{call actualizarUsuario(?,?,?,?)}");

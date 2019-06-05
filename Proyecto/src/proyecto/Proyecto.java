@@ -309,14 +309,19 @@ public class Proyecto {
     
     
     public static void modificarPerfilUsuario(int idUsuario) throws SQLException{
-        Usuario user;
         Usuario userL = Ctrl.LeerUsuario(idUsuario);
-        int idUsuarioBD;
+        //int idenUsuario;
         String nombre;
         String correo;
         String password;
+        //
+        Scanner entradaScanner;
+        String NuevoNombre = "";
+        String NuevoCorreo = "";
+        String NuevoPassword = "";
 
         //idUsuarioBD = userL.getIdUsuario();
+        //idenUsuario = userL.getIdUsuario();
         nombre = userL.getNombre();
         correo = userL.getCorreo();
         password = userL.getPassword();
@@ -325,6 +330,24 @@ public class Proyecto {
         System.out.println(correo);
         System.out.println(password);
         //
+        System.out.println("Digite Nuevo Nombre de Usuario");
+        entradaScanner = new Scanner(System.in);
+        NuevoNombre = entradaScanner.nextLine();
+        //
+        System.out.println("Digite Nuevo Correo de Usuario");
+        entradaScanner = new Scanner(System.in);
+        NuevoCorreo = entradaScanner.nextLine();
+        //
+        System.out.println("Digite Nueva contraseña de Usuario");
+        entradaScanner = new Scanner(System.in);
+        NuevoPassword = entradaScanner.nextLine();
+        //
+        userL.setNombre(NuevoNombre);
+        userL.setCorreo(NuevoCorreo);
+        userL.setPassword(NuevoPassword);
+        
+        Ctrl.ActualizarUsuario(userL);
+        System.out.println("Se ha actualizado correctamente el Usuario");
         
     }
     

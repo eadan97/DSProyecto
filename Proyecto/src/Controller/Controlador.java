@@ -141,6 +141,10 @@ public class Controlador {
     public void CrearUsuario() {
         gUsuario.CrearUsuario(DTOUsuario.getUnUsuario());
     }
+    
+    public void ActualizarUsuario(Usuario u){
+        gUsuario.ActualizarUsuario(u);
+    }
 
     public Usuario LeerUsuario(int idUsuario) {
         return gUsuario.ObtenerUsusario(idUsuario);
