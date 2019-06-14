@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Actividad;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,7 +19,11 @@ public class GestorActividad {
         return DAOAct.Registrar(actividad);
     }
     
-    public void ConsultarActividad(Integer TaskId) throws SQLException{
-        DAOAct.BuscarActividades(TaskId);
+    public ArrayList<Actividad> ConsultarActividadesUsuario(Integer userId) throws SQLException{
+        return DAOAct.BuscarActividades(userId);
+    }
+
+    ArrayList<Actividad> ConsultarTodasLasActividades() {
+        return DAOAct.BuscarActividades();
     }
 }

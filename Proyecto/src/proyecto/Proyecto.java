@@ -167,14 +167,14 @@ public class Proyecto {
         int selected = 0;
         System.out.println("Seleccione la operación que desea realizar");
 
-        System.out.println("1-Mostrar Actividades");
+        System.out.println("1-Mostrar Actividades"); // Listo
         System.out.println("2-Agregar Avance");
         System.out.println("3-Registrar Evidencia a un Avance"); 
         System.out.println("4-Realizar Reporte");
-        System.out.println("5-Editar Perfil Usuario");
-        System.out.println("7-Salir");
+        System.out.println("5-Editar Perfil Usuario"); // Listo
+        System.out.println("7-Salir"); // Listo
         if(rol == 1){
-            System.out.println("6-Importar Proyecto");
+            System.out.println("6-Importar Proyecto"); // Listp
         }
 
         System.out.println("Seccione el numero de la Operacion que desea realizar");

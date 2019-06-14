@@ -160,4 +160,12 @@ public class Actividad {
         this.tareaPadre = tareaPadre;
     }
 
+    @Override
+    public String toString() {
+        return //"idTarea=" + 
+                idTarea + //", fechaCreacion=" + fechaCreacion + ", fechaCompletado=" + fechaCompletado + ", fechaUltimaModificacion=" + fechaUltimaModificacion + ", nombreTarea=" + 
+                " - "+nombreTarea; //+ ", idUsuario=" + idUsuario + ", emailAsignado=" + emailAsignado + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", etiqueta=" + etiqueta + ", nota=" + nota + ", tareaPadre=" + tareaPadre + '}';
+    }
+
+    
 }

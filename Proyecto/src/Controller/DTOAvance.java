@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Avance;
+import java.util.ArrayList;
 
 /**
  *
@@ -8,9 +9,11 @@ import Model.Avance;
  */
 public class DTOAvance {
      private Avance unAvance;
+     private ArrayList<Avance> avances;
      
      public DTOAvance(){
          unAvance = new Avance();
+         avances = new ArrayList<>();
      }
      
      public Avance getUnAvance(){
