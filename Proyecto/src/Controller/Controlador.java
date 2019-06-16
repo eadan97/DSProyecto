@@ -2,6 +2,7 @@ package Controller;
 
 
 import Model.Actividad;
+import Model.Avance;
 import Model.BuilderActividad;
 import Model.BuilderFecha;
 import Model.BuilderMiembro;
@@ -163,5 +164,8 @@ public class Controlador {
 
     public ArrayList<Actividad> ConsultarActividades() {
         return gActividad.ConsultarTodasLasActividades();
+    }
+    public ArrayList<Avance> ConsultarAvancesActividad(int idActividad) throws SQLException{
+        return gAvance.ObtenerAvancesActividad(idActividad);
     }
 }

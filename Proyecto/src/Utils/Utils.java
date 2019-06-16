@@ -15,4 +15,7 @@ public class Utils {
     public static String safeParseToString(Date date){
         return date==null?"Null":date.toString();
     }
+    public static java.sql.Date sqlDate(Date d) {
+        return d!=null ? new java.sql.Date(d.getTime()) : null;
+    }
 }

@@ -32,7 +32,8 @@ public class Actividad {
     public Actividad() {
     }
 
-    public Actividad(String idTarea, Date fechaCreacion, Date fechaCompletado, Date fechaUltimaModificacion, String nombreTarea, String idUsuario, String emailAsignado, Date fechaInicio, Date fechaFin, String etiqueta, String nota, String idProyecto, String tareaPadre) {
+    public Actividad(int idActividad, String idTarea, Date fechaCreacion, Date fechaCompletado, Date fechaUltimaModificacion, String nombreTarea, String idUsuario, String emailAsignado, Date fechaInicio, Date fechaFin, String etiqueta, String nota, String idProyecto, String tareaPadre) {
+        this.idActividad = idActividad;
         this.idTarea = idTarea;
         this.fechaCreacion = fechaCreacion;
         this.fechaCompletado = fechaCompletado;

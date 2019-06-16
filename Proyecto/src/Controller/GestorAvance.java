@@ -1,7 +1,11 @@
 package Controller;
 
 import Model.Avance;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,6 +27,10 @@ public class GestorAvance {
         System.out.println("antes de caer");
         //DAOAvan.BuscarAvancesEvidencias(actividad);
     }
-
+    
+    public ArrayList<Avance> ObtenerAvancesActividad(int idActividad) throws SQLException{
+        return DAOAvan.BuscarAvancesActividad(idActividad);
+        
+    }
 
 }

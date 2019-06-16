@@ -18,6 +18,7 @@ import Model.ConexionBD;
 import Model.Evidencia;
 
 import Model.Usuario;
+import static Utils.Utils.sqlDate;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -361,8 +362,6 @@ public class Proyecto {
         
     }
     
-    private static java.sql.Date sqlDate(Date d) {
-        return d!=null ? new java.sql.Date(d.getTime()) : null;
-    }
+    
     
 }

@@ -102,19 +102,20 @@ public class DAOActividad implements DAOInterface {
             ResultSet rs = cstmt.executeQuery();
             rs.next();
             a = new Actividad(
-                    rs.getString(1),
-                    rs.getDate(2),
+                        rs.getInt(1),
+                    rs.getString(2),
                     rs.getDate(3),
                     rs.getDate(4),
-                    rs.getString(5),
+                    rs.getDate(5),
                     rs.getString(6),
                     rs.getString(7),
-                    rs.getDate(8),
+                    rs.getString(8),
                     rs.getDate(9),
-                    rs.getString(10),
+                    rs.getDate(10),
                     rs.getString(11),
                     rs.getString(12),
-                    rs.getString(13));
+                    rs.getString(13),
+                    rs.getString(14));
         } catch (SQLException ex) {
             Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -238,6 +239,7 @@ public class DAOActividad implements DAOInterface {
             ResultSet rs = cstmt.executeQuery();
             while(rs.next()){
                 Actividad a = new Actividad(
+                        rs.getInt(1),
                     rs.getString(2),
                     rs.getDate(3),
                     rs.getDate(4),
@@ -286,6 +288,7 @@ public class DAOActividad implements DAOInterface {
             ResultSet rs = cstmt.executeQuery();
             while(rs.next()){
                 Actividad a = new Actividad(
+                    rs.getInt(1),
                     rs.getString(2),
                     rs.getDate(3),
                     rs.getDate(4),

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -308,8 +309,34 @@ public class DAOAvance implements DAOInterface {
         }
     }    
     
-    public void BuscarAvancesActividad (Integer IdActiviad) throws SQLException{
-         this.conn = ConexionBD.getInstance().getConexion();
+    public ArrayList<Avance> BuscarAvancesActividad (Integer IdActiviad) throws SQLException{
+        this.conn=ConexionBD.getConexion();
+        CallableStatement cstmt = null;
+        ArrayList<Avance> res = new ArrayList<>();
+        try {
+            cstmt = conn.prepareCall("{call BuscarAvancesActividad(?)}");
+
+            cstmt.setObject(1, IdActiviad, Types.INTEGER);
+            
+            ResultSet rs = cstmt.executeQuery();
+            while(rs.next()){
+                res.add( new Avance(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getInt(4), rs.getInt(5), rs.getString(7)));
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cstmt!=null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return res;
+        /*this.conn = ConexionBD.getInstance().getConexion();
         Statement stmt = conn.createStatement();
         String query="	SELECT A.IdAvance,IdActividad,FechaAvance,HorasDedicadas,U.Nombre, T.Nombre AS TipoAvance,\n" +
 "	Descripción,IdEvidencia,Imagen,U.Correo FROM Avance A  full outer join Evidencia E\n" +
@@ -336,7 +363,7 @@ public class DAOAvance implements DAOInterface {
             pdf.generarPDF(rs.getString("IdAvance"),rs.getString("IdActividad"),rs.getString("FechaAvance"),
                     rs.getString("HorasDedicadas"),rs.getString("TipoAvance"),rs.getString("Nombre"),
                     rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
-        }
+        }*/
         
     }    
     

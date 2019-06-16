@@ -23,6 +23,11 @@ public class Avance {
         return idUsuario;
     }
 
+    @Override
+    public String toString() {
+        return "Avance{" + "idAvance=" + idAvance + ", fechaAvance=" + fechaAvance + ", horasDedicadas=" + horasDedicadas + ", descripcion=" + descripcion + '}';
+    }
+
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
