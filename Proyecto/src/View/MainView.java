@@ -95,6 +95,27 @@ public class MainView extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         lstActividadAvances = new javax.swing.JList<>();
         jLabel21 = new javax.swing.JLabel();
+        paneActividadesVerAvance = new javax.swing.JPanel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtAvanceDescripcion1 = new javax.swing.JTextArea();
+        btnAgregarAvance1 = new javax.swing.JButton();
+        jLabel29 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jLabel40 = new javax.swing.JLabel();
         paneActividadesAgregarAvance = new javax.swing.JPanel();
         spnAvanceHoras = new javax.swing.JSpinner();
         jLabel22 = new javax.swing.JLabel();
@@ -408,6 +429,142 @@ public class MainView extends javax.swing.JFrame {
         );
 
         paneActividadesBase.add(paneActividadesActividad, "actividad");
+
+        jLabel26.setText("Agregar avance");
+
+        jLabel27.setText("Horas dedicadas:");
+
+        jLabel28.setText("Id Usuario:");
+
+        txtAvanceDescripcion1.setEditable(false);
+        txtAvanceDescripcion1.setColumns(20);
+        txtAvanceDescripcion1.setRows(5);
+        jScrollPane3.setViewportView(txtAvanceDescripcion1);
+
+        btnAgregarAvance1.setText("Agregar evidencia");
+        btnAgregarAvance1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarAvance1ActionPerformed(evt);
+            }
+        });
+
+        jLabel29.setText("Tipo de avance:");
+
+        jButton3.setText("Ir atras");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel30.setText("Evidencias:");
+
+        jLabel32.setText("Fecha:");
+
+        jLabel33.setText("Descripción:");
+
+        jLabel34.setText("Horas dedicadas:");
+
+        jLabel35.setText("Horas dedicadas:");
+
+        jLabel36.setText("Horas dedicadas:");
+
+        jLabel37.setText("Horas dedicadas:");
+
+        jLabel38.setText("Horas dedicadas:");
+
+        jLabel39.setText("Horas dedicadas:");
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(jList1);
+
+        jLabel40.setText("Evidencias");
+
+        javax.swing.GroupLayout paneActividadesVerAvanceLayout = new javax.swing.GroupLayout(paneActividadesVerAvance);
+        paneActividadesVerAvance.setLayout(paneActividadesVerAvanceLayout);
+        paneActividadesVerAvanceLayout.setHorizontalGroup(
+            paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneActividadesVerAvanceLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paneActividadesVerAvanceLayout.createSequentialGroup()
+                        .addComponent(jLabel27)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel34))
+                    .addGroup(paneActividadesVerAvanceLayout.createSequentialGroup()
+                        .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel29)
+                            .addComponent(jLabel32)
+                            .addComponent(jLabel28)
+                            .addComponent(jLabel30)
+                            .addComponent(jLabel33))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel39)
+                            .addComponent(jLabel38)
+                            .addComponent(jLabel37)
+                            .addComponent(jLabel36)
+                            .addComponent(jLabel35)))
+                    .addComponent(btnAgregarAvance1)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel26))
+                .addGap(18, 18, 18)
+                .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paneActividadesVerAvanceLayout.createSequentialGroup()
+                        .addComponent(jLabel40)
+                        .addGap(0, 244, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4))
+                .addContainerGap())
+        );
+        paneActividadesVerAvanceLayout.setVerticalGroup(
+            paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneActividadesVerAvanceLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel26)
+                    .addComponent(jLabel40))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(paneActividadesVerAvanceLayout.createSequentialGroup()
+                        .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel27)
+                            .addComponent(jLabel34))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel29)
+                            .addComponent(jLabel35))
+                        .addGap(7, 7, 7)
+                        .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel32)
+                            .addComponent(jLabel36))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel28)
+                            .addComponent(jLabel37))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel30)
+                            .addComponent(jLabel38))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel33)
+                            .addComponent(jLabel39))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                        .addComponent(btnAgregarAvance1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3))
+                    .addComponent(jScrollPane4))
+                .addGap(55, 55, 55))
+        );
+
+        paneActividadesBase.add(paneActividadesVerAvance, "verAvance");
 
         jLabel22.setText("Agregar avance");
 
@@ -806,15 +963,25 @@ public class MainView extends javax.swing.JFrame {
         ((CardLayout)paneActividadesBase.getLayout()).show(paneActividadesBase, "actividad");
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnAgregarAvance1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAvance1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarAvance1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActividadAgregarAvance;
     private javax.swing.JButton btnActividadIrAtras;
     private javax.swing.JButton btnAgregarAvance;
+    private javax.swing.JButton btnAgregarAvance1;
     private javax.swing.JButton btnImportarImportar;
     private javax.swing.JButton btnImportarSeleccionar;
     private javax.swing.JComboBox<String> cmbAvanceTipo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -833,20 +1000,37 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane lstActividadActividades;
     private javax.swing.JList<String> lstActividadAvances;
     private javax.swing.JList<String> lstActividades;
@@ -854,6 +1038,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel paneActividadesAgregarAvance;
     private javax.swing.JPanel paneActividadesBase;
     private javax.swing.JPanel paneActividadesLista;
+    private javax.swing.JPanel paneActividadesVerAvance;
     private javax.swing.JPanel paneImportar;
     private javax.swing.JPasswordField pwdPerfilContra1;
     private javax.swing.JPasswordField pwdPerfilContra2;
@@ -871,6 +1056,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel txtActividadNotas;
     private javax.swing.JLabel txtActividadPadre;
     private javax.swing.JTextArea txtAvanceDescripcion;
+    private javax.swing.JTextArea txtAvanceDescripcion1;
     private javax.swing.JTextField txtImportarPath;
     private javax.swing.JTextField txtPerfilCorreo;
     private javax.swing.JTextField txtPerfilUsuario;
