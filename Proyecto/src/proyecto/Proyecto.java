@@ -18,6 +18,7 @@ import Model.ConexionBD;
 import Model.Evidencia;
 
 import Model.Usuario;
+import static Utils.Utils.sqlDate;
 
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -63,7 +64,9 @@ public class Proyecto {
         System.out.println("1-Iniciar Sesión");
         System.out.println("2-Registrarse");
         System.out.println("3-Salir");
+
         System.out.println("\n\n\nSeccione el numero de la Operacion que desea realizar");
+
         Scanner entradaScanner = new Scanner(System.in);
         selected = Integer.parseInt(entradaScanner.nextLine());
         switch (selected) {
@@ -167,14 +170,14 @@ public class Proyecto {
         int selected = 0;
         System.out.println("Seleccione la operación que desea realizar");
 
-        System.out.println("1-Mostrar Actividades");
-        System.out.println("2-Agregar Avance");
-        System.out.println("3-Registrar Evidencia a un Avance"); 
-        System.out.println("4-Realizar Reporte");
-        System.out.println("5-Editar Perfil Usuario");
-        System.out.println("7-Salir");
+        System.out.println("1-Mostrar Actividades"); // Listo
+        System.out.println("2-Agregar Avance"); // Listo
+        System.out.println("3-Registrar Evidencia a un Avance"); //listo
+        System.out.println("4-Realizar Reporte"); 
+        System.out.println("5-Editar Perfil Usuario"); // Listo
+        System.out.println("7-Salir"); // Listo
         if(rol == 1){
-            System.out.println("6-Importar Proyecto");
+            System.out.println("6-Importar Proyecto"); // Listp
         }
 
         System.out.println("Seccione el numero de la Operacion que desea realizar");
@@ -319,14 +322,19 @@ public class Proyecto {
     
     
     public static void modificarPerfilUsuario(int idUsuario) throws SQLException{
-        Usuario user;
         Usuario userL = Ctrl.LeerUsuario(idUsuario);
-        int idUsuarioBD;
+        //int idenUsuario;
         String nombre;
         String correo;
         String password;
+        //
+        Scanner entradaScanner;
+        String NuevoNombre = "";
+        String NuevoCorreo = "";
+        String NuevoPassword = "";
 
         //idUsuarioBD = userL.getIdUsuario();
+        //idenUsuario = userL.getIdUsuario();
         nombre = userL.getNombre();
         correo = userL.getCorreo();
         password = userL.getPassword();
@@ -335,11 +343,27 @@ public class Proyecto {
         System.out.println(correo);
         System.out.println(password);
         //
+        System.out.println("Digite Nuevo Nombre de Usuario");
+        entradaScanner = new Scanner(System.in);
+        NuevoNombre = entradaScanner.nextLine();
+        //
+        System.out.println("Digite Nuevo Correo de Usuario");
+        entradaScanner = new Scanner(System.in);
+        NuevoCorreo = entradaScanner.nextLine();
+        //
+        System.out.println("Digite Nueva contraseña de Usuario");
+        entradaScanner = new Scanner(System.in);
+        NuevoPassword = entradaScanner.nextLine();
+        //
+        userL.setNombre(NuevoNombre);
+        userL.setCorreo(NuevoCorreo);
+        userL.setPassword(NuevoPassword);
+        
+        Ctrl.ActualizarUsuario(userL);
+        System.out.println("Se ha actualizado correctamente el Usuario");
         
     }
     
-    private static java.sql.Date sqlDate(Date d) {
-        return d!=null ? new java.sql.Date(d.getTime()) : null;
-    }
+    
     
 }

@@ -4,12 +4,12 @@ package View;
  *
  * @author Joaquín
  */
-public class Avance extends javax.swing.JFrame {
+public class Avance2 extends javax.swing.JFrame {
 
     /**
      * Creates new form TicketResuelto
      */
-    public Avance() {
+    public Avance2() {
         this.setUndecorated(true);
         initComponents();
     }
@@ -33,7 +33,6 @@ public class Avance extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TxtComentario = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
-        btnCerrar = new javax.swing.JButton();
         txtIdTicket = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -68,17 +67,6 @@ public class Avance extends javax.swing.JFrame {
 
         jButton1.setText("Adjuntar Evidencia");
 
-        btnCerrar.setBackground(new java.awt.Color(255, 255, 255));
-        btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconCerrar.jpg"))); // NOI18N
-        btnCerrar.setBorder(null);
-        btnCerrar.setBorderPainted(false);
-        btnCerrar.setContentAreaFilled(false);
-        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarActionPerformed(evt);
-            }
-        });
-
         txtIdTicket.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         txtIdTicket.setText("#Actividad");
 
@@ -96,8 +84,7 @@ public class Avance extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelTicketResueltoLayout.createSequentialGroup()
                         .addGap(0, 71, Short.MAX_VALUE)
                         .addComponent(jLabel1)
-                        .addGap(62, 62, 62)
-                        .addComponent(btnCerrar))
+                        .addGap(105, 105, 105))
                     .addGroup(PanelTicketResueltoLayout.createSequentialGroup()
                         .addGroup(PanelTicketResueltoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelTicketResueltoLayout.createSequentialGroup()
@@ -124,19 +111,13 @@ public class Avance extends javax.swing.JFrame {
                                     .addComponent(labelAtendidopor)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         PanelTicketResueltoLayout.setVerticalGroup(
             PanelTicketResueltoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelTicketResueltoLayout.createSequentialGroup()
-                .addGroup(PanelTicketResueltoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelTicketResueltoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnCerrar))
-                    .addGroup(PanelTicketResueltoLayout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabel1)))
+                .addGap(41, 41, 41)
+                .addComponent(jLabel1)
                 .addGap(34, 34, 34)
                 .addGroup(PanelTicketResueltoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelTicketId)
@@ -154,8 +135,8 @@ public class Avance extends javax.swing.JFrame {
                     .addComponent(labelasunto)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(PanelTicketResueltoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelComentario)
+                .addGroup(PanelTicketResueltoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelComentario, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,11 +159,6 @@ public class Avance extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-
-        this.dispose();
-    }//GEN-LAST:event_btnCerrarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -200,21 +176,23 @@ public class Avance extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Avance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Avance2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Avance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Avance2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Avance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Avance2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Avance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Avance2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Avance().setVisible(true);
+                new Avance2().setVisible(true);
             }
         });
     }
@@ -223,7 +201,6 @@ public class Avance extends javax.swing.JFrame {
     private javax.swing.JPanel PanelTicketResuelto;
     private javax.swing.JSpinner Spinner1;
     private javax.swing.JTextArea TxtComentario;
-    private javax.swing.JButton btnCerrar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;

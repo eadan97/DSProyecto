@@ -32,4 +32,8 @@ class GestorUsuario {
         return daoUsr.verificarUsuario(unUsuario);
     }
     
+    public void ActualizarUsuario(Usuario unUsuario){
+        daoUsr.actualizarUsuario(unUsuario);
+    }
+    
 }
