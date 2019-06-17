@@ -399,7 +399,7 @@ public class DAOAvance implements DAOInterface {
         }*/
         //AQUI ESTA LO DE TAPIA QUE HAY QUE REFACTORIZAR
         // TODO: Refactor this
-<<<<<<< HEAD
+
       /*    reporte.setIdAvance(Integer.parseInt(rs.getString("IdAvance")));
 
           reporte.setIdActividad(Integer.parseInt(  rs.getString("IdActividad")));
@@ -421,7 +421,7 @@ public class DAOAvance implements DAOInterface {
         
        
 
-=======
+
 //          reporte.setIdAvance(Integer.parseInt(rs.getString("IdAvance")));
 //          reporte.setIdActividad(Integer.parseInt(  rs.getString("IdActividad")));
 //          reporte.setFechaAvance(rs.getString("FechaAvance"));
@@ -436,11 +436,10 @@ public class DAOAvance implements DAOInterface {
           
 //          pdf.generarPDF(reporte);
 
-        }
+        
         
         
     
->>>>>>> 83172b2725e666019ff1f987f0db203fc9d00527
 
     public void BuscarAvanceFechas(String Inicio, String Final) throws SQLException {
         this.conn = ConexionBD.getInstance().getConexion();
@@ -479,8 +478,9 @@ public class DAOAvance implements DAOInterface {
                     rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
         }*/
         // generar sp de buscar fechas 
-    }    
+        
     }
+}
     
     public void BuscarActividades(Integer Usario) throws SQLException{
          this.conn = ConexionBD.getInstance().getConexion();
