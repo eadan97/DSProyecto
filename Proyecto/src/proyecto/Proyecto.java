@@ -170,8 +170,8 @@ public class Proyecto {
 
         System.out.println("1-Mostrar Actividades"); // Listo
         System.out.println("2-Agregar Avance"); // Listo
-        System.out.println("3-Registrar Evidencia a un Avance"); 
-        System.out.println("4-Realizar Reporte");
+        System.out.println("3-Registrar Evidencia a un Avance"); //listo
+        System.out.println("4-Realizar Reporte"); 
         System.out.println("5-Editar Perfil Usuario"); // Listo
         System.out.println("7-Salir"); // Listo
         if(rol == 1){

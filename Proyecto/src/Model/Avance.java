@@ -84,13 +84,14 @@ public class Avance {
         this.descripcion = descripcion;
     }
 
-    public Avance(Integer idAvance, Integer idActividad, Date fechaAvance, Integer horasDedicadas, Integer tipoAvance, String descripcion) {
+    public Avance(Integer idAvance, Integer idActividad, Date fechaAvance, Integer horasDedicadas, Integer tipoAvance, Integer idUsuario, String descripcion) {
         this.idAvance = idAvance;
         this.idActividad = idActividad;
         this.fechaAvance = fechaAvance;
         this.horasDedicadas = horasDedicadas;
         this.tipoAvance = tipoAvance;
         this.descripcion = descripcion;
+        this.idUsuario=idUsuario;
     }
 
 }

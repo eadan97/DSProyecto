@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Model.Avance;
 import Model.ConexionBD;
 import Model.Evidencia;
 import java.sql.CallableStatement;
@@ -12,6 +13,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -141,6 +143,35 @@ public class DAOEvidencia implements DAOInterface{
     
     private java.sql.Date sqlDate(Date d) {
         return d!=null ? new java.sql.Date(d.getTime()) : null;
+    }
+
+    ArrayList<Evidencia> BuscarEvidenciaAvance(Integer idAvance) {
+        this.conn=ConexionBD.getConexion();
+        CallableStatement cstmt = null;
+        ArrayList<Evidencia> res = new ArrayList<>();
+        try {
+            cstmt = conn.prepareCall("{call BuscarEvidenciasAvance(?)}");
+
+            cstmt.setObject(1, idAvance, Types.INTEGER);
+            
+            ResultSet rs = cstmt.executeQuery();
+            while(rs.next()){
+                res.add( new Evidencia(rs.getInt(1), rs.getInt(2), rs.getBytes(3)));
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cstmt!=null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return res;
     }
     
 }

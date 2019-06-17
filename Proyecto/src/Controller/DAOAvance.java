@@ -95,12 +95,7 @@ public class DAOAvance implements DAOInterface {
             cstmt.setObject(1, idAvance, Types.INTEGER);
             ResultSet rs = cstmt.executeQuery();
             rs.next();
-            a = new Avance(idAvance,
-                    (Integer) rs.getObject(1),
-                    rs.getDate(2),
-                    (Integer) rs.getObject(3),
-                    (Integer) rs.getObject(4),
-                    rs.getString(5));
+            a = new Avance(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getString(7));
         } catch (SQLException ex) {
             Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -320,7 +315,7 @@ public class DAOAvance implements DAOInterface {
             
             ResultSet rs = cstmt.executeQuery();
             while(rs.next()){
-                res.add( new Avance(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getInt(4), rs.getInt(5), rs.getString(7)));
+                res.add( new Avance(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getInt(4), rs.getInt(5), rs.getInt(6), rs.getString(7)));
             }
             
             

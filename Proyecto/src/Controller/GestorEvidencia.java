@@ -1,6 +1,8 @@
 package Controller;
 
 import Model.Evidencia;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,6 +18,10 @@ public class GestorEvidencia {
     
     public boolean CrearEvidencia(Evidencia evidencia){
       return DAOEvid.Registrar(evidencia);
+    }
+
+    ArrayList<Evidencia> ObtenerEvidenciasAvance(Integer idAvance)throws SQLException {
+        return DAOEvid.BuscarEvidenciaAvance(idAvance);
     }
     
     

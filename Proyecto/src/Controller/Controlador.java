@@ -7,6 +7,7 @@ import Model.BuilderActividad;
 import Model.BuilderFecha;
 import Model.BuilderMiembro;
 import Model.DirectorReporte;
+import Model.Evidencia;
 import Model.Reporte;
 import Model.Usuario;
 import java.sql.SQLException;
@@ -167,5 +168,9 @@ public class Controlador {
     }
     public ArrayList<Avance> ConsultarAvancesActividad(int idActividad) throws SQLException{
         return gAvance.ObtenerAvancesActividad(idActividad);
+    }
+
+    public ArrayList<Evidencia> ConsultarEvidenciasAvance(Integer idAvance) throws SQLException{
+        return gEvidencia.ObtenerEvidenciasAvance(idAvance);
     }
 }

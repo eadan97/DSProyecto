@@ -7,16 +7,22 @@ package View;
 
 import Controller.Controlador;
 import Model.Actividad;
+import Model.Avance;
+import Model.Evidencia;
 import Model.Usuario;
 import static Utils.Utils.safeParseToString;
 import static Utils.Utils.sqlDate;
 import java.awt.CardLayout;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
@@ -34,8 +40,9 @@ public class MainView extends javax.swing.JFrame {
     Usuario current_user;
     Controlador Ctrl = Controlador.getInstance();
     javax.swing.JFrame parent;
-    DefaultListModel actividadesListModel, avancesListModel;
+    DefaultListModel actividadesListModel, avancesListModel, evidenciasListModel;
     Actividad current_actividad;
+    Avance current_avance;
     MainView(Login parent, Usuario current_user) {
         this.parent = parent;
         this.current_user = current_user;
@@ -44,8 +51,10 @@ public class MainView extends javax.swing.JFrame {
         txtPerfilCorreo.setText(current_user.getCorreo());
         actividadesListModel=new DefaultListModel();
         avancesListModel=new DefaultListModel();
+        evidenciasListModel=new DefaultListModel();
         lstActividades.setModel(actividadesListModel);
         lstActividadAvances.setModel(avancesListModel);
+        jList1.setModel(evidenciasListModel);
         fillActivitiesList();
     }
 
@@ -101,21 +110,23 @@ public class MainView extends javax.swing.JFrame {
         jLabel28 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtAvanceDescripcion1 = new javax.swing.JTextArea();
-        btnAgregarAvance1 = new javax.swing.JButton();
         jLabel29 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel30 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
+        txtVerHorasDedicadas = new javax.swing.JLabel();
+        txtVerTipoAvance = new javax.swing.JLabel();
+        txtVerFecha = new javax.swing.JLabel();
+        txtVerIdUsuario = new javax.swing.JLabel();
+        txtVerEvidencias = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jLabel40 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        btnAgregarEvidencia = new javax.swing.JButton();
+        txtEvidenciaPath = new javax.swing.JTextField();
+        btnSeleccionarEvidencia = new javax.swing.JButton();
         paneActividadesAgregarAvance = new javax.swing.JPanel();
         spnAvanceHoras = new javax.swing.JSpinner();
         jLabel22 = new javax.swing.JLabel();
@@ -135,6 +146,10 @@ public class MainView extends javax.swing.JFrame {
         btnImportarSeleccionar = new javax.swing.JButton();
         btnImportarImportar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
+        jLabel34 = new javax.swing.JLabel();
+        cmbTipoReporte = new javax.swing.JComboBox<>();
+        jLabel35 = new javax.swing.JLabel();
+        btnGenerarReporte = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -176,7 +191,7 @@ public class MainView extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel7))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(lstActividadActividades, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE))
+                    .addComponent(lstActividadActividades, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         paneActividadesListaLayout.setVerticalGroup(
@@ -374,7 +389,7 @@ public class MainView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnActividadAgregarAvance)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnActividadIrAtras)
                 .addContainerGap())
         );
@@ -406,7 +421,7 @@ public class MainView extends javax.swing.JFrame {
                     .addGroup(paneActividadesActividadLayout.createSequentialGroup()
                         .addGap(130, 130, 130)
                         .addComponent(jLabel21)
-                        .addContainerGap(224, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(paneActividadesActividadLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2)
@@ -441,13 +456,6 @@ public class MainView extends javax.swing.JFrame {
         txtAvanceDescripcion1.setRows(5);
         jScrollPane3.setViewportView(txtAvanceDescripcion1);
 
-        btnAgregarAvance1.setText("Agregar evidencia");
-        btnAgregarAvance1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarAvance1ActionPerformed(evt);
-            }
-        });
-
         jLabel29.setText("Tipo de avance:");
 
         jButton3.setText("Ir atras");
@@ -463,17 +471,15 @@ public class MainView extends javax.swing.JFrame {
 
         jLabel33.setText("Descripción:");
 
-        jLabel34.setText("Horas dedicadas:");
+        txtVerHorasDedicadas.setText("Horas dedicadas:");
 
-        jLabel35.setText("Horas dedicadas:");
+        txtVerTipoAvance.setText("Horas dedicadas:");
 
-        jLabel36.setText("Horas dedicadas:");
+        txtVerFecha.setText("Horas dedicadas:");
 
-        jLabel37.setText("Horas dedicadas:");
+        txtVerIdUsuario.setText("Horas dedicadas:");
 
-        jLabel38.setText("Horas dedicadas:");
-
-        jLabel39.setText("Horas dedicadas:");
+        txtVerEvidencias.setText("Horas dedicadas:");
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -483,6 +489,49 @@ public class MainView extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jList1);
 
         jLabel40.setText("Evidencias");
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Agregar evidencia"));
+
+        btnAgregarEvidencia.setText("Agregar evidencia");
+        btnAgregarEvidencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarEvidenciaActionPerformed(evt);
+            }
+        });
+
+        txtEvidenciaPath.setEditable(false);
+
+        btnSeleccionarEvidencia.setText("Seleccionar archivo");
+        btnSeleccionarEvidencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarEvidenciaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(btnSeleccionarEvidencia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAgregarEvidencia))
+                    .addComponent(txtEvidenciaPath, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtEvidenciaPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarEvidencia)
+                    .addComponent(btnSeleccionarEvidencia))
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout paneActividadesVerAvanceLayout = new javax.swing.GroupLayout(paneActividadesVerAvance);
         paneActividadesVerAvance.setLayout(paneActividadesVerAvanceLayout);
@@ -494,7 +543,7 @@ public class MainView extends javax.swing.JFrame {
                     .addGroup(paneActividadesVerAvanceLayout.createSequentialGroup()
                         .addComponent(jLabel27)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel34))
+                        .addComponent(txtVerHorasDedicadas))
                     .addGroup(paneActividadesVerAvanceLayout.createSequentialGroup()
                         .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel29)
@@ -504,20 +553,19 @@ public class MainView extends javax.swing.JFrame {
                             .addComponent(jLabel33))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel39)
-                            .addComponent(jLabel38)
-                            .addComponent(jLabel37)
-                            .addComponent(jLabel36)
-                            .addComponent(jLabel35)))
-                    .addComponent(btnAgregarAvance1)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtVerEvidencias)
+                            .addComponent(txtVerIdUsuario)
+                            .addComponent(txtVerFecha)
+                            .addComponent(txtVerTipoAvance)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel26))
+                    .addComponent(jLabel26)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(paneActividadesVerAvanceLayout.createSequentialGroup()
                         .addComponent(jLabel40)
-                        .addGap(0, 244, Short.MAX_VALUE))
+                        .addGap(0, 265, Short.MAX_VALUE))
                     .addComponent(jScrollPane4))
                 .addContainerGap())
         );
@@ -528,40 +576,40 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
                     .addComponent(jLabel40))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(paneActividadesVerAvanceLayout.createSequentialGroup()
                         .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel27)
-                            .addComponent(jLabel34))
+                            .addComponent(txtVerHorasDedicadas))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel29)
-                            .addComponent(jLabel35))
+                            .addComponent(txtVerTipoAvance))
                         .addGap(7, 7, 7)
                         .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel32)
-                            .addComponent(jLabel36))
+                            .addComponent(txtVerFecha))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel28)
-                            .addComponent(jLabel37))
+                            .addComponent(txtVerIdUsuario))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel30)
-                            .addComponent(jLabel38))
+                            .addComponent(txtVerEvidencias))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(paneActividadesVerAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel33)
-                            .addComponent(jLabel39))
+                        .addComponent(jLabel33)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                        .addComponent(btnAgregarAvance1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3))
-                    .addComponent(jScrollPane4))
-                .addGap(55, 55, 55))
+                        .addComponent(jButton3)
+                        .addGap(13, 13, 13))
+                    .addGroup(paneActividadesVerAvanceLayout.createSequentialGroup()
+                        .addComponent(jScrollPane4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
 
         paneActividadesBase.add(paneActividadesVerAvance, "verAvance");
@@ -604,7 +652,7 @@ public class MainView extends javax.swing.JFrame {
                     .addGroup(paneActividadesAgregarAvanceLayout.createSequentialGroup()
                         .addComponent(jLabel24)
                         .addGap(27, 27, 27)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(paneActividadesAgregarAvanceLayout.createSequentialGroup()
                         .addGroup(paneActividadesAgregarAvanceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel22)
@@ -645,7 +693,7 @@ public class MainView extends javax.swing.JFrame {
                 .addComponent(btnAgregarAvance)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(180, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         paneActividadesBase.add(paneActividadesAgregarAvance, "agregarAvance");
@@ -692,7 +740,7 @@ public class MainView extends javax.swing.JFrame {
                         .addGroup(paneImportarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnImportarImportar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnImportarSeleccionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         paneImportarLayout.setVerticalGroup(
             paneImportarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -708,23 +756,55 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(btnImportarSeleccionar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnImportarImportar)
-                .addContainerGap(359, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Importar", paneImportar);
+
+        jLabel34.setText("Reportar");
+
+        cmbTipoReporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuario", "Fechas", "Actividad" }));
+
+        jLabel35.setText("Tipo de reporte");
+
+        btnGenerarReporte.setText("Generar reporte");
+        btnGenerarReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarReporteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 638, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnGenerarReporte)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel34)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel35)
+                            .addGap(46, 46, 46)
+                            .addComponent(cmbTipoReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(432, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 462, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbTipoReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel35))
+                .addGap(103, 103, 103)
+                .addComponent(btnGenerarReporte)
+                .addContainerGap(286, Short.MAX_VALUE))
         );
 
-        tabbedPane.addTab("Exportar", jPanel1);
+        tabbedPane.addTab("Reportar", jPanel1);
 
         jLabel2.setText("Editar perfil");
 
@@ -779,7 +859,7 @@ public class MainView extends javax.swing.JFrame {
                             .addComponent(txtPerfilCorreo, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPerfilUsuario, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pwdPerfilContra2))
-                        .addGap(0, 308, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -802,7 +882,7 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pwdPerfilContra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
         );
@@ -923,25 +1003,24 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActividadAgregarAvanceActionPerformed
 
     private void lstActividadAvancesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstActividadAvancesMouseClicked
-        /*JList list = (JList) evt.getSource();
+        JList list = (JList) evt.getSource();
         if(evt.getClickCount()==2){
             int index=list.locationToIndex(evt.getPoint());
-            Actividad act = (Actividad)actividadesListModel.get(index);
-            txtActividadId.setText(act.getIdTarea());
-            txtActividadNombre.setText(act.getNombreTarea());
-            txtActividadIdUsuario.setText(act.getIdUsuario());
-            txtActividadFechaCreacion.setText(safeParseToString(act.getFechaCreacion()));
-            txtActividadFechaCompletado.setText(safeParseToString(act.getFechaCompletado()));
-            txtActividadFechaInicio.setText(safeParseToString(act.getFechaInicio()));
-            txtActividadFechaFin.setText(safeParseToString(act.getFechaFin()));
-            txtActividadNotas.setText(act.getNota());
-            txtActividadEtiquetas.setText(act.getEtiqueta());
-            txtActividadPadre.setText(act.getTareaPadre());
             
-            txtActividadAvances.setText("Fix me");
-            ((CardLayout)paneActividadesBase.getLayout()).show(paneActividadesBase, "actividad");
+            current_avance = (Avance)avancesListModel.get(index);
+            txtVerHorasDedicadas.setText(String.valueOf(current_avance.getHorasDedicadas()));
+            txtVerTipoAvance.setText(String.valueOf(current_avance.getTipoAvance()));
+            txtVerFecha.setText(safeParseToString(current_avance.getFechaAvance()));
+            txtVerIdUsuario.setText(String.valueOf(current_avance.getIdUsuario()));
+            
+            txtAvanceDescripcion1.setText(current_avance.getDescripcion());
+            
+            int evidencias = fillEvidenciasList();
+            txtVerEvidencias.setText(String.valueOf(evidencias));
+            
+            ((CardLayout)paneActividadesBase.getLayout()).show(paneActividadesBase, "verAvance");
 
-        }*/
+        }
     }//GEN-LAST:event_lstActividadAvancesMouseClicked
 
     private void btnAgregarAvanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAvanceActionPerformed
@@ -963,22 +1042,58 @@ public class MainView extends javax.swing.JFrame {
         ((CardLayout)paneActividadesBase.getLayout()).show(paneActividadesBase, "actividad");
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void btnAgregarAvance1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarAvance1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarAvance1ActionPerformed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        ((CardLayout)paneActividadesBase.getLayout()).show(paneActividadesBase, "actividad");
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void btnAgregarEvidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEvidenciaActionPerformed
+        try {
+            Ctrl.getDTOEvidencia().getUnaEvidencia().setIdAvance(current_avance.getIdAvance());
+            
+            BufferedImage bImage = ImageIO.read(new File(txtEvidenciaPath.getText()));
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ImageIO.write(bImage, "jpg", bos );
+            byte [] data = bos.toByteArray();
+            
+            Ctrl.getDTOEvidencia().getUnaEvidencia().setImagen(data);
+            
+            Ctrl.CrearEvidencia();
+            evidenciasListModel.addElement(Ctrl.getDTOEvidencia().getUnaEvidencia());
+            txtEvidenciaPath.setText("");
+        } catch (IOException ex) {
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAgregarEvidenciaActionPerformed
+
+    private void btnSeleccionarEvidenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarEvidenciaActionPerformed
+        JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        jfc.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Imagen", "jpg");
+        jfc.addChoosableFileFilter(filter);
+        int returnValue = jfc.showOpenDialog(this);
+        // int returnValue = jfc.showSaveDialog(null);
+
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = jfc.getSelectedFile();
+                txtEvidenciaPath.setText(selectedFile.getAbsolutePath());    
+        }
+    }//GEN-LAST:event_btnSeleccionarEvidenciaActionPerformed
+
+    private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
+        Ctrl.CrearReporte((String) cmbTipoReporte.getSelectedItem());
+    }//GEN-LAST:event_btnGenerarReporteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActividadAgregarAvance;
     private javax.swing.JButton btnActividadIrAtras;
     private javax.swing.JButton btnAgregarAvance;
-    private javax.swing.JButton btnAgregarAvance1;
+    private javax.swing.JButton btnAgregarEvidencia;
+    private javax.swing.JButton btnGenerarReporte;
     private javax.swing.JButton btnImportarImportar;
     private javax.swing.JButton btnImportarSeleccionar;
+    private javax.swing.JButton btnSeleccionarEvidencia;
     private javax.swing.JComboBox<String> cmbAvanceTipo;
+    private javax.swing.JComboBox<String> cmbTipoReporte;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -1011,10 +1126,6 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
@@ -1027,6 +1138,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1057,9 +1169,15 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel txtActividadPadre;
     private javax.swing.JTextArea txtAvanceDescripcion;
     private javax.swing.JTextArea txtAvanceDescripcion1;
+    private javax.swing.JTextField txtEvidenciaPath;
     private javax.swing.JTextField txtImportarPath;
     private javax.swing.JTextField txtPerfilCorreo;
     private javax.swing.JTextField txtPerfilUsuario;
+    private javax.swing.JLabel txtVerEvidencias;
+    private javax.swing.JLabel txtVerFecha;
+    private javax.swing.JLabel txtVerHorasDedicadas;
+    private javax.swing.JLabel txtVerIdUsuario;
+    private javax.swing.JLabel txtVerTipoAvance;
     // End of variables declaration//GEN-END:variables
 
     private void fillActivitiesList() {
@@ -1080,6 +1198,18 @@ public class MainView extends javax.swing.JFrame {
             ArrayList<Model.Avance> avances = Ctrl.ConsultarAvancesActividad(current_actividad.getIdActividad());
             avancesListModel.addAll(avances);
             return avances.size();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+            return -1;
+        }
+    }
+
+    private int fillEvidenciasList() {
+        evidenciasListModel.clear();
+        try {
+            ArrayList<Evidencia> evidencias = Ctrl.ConsultarEvidenciasAvance(current_avance.getIdAvance());
+            evidenciasListModel.addAll(evidencias);
+            return evidencias.size();
         } catch (SQLException ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
             return -1;
