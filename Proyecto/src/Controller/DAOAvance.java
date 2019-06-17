@@ -377,6 +377,8 @@ public class DAOAvance implements DAOInterface {
                     rs.getString("HorasDedicadas"),rs.getString("TipoAvance"),rs.getString("Nombre"),
                     rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
         }*/
+        //AQUI ESTA LO DE TAPIA QUE HAY QUE REFACTORIZAR
+        // TODO: Refactor this
           reporte.setIdAvance(Integer.parseInt(rs.getString("IdAvance")));
           reporte.setIdActividad(Integer.parseInt(  rs.getString("IdActividad")));
           reporte.setFechaAvance(rs.getString("FechaAvance"));
