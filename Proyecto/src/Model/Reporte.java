@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -14,25 +15,54 @@ import java.util.Date;
 public class Reporte {
 
     private Date FechaSolicitudReporte;
+  
+    private int IdActividad;
+    private String Nombre;
+    private String Correo;
     
     
-            
     
-  /*
+    private ArrayList <Avance> Avances;
+    private ArrayList <Evidencia> Evidencia;
     
-    public  void   ReporteBD () {
-            System.out.println("mandar a pedir reporte a la base");
-            
-}
-    public void ReporteFechaBD(){
-        
+
+    public Date getFechaSolicitudReporte() {
+        return FechaSolicitudReporte;
     }
-    public void MostrarPDF(){
-        
+
+    public void setFechaSolicitudReporte(Date FechaSolicitudReporte) {
+        this.FechaSolicitudReporte = FechaSolicitudReporte;
     }
+
+
+
+    public int getIdActividad() {
+        return IdActividad;
+    }
+
+    public void setIdActividad(int IdActividad) {
+        this.IdActividad = IdActividad;
+    }
+
+
+    public String getNombre() {
+        return Nombre;
+    }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
+    public String getCorreo() {
+        return Correo;
+    }
+
+    public void setCorreo(String Correo) {
+        this.Correo = Correo;
+    }
+
+
+
     
-    public void MostrarPantalla(){
-        
-    }
-    */
+
 }
