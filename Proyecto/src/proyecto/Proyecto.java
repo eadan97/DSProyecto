@@ -224,7 +224,7 @@ public class Proyecto {
         selected = Integer.parseInt(entradaScanner.nextLine());
         switch (selected) {
             case 1:
-                Ctrl.CrearReporte("Usuario");
+                Ctrl.CrearReporte("Miembro");
                 break;
             case 2:
                 Ctrl.CrearReporte("Fechas");
