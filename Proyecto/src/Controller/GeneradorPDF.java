@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Model.Reporte;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -55,5 +56,41 @@ public class GeneradorPDF {
         }
         
     }
+    public boolean generarPDF(Reporte reporte){
+        
+ try{
+            FileOutputStream fi = new FileOutputStream("Avance "+reporte.getIdAvance() + " " + reporte.getNombre()+ ".pdf");
+            Document doc = new Document();
+            PdfWriter.getInstance(doc, fi);
+            doc.open();
+            doc.add(new Paragraph("REPORTE DE AVANCE"));
+            doc.add(new Paragraph(reporte.getIdAvance()));
+            String infs = "";
+            String parrafo;
+             
+            
+                parrafo = "\n**************************************************";
+                parrafo+= "\nResponsable: " + reporte.getNombre();
+                parrafo+= "\nActividad: " + reporte.getIdActividad();
+                parrafo+= "\nFecha: " + reporte.getFechaAvance();
+                parrafo+= "\nHorasDedicadas: " + reporte.getHorasDedicadas();
+                parrafo+= "\nDescripcion: " + reporte.getDescripcion();
+                parrafo+= "\nCorreo: " +reporte.getCorreo();
+                //parrafo = "\n**************************************************";
+                infs += parrafo;
+            
+            
+            doc.add(new Paragraph(infs));
+            doc.close();
+            
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
+        
+        
+        
+    } 
     
 }

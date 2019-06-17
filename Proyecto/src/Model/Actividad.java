@@ -32,7 +32,8 @@ public class Actividad {
     public Actividad() {
     }
 
-    public Actividad(String idTarea, Date fechaCreacion, Date fechaCompletado, Date fechaUltimaModificacion, String nombreTarea, String idUsuario, String emailAsignado, Date fechaInicio, Date fechaFin, String etiqueta, String nota, String idProyecto, String tareaPadre) {
+    public Actividad(int idActividad, String idTarea, Date fechaCreacion, Date fechaCompletado, Date fechaUltimaModificacion, String nombreTarea, String idUsuario, String emailAsignado, Date fechaInicio, Date fechaFin, String etiqueta, String nota, String idProyecto, String tareaPadre) {
+        this.idActividad = idActividad;
         this.idTarea = idTarea;
         this.fechaCreacion = fechaCreacion;
         this.fechaCompletado = fechaCompletado;
@@ -160,4 +161,12 @@ public class Actividad {
         this.tareaPadre = tareaPadre;
     }
 
+    @Override
+    public String toString() {
+        return //"idTarea=" + 
+                idTarea + //", fechaCreacion=" + fechaCreacion + ", fechaCompletado=" + fechaCompletado + ", fechaUltimaModificacion=" + fechaUltimaModificacion + ", nombreTarea=" + 
+                " - "+nombreTarea; //+ ", idUsuario=" + idUsuario + ", emailAsignado=" + emailAsignado + ", fechaInicio=" + fechaInicio + ", fechaFin=" + fechaFin + ", etiqueta=" + etiqueta + ", nota=" + nota + ", tareaPadre=" + tareaPadre + '}';
+    }
+
+    
 }

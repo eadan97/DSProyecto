@@ -48,5 +48,10 @@ public class Evidencia {
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
+
+    @Override
+    public String toString() {
+        return "Evidencia{" + "idEvidencia=" + idEvidencia + '}';
+    }
     
 }

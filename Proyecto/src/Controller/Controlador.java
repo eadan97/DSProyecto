@@ -1,13 +1,18 @@
 package Controller;
 
 
+import Model.Actividad;
+import Model.Avance;
 import Model.BuilderActividad;
 import Model.BuilderFecha;
 import Model.BuilderMiembro;
 import Model.DirectorReporte;
+import Model.Evidencia;
 import Model.Reporte;
 import Model.Usuario;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 /**
@@ -138,8 +143,8 @@ public class Controlador {
         this.DTOUsuario = newdto;                
     }
 
-    public void CrearUsuario() {
-        gUsuario.CrearUsuario(DTOUsuario.getUnUsuario());
+    public boolean CrearUsuario() {
+        return gUsuario.CrearUsuario(DTOUsuario.getUnUsuario());
     }
     
     public void ActualizarUsuario(Usuario u){
@@ -154,7 +159,18 @@ public class Controlador {
         return gUsuario.validarUsuario(DTOUsuario.getUnUsuario());
     }
     
-    public void ConsultarActividades(int idUsuario) throws SQLException{
-        gActividad.ConsultarActividad(idUsuario);
+    public ArrayList<Actividad> ConsultarActividades(int idUsuario) throws SQLException{
+        return gActividad.ConsultarActividadesUsuario(idUsuario);
     } 
+
+    public ArrayList<Actividad> ConsultarActividades() {
+        return gActividad.ConsultarTodasLasActividades();
+    }
+    public ArrayList<Avance> ConsultarAvancesActividad(int idActividad) throws SQLException{
+        return gAvance.ObtenerAvancesActividad(idActividad);
+    }
+
+    public ArrayList<Evidencia> ConsultarEvidenciasAvance(Integer idAvance) throws SQLException{
+        return gEvidencia.ObtenerEvidenciasAvance(idAvance);
+    }
 }

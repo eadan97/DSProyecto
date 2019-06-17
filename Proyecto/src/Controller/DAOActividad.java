@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Actividad;
+import Model.Avance;
 import Model.ConexionBD;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -8,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -100,19 +102,20 @@ public class DAOActividad implements DAOInterface {
             ResultSet rs = cstmt.executeQuery();
             rs.next();
             a = new Actividad(
-                    rs.getString(1),
-                    rs.getDate(2),
+                        rs.getInt(1),
+                    rs.getString(2),
                     rs.getDate(3),
                     rs.getDate(4),
-                    rs.getString(5),
+                    rs.getDate(5),
                     rs.getString(6),
                     rs.getString(7),
-                    rs.getDate(8),
+                    rs.getString(8),
                     rs.getDate(9),
-                    rs.getString(10),
+                    rs.getDate(10),
                     rs.getString(11),
                     rs.getString(12),
-                    rs.getString(13));
+                    rs.getString(13),
+                    rs.getString(14));
         } catch (SQLException ex) {
             Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -204,15 +207,15 @@ public class DAOActividad implements DAOInterface {
             }
         }
     }
-    public void BuscarActividades(Integer Usario) throws SQLException{
-         this.conn = ConexionBD.getInstance().getConexion();
-        Statement stmt = conn.createStatement();
-        String query="Select *,u.Nombre FROM Actividad A\n" +
-         "inner join Usuario U on U.IdUsuario =  A.IdUsuario\n" +
-         "inner join Proyecto P on P.IdProyecto =A.IdProyecto\n" +
-         "where A.IdUsuario ="+Usario + ";";
-        ResultSet rs =stmt.executeQuery(query);
-        while(rs.next()){
+    public ArrayList<Actividad> BuscarActividades(Integer Usario) throws SQLException{
+         this.conn = ConexionBD.getConexion();
+        // Statement stmt = conn.createStatement();
+        // String query="Select *,u.Nombre FROM Actividad A\n" +
+        // "inner join Usuario U on U.IdUsuario =  A.IdUsuario\n" +
+        // "inner join Proyecto P on P.IdProyecto =A.IdProyecto\n" +
+        // "where A.IdUsuario ="+Usario + ";";
+        // ResultSet rs =stmt.executeQuery(query);
+        /*while(rs.next()){
             System.out.println("---------------------------------");
             System.out.println("          IdActividad: "+rs.getString("IdActividad"));
             System.out.println("Fecha de Creacion: "+rs.getString("FechaCreacion"));
@@ -225,6 +228,103 @@ public class DAOActividad implements DAOInterface {
           //  System.out.println("Imagen: "+rs.getString("Imagen"));
             System.out.println("---------------------------------");    
             
+        }*/
+        
+        ArrayList<Actividad> res = new ArrayList<>();
+        CallableStatement cstmt = null;
+        try {
+            cstmt = conn.prepareCall("{call BuscarActividadMiembro(?)}");
+            
+            cstmt.setObject(1, Usario, Types.INTEGER);
+            ResultSet rs = cstmt.executeQuery();
+            while(rs.next()){
+                Actividad a = new Actividad(
+                        rs.getInt(1),
+                    rs.getString(2),
+                    rs.getDate(3),
+                    rs.getDate(4),
+                    rs.getDate(5),
+                    rs.getString(6),
+                    rs.getString(7),
+                    rs.getString(8),
+                    rs.getDate(9),
+                    rs.getDate(10),
+                    rs.getString(11),
+                    rs.getString(12),
+                    rs.getString(13),
+                    rs.getString(14));
+                res.add(a);
+
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cstmt!=null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
         }
+        return res;
+    }
+
+    ArrayList<Actividad> BuscarActividades() {
+        this.conn = ConexionBD.getConexion();
+        ArrayList<Actividad> res = new ArrayList<>();
+        CallableStatement cstmt = null;
+        try {
+            cstmt = conn.prepareCall("{call BuscarActividades}");            
+            ResultSet rs = cstmt.executeQuery();
+            while(rs.next()){
+                Actividad a = new Actividad(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getDate(3),
+                    rs.getDate(4),
+                    rs.getDate(5),
+                    rs.getString(6),
+                    rs.getString(7),
+                    rs.getString(8),
+                    rs.getDate(9),
+                    rs.getDate(10),
+                    rs.getString(11),
+                    rs.getString(12),
+                    rs.getString(13),
+                    rs.getString(14));
+                res.add(a);
+
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(cstmt!=null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConexionBD.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            }
+        }
+        return res;
     }
 }
