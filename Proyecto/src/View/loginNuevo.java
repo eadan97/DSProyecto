@@ -198,7 +198,7 @@ public class loginNuevo extends javax.swing.JFrame {
             //
             System.out.println("Bienvenido " + Nombre);
             this.setVisible(false);
-            new View.MainView(this, Uingreso, idUsuario).setVisible(true);
+            new View.MainView(this, Uingreso).setVisible(true);
         }
         
         new loginNuevo().enable();

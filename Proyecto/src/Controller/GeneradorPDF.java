@@ -15,7 +15,7 @@ import java.io.FileOutputStream;
  *
  * @author aleta
  */
-public class GeneradorPDF {
+public class  GeneradorPDF   {
     
     public GeneradorPDF(){}
 
@@ -56,8 +56,8 @@ public class GeneradorPDF {
         }
         
     }
-    /*
-    public boolean generarPDF(Reporte reporte){
+    
+   /* public boolean generarPDF(Reporte reporte){
         
  try{
             FileOutputStream fi = new FileOutputStream("Avance "+reporte.getIdAvance() + " " + reporte.getNombre()+ ".pdf");
@@ -92,6 +92,8 @@ public class GeneradorPDF {
         
         
         
-    }*/ 
+    }*/
+    
+
     
 }

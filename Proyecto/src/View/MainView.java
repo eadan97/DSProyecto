@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -44,7 +45,7 @@ public class MainView extends javax.swing.JFrame {
     DefaultListModel actividadesListModel, avancesListModel, evidenciasListModel;
     Actividad current_actividad;
     Avance current_avance;
-    MainView(Login parent, Usuario current_user) {
+    MainView(JFrame parent, Usuario current_user) {
         this.parent = parent;
         this.current_user = current_user;
         initComponents();
@@ -58,7 +59,7 @@ public class MainView extends javax.swing.JFrame {
         jList1.setModel(evidenciasListModel);
         fillActivitiesList();
     }
-       MainView(loginNuevo parent, Usuario current_user, int a ) {
+      /* MainView(loginNuevo parent, Usuario current_user, int a ) {
         this.parent = parent;
         this.current_user = current_user;
         initComponents();
@@ -71,7 +72,7 @@ public class MainView extends javax.swing.JFrame {
         lstActividadAvances.setModel(avancesListModel);
         jList1.setModel(evidenciasListModel);
         fillActivitiesList();
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.

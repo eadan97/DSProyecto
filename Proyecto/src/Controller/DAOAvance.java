@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  */
 public class DAOAvance implements DAOInterface {
     Connection conn;
-    GeneradorPDF pdf =new GeneradorPDF();
+    IDocumentos doc =new GeneradorPDF();
     
     public DAOAvance(){
         this.conn = null;
@@ -312,7 +312,7 @@ public class DAOAvance implements DAOInterface {
           //reporte.addEvidencia(Integer.parseInt( rs.getString("IdEvidencia")));
           //arreglar evidencias e imagenes
             
-          pdf.generarPDF(reporte);*/
+          doc.generarPDF(reporte);*/
         }
     }    
     
@@ -382,7 +382,7 @@ public class DAOAvance implements DAOInterface {
             
 <<<<<<< HEAD
 <<<<<<< HEAD
-            pdf.generarPDF(rs.getString("IdAvance"),rs.getString("IdActividad"),rs.getString("FechaAvance"),
+            doc.generarPDF(rs.getString("IdAvance"),rs.getString("IdActividad"),rs.getString("FechaAvance"),
                     rs.getString("HorasDedicadas"),rs.getString("TipoAvance"),rs.getString("Nombre"),
                     rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
         }*/
@@ -393,7 +393,7 @@ public class DAOAvance implements DAOInterface {
           //  System.out.println("Imagen: "+rs.getString("Imagen"));
             System.out.println("---------------------------------");   
             
-            pdf.generarPDF(rs.getString("IdAvance"),rs.getString("IdActividad"),rs.getString("FechaAvance"),
+            doc.generarPDF(rs.getString("IdAvance"),rs.getString("IdActividad"),rs.getString("FechaAvance"),
                     rs.getString("HorasDedicadas"),rs.getString("TipoAvance"),rs.getString("Nombre"),
                     rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
         }*/
@@ -412,7 +412,7 @@ public class DAOAvance implements DAOInterface {
           //reporte.addEvidencia(Integer.parseInt( rs.getString("IdEvidencia")));
           //arreglar evidencias e imagenes
           
-          pdf.generarPDF(reporte);
+         doc.generarPDF(reporte);
 
 */
 
@@ -453,12 +453,13 @@ public class DAOAvance implements DAOInterface {
             
             
         
-          pdf.generarPDF(rs.getString("IdAvance"),rs.getString("IdActividad"),rs.getString("FechaAvance"),
+         /* pdf.generarPDF(rs.getString("IdAvance"),rs.getString("IdActividad"),rs.getString("FechaAvance"),
                     rs.getString("HorasDedicadas"),rs.getString("TipoAvance"),rs.getString("Nombre"),
                     rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
-        }
+        }*/
         // generar sp de buscar fechas 
     }    
+    }
     
     public void BuscarActividades(Integer Usario) throws SQLException{
          this.conn = ConexionBD.getInstance().getConexion();
