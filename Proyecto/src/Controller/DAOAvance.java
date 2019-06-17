@@ -381,6 +381,7 @@ public class DAOAvance implements DAOInterface {
 
             
 <<<<<<< HEAD
+<<<<<<< HEAD
             pdf.generarPDF(rs.getString("IdAvance"),rs.getString("IdActividad"),rs.getString("FechaAvance"),
                     rs.getString("HorasDedicadas"),rs.getString("TipoAvance"),rs.getString("Nombre"),
                     rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
@@ -388,6 +389,18 @@ public class DAOAvance implements DAOInterface {
 
           //  System.out.println("Imagen: "+rs.getString("Imagen"));
          /* reporte.setIdAvance(Integer.parseInt(rs.getString("IdAvance")));
+=======
+          //  System.out.println("Imagen: "+rs.getString("Imagen"));
+            System.out.println("---------------------------------");   
+            
+            pdf.generarPDF(rs.getString("IdAvance"),rs.getString("IdActividad"),rs.getString("FechaAvance"),
+                    rs.getString("HorasDedicadas"),rs.getString("TipoAvance"),rs.getString("Nombre"),
+                    rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
+        }*/
+        //AQUI ESTA LO DE TAPIA QUE HAY QUE REFACTORIZAR
+        // TODO: Refactor this
+      /*    reporte.setIdAvance(Integer.parseInt(rs.getString("IdAvance")));
+
           reporte.setIdActividad(Integer.parseInt(  rs.getString("IdActividad")));
           reporte.setFechaAvance(rs.getString("FechaAvance"));
           reporte.setHorasDedicadas(Integer.parseInt(  rs.getString("HorasDedicadas")));

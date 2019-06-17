@@ -65,7 +65,9 @@ public class Proyecto {
         System.out.println("2-Registrarse");
         System.out.println("3-Salir");
 
+
         System.out.println("\n\n\nSeccione el numero de la Operacion que desea realizar");
+
 
         Scanner entradaScanner = new Scanner(System.in);
         selected = Integer.parseInt(entradaScanner.nextLine());

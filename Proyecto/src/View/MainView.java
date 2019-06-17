@@ -13,6 +13,7 @@ import Model.Usuario;
 import static Utils.Utils.safeParseToString;
 import static Utils.Utils.sqlDate;
 import java.awt.CardLayout;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -44,6 +45,20 @@ public class MainView extends javax.swing.JFrame {
     Actividad current_actividad;
     Avance current_avance;
     MainView(Login parent, Usuario current_user) {
+        this.parent = parent;
+        this.current_user = current_user;
+        initComponents();
+        txtPerfilUsuario.setText(current_user.getNombre());
+        txtPerfilCorreo.setText(current_user.getCorreo());
+        actividadesListModel=new DefaultListModel();
+        avancesListModel=new DefaultListModel();
+        evidenciasListModel=new DefaultListModel();
+        lstActividades.setModel(actividadesListModel);
+        lstActividadAvances.setModel(avancesListModel);
+        jList1.setModel(evidenciasListModel);
+        fillActivitiesList();
+    }
+       MainView(loginNuevo parent, Usuario current_user, int a ) {
         this.parent = parent;
         this.current_user = current_user;
         initComponents();
@@ -161,6 +176,10 @@ public class MainView extends javax.swing.JFrame {
         pwdPerfilContra1 = new javax.swing.JPasswordField();
         pwdPerfilContra2 = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        btnCerrarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -841,11 +860,8 @@ public class MainView extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(10, 10, 10))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -858,8 +874,8 @@ public class MainView extends javax.swing.JFrame {
                             .addComponent(pwdPerfilContra1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addComponent(txtPerfilCorreo, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPerfilUsuario, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pwdPerfilContra2))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(pwdPerfilContra2))))
+                .addGap(0, 304, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -882,12 +898,49 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(pwdPerfilContra2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap())
+                .addContainerGap(293, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Perfil", jPanel2);
+
+        jLabel36.setText("Cerrar Sesión");
+
+        jLabel37.setText("Para cerrar sesión haga click en el boton:");
+
+        btnCerrarSesion.setText("Cerrar Sesión");
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnCerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel36, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(423, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel37)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(362, Short.MAX_VALUE))
+        );
+
+        tabbedPane.addTab("Cerrar Sesión", jPanel6);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1083,11 +1136,18 @@ public class MainView extends javax.swing.JFrame {
         Ctrl.CrearReporte((String) cmbTipoReporte.getSelectedItem());
     }//GEN-LAST:event_btnGenerarReporteActionPerformed
 
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        Login login = new Login();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActividadAgregarAvance;
     private javax.swing.JButton btnActividadIrAtras;
     private javax.swing.JButton btnAgregarAvance;
     private javax.swing.JButton btnAgregarEvidencia;
+    private javax.swing.JButton btnCerrarSesion;
     private javax.swing.JButton btnGenerarReporte;
     private javax.swing.JButton btnImportarImportar;
     private javax.swing.JButton btnImportarSeleccionar;
@@ -1126,6 +1186,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
@@ -1139,6 +1201,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
