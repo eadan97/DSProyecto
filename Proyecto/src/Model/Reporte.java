@@ -15,6 +15,7 @@ import java.util.Date;
 public class Reporte {
 
     private Date FechaSolicitudReporte;
+<<<<<<< HEAD
   
     private int IdActividad;
     private String Nombre;
@@ -25,6 +26,13 @@ public class Reporte {
     private ArrayList <Avance> Avances;
     private ArrayList <Evidencia> Evidencia;
     
+=======
+    private int IdActividad;
+    private String Nombre;
+    private String Correo;
+    private ArrayList <Avance> avances;
+    private ArrayList <Evidencia> evidencias;
+>>>>>>> 83172b2725e666019ff1f987f0db203fc9d00527
 
     public Date getFechaSolicitudReporte() {
         return FechaSolicitudReporte;
@@ -34,8 +42,11 @@ public class Reporte {
         this.FechaSolicitudReporte = FechaSolicitudReporte;
     }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 83172b2725e666019ff1f987f0db203fc9d00527
     public int getIdActividad() {
         return IdActividad;
     }
@@ -44,7 +55,10 @@ public class Reporte {
         this.IdActividad = IdActividad;
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 83172b2725e666019ff1f987f0db203fc9d00527
     public String getNombre() {
         return Nombre;
     }
@@ -61,8 +75,17 @@ public class Reporte {
         this.Correo = Correo;
     }
 
+<<<<<<< HEAD
 
 
+=======
+    public void addEvidencia (Evidencia E){
+        this.evidencias.add(E);
+    }
+>>>>>>> 83172b2725e666019ff1f987f0db203fc9d00527
     
+    public void addAvance (Avance avance){
+        this.avances.add(avance);
+    }
 
 }

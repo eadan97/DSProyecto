@@ -7,6 +7,7 @@ package Model;
 
 import Controller.DAOAvance;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class BuilderActividad extends ReporteBuilder{
 
-        DAOAvance DAOAvance= new DAOAvance();
+    DAOAvance DAOAvance= new DAOAvance();
     @Override
     public void GenerarReporte() {
         
@@ -26,10 +27,10 @@ public class BuilderActividad extends ReporteBuilder{
         Scanner entrada = new Scanner (System.in);
 //        
         System.out.println("Cual es el numero de la Actividad");
-       Actividad= entrada.nextLine();
+        Actividad= entrada.nextLine();
         
             try {
-                DAOAvance.BuscarAvancesActividad(Integer.valueOf(Actividad));
+                ArrayList<Avance> avances = DAOAvance.BuscarAvancesActividad(Integer.valueOf(Actividad));
             } catch (SQLException ex) {
                 Logger.getLogger(BuilderActividad.class.getName()).log(Level.SEVERE, null, ex);
             }
