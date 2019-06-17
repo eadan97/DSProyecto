@@ -1184,9 +1184,11 @@ public class MainView extends javax.swing.JFrame {
         actividadesListModel.clear();
         try {
             if(current_user.getRolUsuario()==1)
-                actividadesListModel.addAll(Ctrl.ConsultarActividades());
+                for(Actividad actividad: Ctrl.ConsultarActividades())
+                    actividadesListModel.addElement(Ctrl.ConsultarActividades());
             else
-                actividadesListModel.addAll(Ctrl.ConsultarActividades(current_user.getIdUsuario()));
+                for(Actividad actividad: Ctrl.ConsultarActividades(current_user.getIdUsuario()))
+                    actividadesListModel.addElement(actividad);
         } catch (SQLException ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1196,7 +1198,8 @@ public class MainView extends javax.swing.JFrame {
         avancesListModel.clear();
         try {
             ArrayList<Model.Avance> avances = Ctrl.ConsultarAvancesActividad(current_actividad.getIdActividad());
-            avancesListModel.addAll(avances);
+            for(Avance avance: avances)
+                avancesListModel.addElement(avance);
             return avances.size();
         } catch (SQLException ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
@@ -1208,7 +1211,8 @@ public class MainView extends javax.swing.JFrame {
         evidenciasListModel.clear();
         try {
             ArrayList<Evidencia> evidencias = Ctrl.ConsultarEvidenciasAvance(current_avance.getIdAvance());
-            evidenciasListModel.addAll(evidencias);
+            for(Evidencia evidencia : evidencias)
+                evidenciasListModel.addElement(evidencia);
             return evidencias.size();
         } catch (SQLException ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);

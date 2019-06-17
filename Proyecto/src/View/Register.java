@@ -122,7 +122,7 @@ public class Register extends javax.swing.JFrame {
                 nombre=txtNombre.getText(),
                 correo=txtCorreo.getText(),
                 contra=String.valueOf(pswContrasenia.getPassword());
-        if(nombre.isBlank()||correo.isBlank()||contra.isBlank()){
+        if(nombre.isEmpty()||correo.isEmpty()||contra.isEmpty()){
             JOptionPane.showMessageDialog(this,
                 "Revise que los valores ingresados sean válidos.",
                 "Error de validación",
