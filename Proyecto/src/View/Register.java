@@ -6,6 +6,7 @@
 package View;
 
 import Controller.Controlador;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -42,6 +43,7 @@ public class Register extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         pswContrasenia = new javax.swing.JPasswordField();
+        btnIrAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -65,6 +67,13 @@ public class Register extends javax.swing.JFrame {
 
         jLabel4.setText("Registrar usuario");
 
+        btnIrAtras.setText("Ir atras");
+        btnIrAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIrAtrasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -73,7 +82,10 @@ public class Register extends javax.swing.JFrame {
                 .addGap(114, 114, 114)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton1)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnIrAtras)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton1))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
@@ -110,7 +122,9 @@ public class Register extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(pswContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(btnIrAtras))
                 .addContainerGap(87, Short.MAX_VALUE))
         );
 
@@ -138,13 +152,22 @@ public class Register extends javax.swing.JFrame {
         ctrl.getDTOUsuario().getUnUsuario().setRolUsuario(1);
         
         ctrl.CrearUsuario();
+        
+        txtNombre.setText("");
+        txtCorreo.setText("");
+        pswContrasenia.setText("");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         parent.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
+    private void btnIrAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIrAtrasActionPerformed
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSED));
+    }//GEN-LAST:event_btnIrAtrasActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnIrAtras;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
