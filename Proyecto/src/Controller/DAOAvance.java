@@ -3,6 +3,7 @@ package Controller;
 import Model.Avance;
 import Model.ConexionBD;
 import Model.Evidencia;
+import Model.Reporte;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.util.Date;
@@ -285,6 +286,7 @@ public class DAOAvance implements DAOInterface {
 "	Where A.idUsuario = " +IdUsuario+ ";";
        ResultSet rs =stmt.executeQuery(query);
         while(rs.next()){
+            Reporte reporte = new Reporte();
             System.out.println("---------------------------------");
             System.out.print("IdAvance: "+ rs.getString("IdAvance"));
             System.out.println("          IdActividad: "+rs.getString("IdActividad"));
@@ -297,10 +299,20 @@ public class DAOAvance implements DAOInterface {
             System.out.println("Codigo Evidencia: "+rs.getString("IdEvidencia"));
           //  System.out.println("Imagen: "+rs.getString("Imagen"));
             System.out.println("---------------------------------");   
+          
+          reporte.setIdAvance(Integer.parseInt(rs.getString("IdAvance")));
+          reporte.setIdActividad(Integer.parseInt(  rs.getString("IdActividad")));
+          reporte.setFechaAvance(rs.getString("FechaAvance"));
+          reporte.setHorasDedicadas(Integer.parseInt(  rs.getString("HorasDedicadas")));
+          reporte.setTipoAvance(rs.getString("TipoAvance"));
+          reporte.setNombre(rs.getString("Nombre"));
+          reporte.setCorreo(rs.getString("Correo"));
+          reporte.setDescripcion(rs.getString("Descripción"));
+          reporte.setImagen(rs.getBytes("Imagen"));
+          //reporte.addEvidencia(Integer.parseInt( rs.getString("IdEvidencia")));
+          //arreglar evidencias e imagenes
             
-             pdf.generarPDF(rs.getString("IdAvance"),rs.getString("IdActividad"),rs.getString("FechaAvance"),
-                    rs.getString("HorasDedicadas"),rs.getString("TipoAvance"),rs.getString("Nombre"),
-                    rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
+          pdf.generarPDF(reporte);
         }
     }    
     
@@ -340,7 +352,10 @@ public class DAOAvance implements DAOInterface {
 "	join TipoAvance T on T.IdTipoAvance = A.TipoAvance\n" +
 "	Where A.IdActividad ="+IdActiviad+";";
        ResultSet rs =stmt.executeQuery(query);
+       
         while(rs.next()){
+            Reporte reporte = new Reporte();
+            
             System.out.println("---------------------------------");
             System.out.print("IdAvance: "+ rs.getString("IdAvance"));
             System.out.println("          IdActividad: "+rs.getString("IdActividad"));
@@ -351,6 +366,9 @@ public class DAOAvance implements DAOInterface {
             System.out.println("Correo: "+rs.getString("Correo"));
             System.out.println("Descripcion : "+rs.getString("Descripción"));
             System.out.println("Codigo Evidencia: "+rs.getString("IdEvidencia"));
+          //  System.out.println("Imagen: "+rs.getString("Imagen"));
+            System.out.println("---------------------------------");    
+
             
           //  System.out.println("Imagen: "+rs.getString("Imagen"));
             System.out.println("---------------------------------");   
@@ -359,6 +377,21 @@ public class DAOAvance implements DAOInterface {
                     rs.getString("HorasDedicadas"),rs.getString("TipoAvance"),rs.getString("Nombre"),
                     rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
         }*/
+          reporte.setIdAvance(Integer.parseInt(rs.getString("IdAvance")));
+          reporte.setIdActividad(Integer.parseInt(  rs.getString("IdActividad")));
+          reporte.setFechaAvance(rs.getString("FechaAvance"));
+          reporte.setHorasDedicadas(Integer.parseInt(  rs.getString("HorasDedicadas")));
+          reporte.setTipoAvance(rs.getString("TipoAvance"));
+          reporte.setNombre(rs.getString("Nombre"));
+          reporte.setCorreo(rs.getString("Correo"));
+          reporte.setDescripcion(rs.getString("Descripción"));
+          reporte.setImagen(rs.getBytes("Imagen"));
+          //reporte.addEvidencia(Integer.parseInt( rs.getString("IdEvidencia")));
+          //arreglar evidencias e imagenes
+          
+          pdf.generarPDF(reporte);
+
+        }
         
     }    
     
@@ -379,6 +412,7 @@ public class DAOAvance implements DAOInterface {
 "	Where (FechaAvance BETWEEN '2019-05-06' AND '2019-06-30'); "; //" +Inicio+ " AND " + Final +")";
         ResultSet rs =stmt.executeQuery(query);
         while(rs.next()){
+            
             System.out.println("---------------------------------");
             System.out.print("IdAvance: "+ rs.getString("IdAvance"));
             System.out.println("          IdActividad: "+rs.getString("IdActividad"));
@@ -392,6 +426,8 @@ public class DAOAvance implements DAOInterface {
           //  System.out.println("Imagen: "+rs.getString("Imagen"));
             System.out.println("---------------------------------");    
             
+            
+        
           pdf.generarPDF(rs.getString("IdAvance"),rs.getString("IdActividad"),rs.getString("FechaAvance"),
                     rs.getString("HorasDedicadas"),rs.getString("TipoAvance"),rs.getString("Nombre"),
                     rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
@@ -409,6 +445,7 @@ public class DAOAvance implements DAOInterface {
          "inner join Proyecto P on P.IdProyecto =A.IdProyecto\n" +
          "where A.IdUsuario ="+Usario + ";";
         ResultSet rs =stmt.executeQuery(query);
+        Reporte reporte = new Reporte();
         while(rs.next()){
             System.out.println("---------------------------------");
             System.out.println("          IdActividad: "+rs.getString("IdActividad"));
@@ -422,9 +459,20 @@ public class DAOAvance implements DAOInterface {
           //  System.out.println("Imagen: "+rs.getString("Imagen"));
             System.out.println("---------------------------------");    
             
-          pdf.generarPDF(rs.getString("IdAvance"),rs.getString("IdActividad"),rs.getString("FechaAvance"),
-                    rs.getString("HorasDedicadas"),rs.getString("TipoAvance"),rs.getString("Nombre"),
-                    rs.getString("Descripción"),rs.getString("IdEvidencia"),rs.getString("Correo"));
+            
+          reporte.setIdAvance(Integer.parseInt(rs.getString("IdAvance")));
+          reporte.setIdActividad(Integer.parseInt(  rs.getString("IdActividad")));
+          reporte.setFechaAvance(rs.getString("FechaAvance"));
+          reporte.setHorasDedicadas(Integer.parseInt(  rs.getString("HorasDedicadas")));
+          reporte.setTipoAvance(rs.getString("TipoAvance"));
+          reporte.setNombre(rs.getString("Nombre"));
+          reporte.setCorreo(rs.getString("Correo"));
+          reporte.setDescripcion(rs.getString("Descripción"));
+          reporte.setImagen(rs.getBytes("Imagen"));
+          //reporte.addEvidencia(Integer.parseInt( rs.getString("IdEvidencia")));
+          //arreglar evidencias e imagenes
+            
+          pdf.generarPDF(reporte);
         }
     }
 
