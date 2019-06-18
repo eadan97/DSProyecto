@@ -9,17 +9,14 @@ package Model;
  *
  * @author eadan
  */
-public abstract class GeneradorDecorator extends IDecorador{
-    
-    IDecorador wrappee;
+public abstract class GeneradorBase extends IDecorador {
 
-     
-    
-    
-    public GeneradorDecorator(IDecorador wrappee) {
-        this.wrappee = wrappee;
+    String str;
+    public GeneradorBase(String str) {
+        this.str = str;
     }
-    
+
+   
     
     
 }

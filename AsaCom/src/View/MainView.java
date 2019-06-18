@@ -1249,7 +1249,7 @@ public class MainView extends javax.swing.JFrame {
                     break;
             }
             Ctrl.CrearReporte(tipo);
-            Ctrl.ExportarReporte();
+            Ctrl.ExportarReporte("PDF");
             JOptionPane.showMessageDialog(this,
                 "Se generado el reporte exitosamente.",
                 "Operación exitosa",
