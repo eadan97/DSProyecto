@@ -88,9 +88,6 @@ public class GeneradorPDF {
         catch(Exception e){
             return false;
         }
-        
-        
-        
     } 
     
 }

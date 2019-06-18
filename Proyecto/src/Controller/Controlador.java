@@ -173,4 +173,5 @@ public class Controlador {
     public ArrayList<Evidencia> ConsultarEvidenciasAvance(Integer idAvance) throws SQLException{
         return gEvidencia.ObtenerEvidenciasAvance(idAvance);
     }
+    
 }
