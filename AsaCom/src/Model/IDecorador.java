@@ -9,7 +9,15 @@ package Model;
  *
  * @author eadan
  */
-public interface GeneradorSource {
-    public String getSource();
+public abstract class IDecorador {
+    String str;
+
+    public abstract String getSource();
+    public String getStr() {
+        return str;
+    }
+    public void setStr(String str) {
+        this.str = str;
+    }
     
 }

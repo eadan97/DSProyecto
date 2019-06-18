@@ -30,11 +30,11 @@ public class Controladorcito extends Controlador{
         IGenerador generador = null;
         switch(S){
             case "El formato que quiera":
-               generador=new GeneradorPDF();
+               generador=new GeneradorPDF2();
                break;
             case "PDF":
-                super.ExportarReporte();
-                return true;
+                generador=new GeneradorPDF2();
+                break;
            default:  
                super.ExportarReporte();
                System.out.println("Reporte no soportado");
