@@ -28,7 +28,7 @@ public class BuilderFecha extends ReporteBuilder {
 
     @Override
     public void GenerarReporte() {
-        String FechaInicio;
+        /*String FechaInicio;
         String FechaFin;
         Scanner entrada = new Scanner (System.in);
         
@@ -54,11 +54,11 @@ public class BuilderFecha extends ReporteBuilder {
         try {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
             
-            String fecha1=dateFormat.format(ctrl.getDTOReporte().getFechaInicio())
-                    ,fecha2=dateFormat.format(ctrl.getDTOReporte().getFechaFin());
+            String fecha1=ctrl.getDTOReporte().getFechaInicio()//dateFormat.format(ctrl.getDTOReporte().getFechaInicio())
+                    ,fecha2=ctrl.getDTOReporte().getFechaFin();//dateFormat.format(ctrl.getDTOReporte().getFechaFin());
             ctrl.getDTOReporte().setUnReporte(daoReporte.BuscarReportesPorFechas(fecha1, fecha2));
 
-            daoReporte.BuscarReportesPorFechas(fecha1, fecha2);
+            //daoReporte.BuscarReportesPorFechas(fecha1, fecha2);
           
         } catch (SQLException ex) {
             Logger.getLogger(BuilderFecha.class.getName()).log(Level.SEVERE, null, ex);

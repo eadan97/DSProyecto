@@ -96,6 +96,7 @@ public class MainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         tabbedPane = new javax.swing.JTabbedPane();
         paneActividadesBase = new javax.swing.JPanel();
         paneActividadesLista = new javax.swing.JPanel();
@@ -183,6 +184,8 @@ public class MainView extends javax.swing.JFrame {
         paneReporteActividad = new javax.swing.JPanel();
         cmbReporteActividad = new javax.swing.JComboBox<>();
         paneReporteFecha = new javax.swing.JPanel();
+        txtReporteFecha1 = new javax.swing.JTextField();
+        txtReporteFecha2 = new javax.swing.JTextField();
         paneReporteUsuario = new javax.swing.JPanel();
         txtReporteUsuario = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
@@ -200,6 +203,8 @@ public class MainView extends javax.swing.JFrame {
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         btnCerrarSesion = new javax.swing.JButton();
+
+        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -841,15 +846,29 @@ public class MainView extends javax.swing.JFrame {
 
         paneReportesCards.add(paneReporteActividad, "Actividad");
 
+        txtReporteFecha1.setText("jTextField2");
+
+        txtReporteFecha2.setText("jTextField2");
+
         javax.swing.GroupLayout paneReporteFechaLayout = new javax.swing.GroupLayout(paneReporteFecha);
         paneReporteFecha.setLayout(paneReporteFechaLayout);
         paneReporteFechaLayout.setHorizontalGroup(
             paneReporteFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 192, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneReporteFechaLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(txtReporteFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(txtReporteFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         paneReporteFechaLayout.setVerticalGroup(
             paneReporteFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGroup(paneReporteFechaLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(paneReporteFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtReporteFecha2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtReporteFecha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         paneReportesCards.add(paneReporteFecha, "Fechas");
@@ -1222,8 +1241,14 @@ public class MainView extends javax.swing.JFrame {
             switch (tipo){
                 case "Actividad":
                     Ctrl.getDTOReporte().setIdActividad(((Actividad)cmbReporteActividad.getSelectedItem()).getIdActividad());
+                    break;
                 case "Usuario":
                     Ctrl.getDTOReporte().setIdUsuario(Integer.parseInt(txtReporteUsuario.getText()));
+                    break;
+                case "Fechas":
+                    Ctrl.getDTOReporte().setFechaInicio(txtReporteFecha1.getText());
+                    Ctrl.getDTOReporte().setFechaFin(txtReporteFecha2.getText());
+                    break;
             }
             Ctrl.CrearReporte(tipo);
             Ctrl.ExportarReporte();
@@ -1312,6 +1337,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JScrollPane lstActividadActividades;
     private javax.swing.JList<String> lstActividadAvances;
     private javax.swing.JList<String> lstActividades;
@@ -1346,6 +1372,8 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextField txtImportarPath;
     private javax.swing.JTextField txtPerfilCorreo;
     private javax.swing.JTextField txtPerfilUsuario;
+    private javax.swing.JTextField txtReporteFecha1;
+    private javax.swing.JTextField txtReporteFecha2;
     private javax.swing.JTextField txtReporteUsuario;
     private javax.swing.JLabel txtVerEvidencias;
     private javax.swing.JLabel txtVerFecha;

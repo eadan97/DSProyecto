@@ -27,12 +27,7 @@ public class DAOReporte {
     public Reporte BuscarReportesPorUsuario(Integer IdUsuario) throws SQLException {
         this.conn = ConexionBD.getInstance().getConexion();
         Statement stmt = conn.createStatement();
-        String query = "SELECT IdActividad,FechaAvance,HorasDedicadas,T.Nombre as TipoAvance,U.Nombre,Descripción, IdEvidencia,\n"
-                + "	a.IdAvance,Imagen,U.Correo FROM Avance A  full outer join Evidencia E\n"
-                + "	on A.IdAvance = E.IdEvidencia\n"
-                + "	join Usuario U on U.IdUsuario = A.IdUsuario\n"
-                + "	join TipoAvance T on T.IdTipoAvance = A.TipoAvance\n"
-                + "	Where A.idUsuario = " + IdUsuario + ";";
+        String query = "exec ConsultaReportes @IdUsuario="+IdUsuario+",@FechaInicio=NULL,@FechaFinal=NULL,@IdActividad=NULL;";
         ResultSet rs = stmt.executeQuery(query);
         Reporte reporte = new Reporte();
         reporte.setFechaSolicitudReporte(Date.from(Instant.now()));
@@ -52,21 +47,15 @@ public class DAOReporte {
         }
         return reporte;
     }
-
+    
+ 
     public Reporte BuscarReportesPorFechas(String Inicio, String Final) throws SQLException {
         this.conn = ConexionBD.getInstance().getConexion();
         Statement stmt = conn.createStatement();
         System.out.println("inicio" + Inicio);
-        java.sql.Date d1 = java.sql.Date.valueOf(Inicio);
-        java.sql.Date d2 = java.sql.Date.valueOf(Final);
-        String query = "	SELECT A.IdAvance,IdActividad,FechaAvance,HorasDedicadas,U.Nombre, T.Nombre AS TipoAvance,\n"
-                + "	Descripción,IdEvidencia,Imagen,U.Correo		\n"
-                + "	FROM Avance A full outer join\n"
-                + "	Evidencia E on A.IdAvance =E.IdAvance\n"
-                + "	join Usuario U on A.IdUsuario = U.IdUsuario\n"
-                + "	join TipoAvance T on T.IdTipoAvance = A.TipoAvance\n"
-                + "	Where (FechaAvance BETWEEN '" + Inicio + "' AND '" + Final + "');"; //" +Inicio+ " AND " + Final +")";
-                //"	Where (FechaAvance BETWEEN '2019-05-06' AND '2019-06-30'); "; //" +Inicio+ " AND " + Final +")";
+        //java.sql.Date d1 = java.sql.Date.valueOf(Inicio);
+        //java.sql.Date d2 = java.sql.Date.valueOf(Final);
+        String query = "exec ConsultaReportes @IdUsuario=NULL,@FechaInicio='"+Inicio+"',@FechaFinal='"+Final+"',@IdActividad=NULL;";
         ResultSet rs = stmt.executeQuery(query);
         Reporte reporte = new Reporte();
         reporte.setFechaSolicitudReporte(Date.from(Instant.now()));
@@ -90,12 +79,7 @@ public class DAOReporte {
     public Reporte BuscarReportePorActividad(Integer idActividad) throws SQLException {
         this.conn = ConexionBD.getInstance().getConexion();
         Statement stmt = conn.createStatement();
-        String query = "	SELECT A.IdAvance,IdActividad,FechaAvance,HorasDedicadas,U.Nombre, T.Nombre AS TipoAvance,\n"
-                + "	Descripción,IdEvidencia,Imagen,U.Correo FROM Avance A  full outer join Evidencia E\n"
-                + "	on A.IdAvance = E.IdEvidencia\n"
-                + "	join Usuario U on A.IdUsuario = U.IdUsuario\n"
-                + "	join TipoAvance T on T.IdTipoAvance = A.TipoAvance\n"
-                + "	Where A.IdActividad =" + idActividad + ";";
+        String query = "exec ConsultaReportes @IdUsuario=NULL,@FechaInicio=NULL,@FechaFinal=NULL,@IdActividad="+idActividad+";";
         ResultSet rs = stmt.executeQuery(query);
         Reporte reporte = new Reporte();
         reporte.setFechaSolicitudReporte(Date.from(Instant.now()));
