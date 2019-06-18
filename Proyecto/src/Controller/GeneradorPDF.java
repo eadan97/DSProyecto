@@ -70,6 +70,13 @@ public class GeneradorPDF implements IGenerador{
             
             //doc.add(new Paragraph());
             String infs = "";
+            /*var a = new Base(itemReporte.getIdActividad());
+            if (responsable is in opciones)
+            a = new ResponsableWrapper(a);
+            if (responsable is in opciones)
+            a = new ResponsableWrapper(a);
+            if (responsable is in opciones)
+            a = new ResponsableWrapper(a);*/
             
             String parrafo;
             for (ItemReporte itemReporte : Reporte.getItemReportes()) {

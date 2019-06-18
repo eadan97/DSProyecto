@@ -1,13 +1,13 @@
 
 package View;
 
-public class GUI2 extends javax.swing.JFrame {
+public class GUI extends javax.swing.JFrame {
 
-    private static GUI2 INSTANCE = null;
+    private static GUI INSTANCE = null;
     /**
      * Creates new form Panel
      */
-    public GUI2() {
+    public GUI() {
         //this.setUndecorated(true);
         initComponents();
     }
@@ -15,11 +15,11 @@ public class GUI2 extends javax.swing.JFrame {
         /*Patron de diseño Singleton*/
     private synchronized static void createInstance(){
         if(INSTANCE == null){
-            INSTANCE = new GUI2();
+            INSTANCE = new GUI();
         }
     }
     
-    public static GUI2 getInstance(){
+    public static GUI getInstance(){
         createInstance();
         return INSTANCE;
     }
@@ -350,14 +350,22 @@ public class GUI2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUI2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUI2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUI2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUI2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -370,7 +378,7 @@ public class GUI2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUI2().setVisible(true);
+                new GUI().setVisible(true);
             }
         });
     }
