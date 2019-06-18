@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Model.ItemReporte;
 import Model.Reporte;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
@@ -15,7 +16,7 @@ import java.io.FileOutputStream;
  *
  * @author aleta
  */
-public class GeneradorPDF {
+public class GeneradorPDF implements IGenerador{
     
     public GeneradorPDF(){}
 
@@ -56,38 +57,43 @@ public class GeneradorPDF {
         }
         
     }
-    public boolean generarPDF(Reporte reporte){
-        
- try{
-            FileOutputStream fi = new FileOutputStream("Avance "+reporte.getIdAvance() + " " + reporte.getNombre()+ ".pdf");
+
+    @Override
+    public boolean GenerarReporte(Reporte Reporte) {
+        try{
+            
+            FileOutputStream fi = new FileOutputStream("Reporte X.pdf");
             Document doc = new Document();
             PdfWriter.getInstance(doc, fi);
             doc.open();
-            doc.add(new Paragraph("REPORTE DE AVANCE"));
-            doc.add(new Paragraph(reporte.getIdAvance()));
+            doc.add(new Paragraph("REPORTE DE AVANCES"));
+            
+            //doc.add(new Paragraph());
             String infs = "";
+            
             String parrafo;
-             
-            
-                parrafo = "\n**************************************************";
-                parrafo+= "\nResponsable: " + reporte.getNombre();
-                parrafo+= "\nActividad: " + reporte.getIdActividad();
-                parrafo+= "\nFecha: " + reporte.getFechaAvance();
-                parrafo+= "\nHorasDedicadas: " + reporte.getHorasDedicadas();
-                parrafo+= "\nDescripcion: " + reporte.getDescripcion();
-                parrafo+= "\nCorreo: " +reporte.getCorreo();
-                //parrafo = "\n**************************************************";
+            for (ItemReporte itemReporte : Reporte.getItemReportes()) {
+                parrafo = "\n\n**************************************************";
+                parrafo+= "\nResponsable: " + itemReporte.getNombre();
+                parrafo+= "\nActividad: " + itemReporte.getIdActividad();
+                parrafo+= "\nFecha: " + itemReporte.getFechaAvance();
+                parrafo+= "\nHorasDedicadas: " + itemReporte.getHorasDedicadas();
+                parrafo+= "\nDescripcion: " + itemReporte.getDescripcion();
+                parrafo+= "\nCorreo: " + itemReporte.getCorreo();
+                
                 infs += parrafo;
-            
-            
+            }
+            infs += "\n**************************************************";
+
             doc.add(new Paragraph(infs));
             doc.close();
-            
             return true;
         }
         catch(Exception e){
             return false;
         }
-    } 
+    }
+    
+
     
 }

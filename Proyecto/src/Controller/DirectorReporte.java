@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Controller;
+
+import Model.Reporte;
 
 /**
  *
@@ -20,18 +22,12 @@ public class DirectorReporte {
     public void setBuilder(ReporteBuilder builder) {
         this.builder = builder;
     }
-
-   public Reporte getReporte(){
-       return builder.getReporte();
-   }
      
    public void prepararReporte(){
        System.out.println("preparar reporte");
-        builder.GenerarReporte();
+       builder.GenerarReporte();
     
-}
+    }
 
-
-    
-
+   
 }

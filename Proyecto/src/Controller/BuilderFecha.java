@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Controller;
 
 import Controller.DAOAvance;
+import Model.Reporte;
 import java.text.ParseException;
 import java.util.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;  
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -21,8 +23,7 @@ import org.json.JSONObject;
  * @author aleta
  */
 public class BuilderFecha extends ReporteBuilder {
-    public Reporte Reporte;
-    DAOAvance DAOAvance= new DAOAvance();
+
 
 
     @Override
@@ -51,7 +52,13 @@ public class BuilderFecha extends ReporteBuilder {
         //System.out.println(Inicio);
        
         try {
-            DAOAvance.BuscarAvanceFechas(FechaInicio,FechaFin);
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+            
+            String fecha1=dateFormat.format(ctrl.getDTOReporte().getFechaInicio())
+                    ,fecha2=dateFormat.format(ctrl.getDTOReporte().getFechaFin());
+            ctrl.getDTOReporte().setUnReporte(daoReporte.BuscarReportesPorFechas(fecha1, fecha2));
+
+            daoReporte.BuscarReportesPorFechas(fecha1, fecha2);
           
         } catch (SQLException ex) {
             Logger.getLogger(BuilderFecha.class.getName()).log(Level.SEVERE, null, ex);

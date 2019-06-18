@@ -3,10 +3,6 @@ package Controller;
 
 import Model.Actividad;
 import Model.Avance;
-import Model.BuilderActividad;
-import Model.BuilderFecha;
-import Model.BuilderMiembro;
-import Model.DirectorReporte;
 import Model.Evidencia;
 import Model.Reporte;
 import Model.Usuario;
@@ -20,21 +16,20 @@ import java.util.Collection;
  * @author Joaquin
  */
 public class Controlador {
-    private static Controlador instancia;
-    private GestorImportacion gImportacion;
-    private GestorActividad gActividad;
-    private GestorAvance gAvance;
-    private GestorEvidencia gEvidencia;
-    private GestorUsuario gUsuario;
-    private DTOProyecto DTOProyecto;
-    private DTOActividad DTOActividad;
-    private DTOAvance DTOAvance;
-    private DirectorReporte DReporte;
-    private BuilderFecha BFecha;
-    private BuilderActividad BActvidad;
-    private BuilderMiembro BMiembro;
-    private DTOEvidencia DTOEvidencia;
-    private DTOUsuario DTOUsuario;
+    protected static Controlador instancia;
+    protected GestorImportacion gImportacion;
+    protected GestorActividad gActividad;
+    protected GestorAvance gAvance;
+    protected GestorEvidencia gEvidencia;
+    protected GestorUsuario gUsuario;
+    protected GestorReporte gReporte;
+    protected DTOProyecto DTOProyecto;
+    protected DTOActividad DTOActividad;
+    protected DTOAvance DTOAvance;
+
+    protected DTOEvidencia DTOEvidencia;
+    protected DTOUsuario DTOUsuario;
+    protected DTOReporte DTOReporte;
 
     
     public Controlador(){
@@ -43,12 +38,13 @@ public class Controlador {
         gAvance = new GestorAvance();
         gEvidencia = new GestorEvidencia();
         gUsuario = new GestorUsuario();
+        gReporte = new GestorReporte();
         DTOProyecto = new DTOProyecto();
         DTOActividad = new DTOActividad();
         DTOAvance = new DTOAvance();
-        DReporte  = new DirectorReporte();
         DTOEvidencia = new DTOEvidencia();
         DTOUsuario = new DTOUsuario();
+        DTOReporte = new DTOReporte();
     }
   
     public static Controlador getInstance(){
@@ -99,27 +95,48 @@ public class Controlador {
     }
     
 
-    public void CrearReporte(String S){
+    /*public boolean ExportarReporte(String S){
+       
+       IGenerador generador = null;
+       switch(S){
+           case "PDF":
+               generador=new GeneradorPDF();
+               break;
+           default:           
+               System.out.println("Reporte no soportado");
+               return false;
+       }
+        
+       gReporte.GenerarDocumento(generador, DTOReporte.getUnReporte());
+       return true;
+    }*/
+    
+    
+    public boolean ExportarReporte(){
+       
+       IGenerador generador = new GeneradorPDF();
+               
+       gReporte.GenerarDocumento(generador, DTOReporte.getUnReporte());
+       return true;
+    }
+    
+    public void CrearReporte(String S) throws SQLException{
 
        switch(S){
-           case "Miembro":
-               BMiembro = new BuilderMiembro();
-               DReporte.setBuilder(BMiembro);
+           case "Usuario":
+               gReporte.GenerarReporteMiembro();
                break;
            case "Actividad":
-               BActvidad = new BuilderActividad();
-               DReporte.setBuilder(BActvidad);
+               gReporte.GenerarReporteActividad();
                break;
            case "Fechas":
-               BFecha = new BuilderFecha();
-               DReporte.setBuilder(BFecha);
+                gReporte.GenerarReporteFecha();
                break;
                
            default:
                System.out.println("Reporte no soportado");
        }
         
-       DReporte.prepararReporte();
     }
     
     public void CrearEvidencia(){
@@ -133,6 +150,7 @@ public class Controlador {
     
     public void VerEvidencia(Integer actividad){
         gAvance.VerAvance(actividad);
+        //Todo: arreglar esto
     }
     
 
@@ -174,4 +192,7 @@ public class Controlador {
         return gEvidencia.ObtenerEvidenciasAvance(idAvance);
     }
     
+    public DTOReporte getDTOReporte() {
+        return DTOReporte;
+    }
 }
