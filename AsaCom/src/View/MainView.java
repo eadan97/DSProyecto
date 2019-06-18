@@ -32,7 +32,6 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
-import static proyecto.Proyecto.Ctrl;
 
 /**
  *

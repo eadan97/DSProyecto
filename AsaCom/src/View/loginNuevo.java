@@ -9,7 +9,6 @@ import Controller.Controladorcito;
 import Model.Usuario;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import static proyecto.Proyecto.Ctrl;
 
 /**
  *

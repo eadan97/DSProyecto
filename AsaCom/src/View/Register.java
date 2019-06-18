@@ -5,7 +5,7 @@
  */
 package View;
 
-import Controller.Controlador;
+import Controller.Controladorcito;
 import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
@@ -16,13 +16,13 @@ import javax.swing.JOptionPane;
 public class Register extends javax.swing.JFrame {
 
     javax.swing.JFrame parent;
-    Controlador ctrl;
+    Controladorcito ctrl;
     
 
 
     Register(Login parent) {
         this.parent=parent;
-        ctrl= Controlador.getInstance();
+        ctrl= Controladorcito.getInstance();
         initComponents();
     }
 
