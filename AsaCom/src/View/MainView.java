@@ -5,7 +5,7 @@
  */
 package View;
 
-import Controller.Controlador;
+import Controller.Controladorcito;
 import Model.Actividad;
 import Model.Avance;
 import Model.Evidencia;
@@ -13,7 +13,6 @@ import Model.Usuario;
 import static Utils.Utils.safeParseToString;
 import static Utils.Utils.sqlDate;
 import java.awt.CardLayout;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -42,7 +41,7 @@ import static proyecto.Proyecto.Ctrl;
 public class MainView extends javax.swing.JFrame {
 
     Usuario current_user;
-    Controlador Ctrl = Controlador.getInstance();
+    Controladorcito Ctrl = Controladorcito.getInstance();
     javax.swing.JFrame parent;
     DefaultListModel actividadesListModel, avancesListModel, evidenciasListModel;
     ComboBoxModel<String> actividadesComboModel;    

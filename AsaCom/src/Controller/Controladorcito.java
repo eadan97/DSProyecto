@@ -11,9 +11,19 @@ import Model.Evidencia;
  *
  * @author eadan
  */
-public class Cont2 extends Controlador{
+public class Controladorcito extends Controlador{
 
-    public Cont2() {
+    static Controladorcito instancia2;
+    
+    public static Controladorcito getInstance(){
+        if(instancia2==null){
+            instancia2 = new Controladorcito();
+            instancia = instancia2;
+        }
+        return instancia2;
+    }        
+    private Controladorcito() { 
+        super();
     }
   
     public boolean ExportarReporte(String S) {

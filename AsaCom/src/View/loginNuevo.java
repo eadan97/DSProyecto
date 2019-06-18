@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.Controladorcito;
 import Model.Usuario;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -16,10 +17,12 @@ import static proyecto.Proyecto.Ctrl;
  */
 public class loginNuevo extends javax.swing.JFrame {
 
+    Controladorcito Ctrl;
     /**
      * Creates new form login
      */
     public loginNuevo() {
+        Ctrl=Controladorcito.getInstance();
         initComponents();
       //  myinit();
     }

@@ -6,6 +6,7 @@
 package View;
 
 import Controller.Controlador;
+import Controller.Controladorcito;
 import Model.Usuario;
 import javax.swing.JOptionPane;
 
@@ -15,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
     
-    private Controlador Ctrl = Controlador.getInstance();
+    private Controladorcito Ctrl = Controladorcito.getInstance();
 
     /**
      * Creates new form 
