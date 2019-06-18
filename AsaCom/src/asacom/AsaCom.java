@@ -5,6 +5,8 @@
  */
 package asacom;
 
+import View.LoginUX;
+
 /**
  *
  * @author eadan
@@ -15,6 +17,8 @@ public class AsaCom {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        LoginUX.main(args);
         
     }
     
