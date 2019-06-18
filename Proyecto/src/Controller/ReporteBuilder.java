@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Controller;
 
 import Controller.GestorAvance;
+import Model.Reporte;
 
 /**
  *
@@ -13,18 +14,9 @@ import Controller.GestorAvance;
  */
 public abstract class ReporteBuilder {
     
-   protected Reporte Reporte;
-   GestorAvance gAvance;
+   DAOReporte daoReporte = new DAOReporte();
+   Controlador ctrl = Controlador.getInstance();
    
-   public Reporte getReporte(){
-    return Reporte;
-}
-   
-   public void crearReporte (){
-       Reporte= new Reporte();
-   }
-    
-
    abstract void GenerarReporte();
    
 }

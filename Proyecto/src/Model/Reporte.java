@@ -16,17 +16,16 @@ public class Reporte {
 
     private Date FechaSolicitudReporte;
 
-  
-    private int IdActividad;
-    private String Nombre;
-    private String Correo;
-    
-    
-    
-    private ArrayList <Avance> avances;
-    private ArrayList <Evidencia> evidencias;
+    protected ArrayList<ItemReporte> itemReportes;
 
 
+    public Reporte() {
+        itemReportes = new ArrayList<>();
+        
+    }
+
+
+    
     public Date getFechaSolicitudReporte() {
         return FechaSolicitudReporte;
     }
@@ -35,40 +34,16 @@ public class Reporte {
         this.FechaSolicitudReporte = FechaSolicitudReporte;
     }
 
-
-    public int getIdActividad() {
-        return IdActividad;
+    public ArrayList<ItemReporte> getItemReportes() {
+        return itemReportes;
     }
 
-    public void setIdActividad(int IdActividad) {
-        this.IdActividad = IdActividad;
+    public void setItemReportes(ArrayList<ItemReporte> itemReportes) {
+        this.itemReportes = itemReportes;
     }
 
-
-    public String getNombre() {
-        return Nombre;
-    }
-
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
-    }
-
-    public String getCorreo() {
-        return Correo;
-    }
-
-    public void setCorreo(String Correo) {
-        this.Correo = Correo;
-    }
-
-
-    public void addEvidencia (Evidencia E){
-        this.evidencias.add(E);
-    }
-
-    
-    public void addAvance (Avance avance){
-        this.avances.add(avance);
+    public void addItemReporte(ItemReporte item){
+        this.itemReportes.add(item);
     }
 
 }

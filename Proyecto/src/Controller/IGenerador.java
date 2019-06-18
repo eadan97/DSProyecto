@@ -11,7 +11,7 @@ import Model.Reporte;
  *
  * @author aleta
  */
-interface IDocumentos {
+interface IGenerador {
     
     public boolean GenerarReporte (Reporte Reporte);
 }

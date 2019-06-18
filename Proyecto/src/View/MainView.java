@@ -24,6 +24,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -43,6 +45,7 @@ public class MainView extends javax.swing.JFrame {
     Controlador Ctrl = Controlador.getInstance();
     javax.swing.JFrame parent;
     DefaultListModel actividadesListModel, avancesListModel, evidenciasListModel;
+    ComboBoxModel<String> actividadesComboModel;    
     Actividad current_actividad;
     Avance current_avance;
     MainView(JFrame parent, Usuario current_user) {
@@ -54,10 +57,20 @@ public class MainView extends javax.swing.JFrame {
         actividadesListModel=new DefaultListModel();
         avancesListModel=new DefaultListModel();
         evidenciasListModel=new DefaultListModel();
+        actividadesComboModel=new DefaultComboBoxModel<>();
         lstActividades.setModel(actividadesListModel);
         lstActividadAvances.setModel(avancesListModel);
+        cmbReporteActividad.setModel(actividadesComboModel);
         jList1.setModel(evidenciasListModel);
         fillActivitiesList();
+        txtReporteUsuario.setText(String.valueOf(current_user.getIdUsuario()));
+        if (current_user.getRolUsuario()!=1){
+            txtReporteUsuario.setEditable(false);
+            tabbedPane.removeTabAt(1);
+            
+        }
+        ((CardLayout)paneReportesCards.getLayout()).show(paneReportesCards, "Usuario");
+
     }
       /* MainView(loginNuevo parent, Usuario current_user, int a ) {
         this.parent = parent;
@@ -166,6 +179,12 @@ public class MainView extends javax.swing.JFrame {
         cmbTipoReporte = new javax.swing.JComboBox<>();
         jLabel35 = new javax.swing.JLabel();
         btnGenerarReporte = new javax.swing.JButton();
+        paneReportesCards = new javax.swing.JPanel();
+        paneReporteActividad = new javax.swing.JPanel();
+        cmbReporteActividad = new javax.swing.JComboBox<>();
+        paneReporteFecha = new javax.swing.JPanel();
+        paneReporteUsuario = new javax.swing.JPanel();
+        txtReporteUsuario = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -784,6 +803,11 @@ public class MainView extends javax.swing.JFrame {
         jLabel34.setText("Reportar");
 
         cmbTipoReporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Usuario", "Fechas", "Actividad" }));
+        cmbTipoReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoReporteActionPerformed(evt);
+            }
+        });
 
         jLabel35.setText("Tipo de reporte");
 
@@ -794,20 +818,77 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
+        paneReportesCards.setLayout(new java.awt.CardLayout());
+
+        cmbReporteActividad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout paneReporteActividadLayout = new javax.swing.GroupLayout(paneReporteActividad);
+        paneReporteActividad.setLayout(paneReporteActividadLayout);
+        paneReporteActividadLayout.setHorizontalGroup(
+            paneReporteActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneReporteActividadLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cmbReporteActividad, 0, 172, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        paneReporteActividadLayout.setVerticalGroup(
+            paneReporteActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneReporteActividadLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cmbReporteActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+
+        paneReportesCards.add(paneReporteActividad, "Actividad");
+
+        javax.swing.GroupLayout paneReporteFechaLayout = new javax.swing.GroupLayout(paneReporteFecha);
+        paneReporteFecha.setLayout(paneReporteFechaLayout);
+        paneReporteFechaLayout.setHorizontalGroup(
+            paneReporteFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 192, Short.MAX_VALUE)
+        );
+        paneReporteFechaLayout.setVerticalGroup(
+            paneReporteFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        paneReportesCards.add(paneReporteFecha, "Fechas");
+
+        txtReporteUsuario.setText("jTextField1");
+
+        javax.swing.GroupLayout paneReporteUsuarioLayout = new javax.swing.GroupLayout(paneReporteUsuario);
+        paneReporteUsuario.setLayout(paneReporteUsuarioLayout);
+        paneReporteUsuarioLayout.setHorizontalGroup(
+            paneReporteUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneReporteUsuarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtReporteUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        paneReporteUsuarioLayout.setVerticalGroup(
+            paneReporteUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(paneReporteUsuarioLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtReporteUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+
+        paneReportesCards.add(paneReporteUsuario, "Usuario");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel34)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel35)
+                        .addGap(46, 46, 46)
+                        .addComponent(cmbTipoReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnGenerarReporte)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel34)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel35)
-                            .addGap(46, 46, 46)
-                            .addComponent(cmbTipoReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(paneReportesCards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(432, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -819,9 +900,11 @@ public class MainView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbTipoReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel35))
-                .addGap(103, 103, 103)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(paneReportesCards, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
                 .addComponent(btnGenerarReporte)
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("Reportar", jPanel1);
@@ -1134,7 +1217,23 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSeleccionarEvidenciaActionPerformed
 
     private void btnGenerarReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarReporteActionPerformed
-        Ctrl.CrearReporte((String) cmbTipoReporte.getSelectedItem());
+        try {
+            String tipo = (String) cmbTipoReporte.getSelectedItem();
+            switch (tipo){
+                case "Actividad":
+                    Ctrl.getDTOReporte().setIdActividad(((Actividad)cmbReporteActividad.getSelectedItem()).getIdActividad());
+                case "Usuario":
+                    Ctrl.getDTOReporte().setIdUsuario(Integer.parseInt(txtReporteUsuario.getText()));
+            }
+            Ctrl.CrearReporte(tipo);
+            Ctrl.ExportarReporte();
+            JOptionPane.showMessageDialog(this,
+                "Se generado el reporte exitosamente.",
+                "Operación exitosa",
+                JOptionPane.INFORMATION_MESSAGE);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnGenerarReporteActionPerformed
 
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
@@ -1142,6 +1241,11 @@ public class MainView extends javax.swing.JFrame {
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void cmbTipoReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoReporteActionPerformed
+        ((CardLayout)paneReportesCards.getLayout()).show(paneReportesCards, ((String)cmbTipoReporte.getSelectedItem()));
+
+    }//GEN-LAST:event_cmbTipoReporteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActividadAgregarAvance;
@@ -1154,6 +1258,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton btnImportarSeleccionar;
     private javax.swing.JButton btnSeleccionarEvidencia;
     private javax.swing.JComboBox<String> cmbAvanceTipo;
+    private javax.swing.JComboBox<String> cmbReporteActividad;
     private javax.swing.JComboBox<String> cmbTipoReporte;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -1216,6 +1321,10 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JPanel paneActividadesLista;
     private javax.swing.JPanel paneActividadesVerAvance;
     private javax.swing.JPanel paneImportar;
+    private javax.swing.JPanel paneReporteActividad;
+    private javax.swing.JPanel paneReporteFecha;
+    private javax.swing.JPanel paneReporteUsuario;
+    private javax.swing.JPanel paneReportesCards;
     private javax.swing.JPasswordField pwdPerfilContra1;
     private javax.swing.JPasswordField pwdPerfilContra2;
     private javax.swing.JSpinner spnAvanceHoras;
@@ -1237,6 +1346,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JTextField txtImportarPath;
     private javax.swing.JTextField txtPerfilCorreo;
     private javax.swing.JTextField txtPerfilUsuario;
+    private javax.swing.JTextField txtReporteUsuario;
     private javax.swing.JLabel txtVerEvidencias;
     private javax.swing.JLabel txtVerFecha;
     private javax.swing.JLabel txtVerHorasDedicadas;
@@ -1246,16 +1356,19 @@ public class MainView extends javax.swing.JFrame {
 
     private void fillActivitiesList() {
         actividadesListModel.clear();
+        
         try {
             if(current_user.getRolUsuario()==1)
                 for(Actividad actividad: Ctrl.ConsultarActividades())
-                    actividadesListModel.addElement(Ctrl.ConsultarActividades());
+                    actividadesListModel.addElement(actividad);
             else
                 for(Actividad actividad: Ctrl.ConsultarActividades(current_user.getIdUsuario()))
                     actividadesListModel.addElement(actividad);
         } catch (SQLException ex) {
             Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
         }
+        actividadesComboModel = new DefaultComboBoxModel(actividadesListModel.toArray());
+        cmbReporteActividad.setModel(actividadesComboModel);
     }
 
     private int fillAvancesList() {
