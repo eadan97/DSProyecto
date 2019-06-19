@@ -5,6 +5,8 @@
  */
 package Controller;
 
+import Model.OpcionesReporte;
+
 
 /**
  *
@@ -25,18 +27,21 @@ public class Controladorcito extends Controlador{
         super();
     }
   
-    public boolean ExportarReporte(String S) {
+    public boolean ExportarReporte(String S, OpcionesReporte or) {
         
         IGenerador generador = null;
         switch(S){
-            case "El formato que quiera":
-               generador=new GeneradorPDF2();
+            case "TXT":
+               generador=new GeneradorTXT(or);
+               break;
+            case "HTML":
+               generador=new GeneradorHTML(or);
                break;
             case "PDF":
-                generador=new GeneradorPDF2();
+                generador=new GeneradorPDF2(or);
                 break;
            default:  
-               super.ExportarReporte();
+               //super.ExportarReporte();
                System.out.println("Reporte no soportado");
                return false;
        }
