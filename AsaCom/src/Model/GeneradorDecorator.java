@@ -11,7 +11,7 @@ package Model;
  */
 public abstract class GeneradorDecorator extends IDecorador{
     
-    IDecorador wrappee;
+    public IDecorador wrappee;
 
      
     

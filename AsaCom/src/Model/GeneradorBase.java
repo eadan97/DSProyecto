@@ -11,12 +11,8 @@ package Model;
  */
 public abstract class GeneradorBase extends IDecorador {
 
-    String str;
     public GeneradorBase(String str) {
         this.str = str;
     }
 
-   
-    
-    
 }

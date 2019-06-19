@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Model.TextDecorator;
+
+import Model.GeneradorBase;
 
 /**
  *
  * @author eadan
  */
-public class GeneradorBasePdf extends GeneradorBase {
+public class GeneradorBaseTexto extends GeneradorBase {
 
-    public GeneradorBasePdf(String str) {
+    public GeneradorBaseTexto(String str) {
         super(str);
     }
   
