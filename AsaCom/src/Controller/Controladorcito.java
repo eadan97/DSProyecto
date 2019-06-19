@@ -39,7 +39,7 @@ public class Controladorcito extends Controlador{
                 generador=new GeneradorPDF2();
                 break;
            default:  
-               super.ExportarReporte();
+               //super.ExportarReporte();
                System.out.println("Reporte no soportado");
                return false;
        }
