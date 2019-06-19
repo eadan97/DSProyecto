@@ -52,7 +52,7 @@ public class MainViewUX extends javax.swing.JFrame {
         initComponents();
         setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
         txtPerfilUsuario.setText(current_user.getNombre());
-        
+        txtPerfilUsuario2.setText(current_user.getNombre());
         txtPerfilCorreo.setText(current_user.getCorreo());
         actividadesListModel=new DefaultListModel();
         avancesListModel=new DefaultListModel();
@@ -195,6 +195,8 @@ public class MainViewUX extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         btnImportarSeleccionar = new javax.swing.JButton();
+        panelOpcionesImportar = new javax.swing.JPanel();
+        LabelImportar = new javax.swing.JLabel();
         panePerfil = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jButton8 = new javax.swing.JButton();
@@ -207,8 +209,8 @@ public class MainViewUX extends javax.swing.JFrame {
         pwdPerfilContra2 = new javax.swing.JPasswordField();
         jLabel46 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        panelOpcionesPerfil = new javax.swing.JPanel();
-        BotonOpcionesPerfil = new javax.swing.JButton();
+        panelOpcionesEditarPerfil = new javax.swing.JPanel();
+        LabelEditarPerfil = new javax.swing.JLabel();
         panelLateral = new javax.swing.JPanel();
         PanelPerfil = new javax.swing.JPanel();
         botonPerfil = new javax.swing.JButton();
@@ -367,7 +369,7 @@ public class MainViewUX extends javax.swing.JFrame {
                 .addComponent(paneReportesCards, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
                 .addComponent(btnGenerarReporte)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
 
         panelOpcionesReportes.setBackground(new java.awt.Color(26, 96, 129));
@@ -405,13 +407,13 @@ public class MainViewUX extends javax.swing.JFrame {
         paneReportes.setLayout(paneReportesLayout);
         paneReportesLayout.setHorizontalGroup(
             paneReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelOpcionesReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelOpcionesReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         paneReportesLayout.setVerticalGroup(
             paneReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneReportesLayout.createSequentialGroup()
-                .addComponent(panelOpcionesReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelOpcionesReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -996,6 +998,30 @@ public class MainViewUX extends javax.swing.JFrame {
             }
         });
 
+        panelOpcionesImportar.setBackground(new java.awt.Color(26, 96, 129));
+
+        LabelImportar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        LabelImportar.setForeground(new java.awt.Color(255, 255, 255));
+        LabelImportar.setText("Importar");
+        LabelImportar.setToolTipText("");
+
+        javax.swing.GroupLayout panelOpcionesImportarLayout = new javax.swing.GroupLayout(panelOpcionesImportar);
+        panelOpcionesImportar.setLayout(panelOpcionesImportarLayout);
+        panelOpcionesImportarLayout.setHorizontalGroup(
+            panelOpcionesImportarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOpcionesImportarLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(LabelImportar, javax.swing.GroupLayout.PREFERRED_SIZE, 978, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+        panelOpcionesImportarLayout.setVerticalGroup(
+            panelOpcionesImportarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOpcionesImportarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelImportar, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout paneImportarLayout = new javax.swing.GroupLayout(paneImportar);
         paneImportar.setLayout(paneImportarLayout);
         paneImportarLayout.setHorizontalGroup(
@@ -1013,12 +1039,16 @@ public class MainViewUX extends javax.swing.JFrame {
                         .addGroup(paneImportarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnImportarImportar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnImportarSeleccionar))))
-                .addContainerGap(357, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneImportarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(panelOpcionesImportar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         paneImportarLayout.setVerticalGroup(
             paneImportarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneImportarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelOpcionesImportar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
@@ -1120,55 +1150,50 @@ public class MainViewUX extends javax.swing.JFrame {
                     .addComponent(jLabel46))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton8)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
-        panelOpcionesPerfil.setBackground(new java.awt.Color(26, 96, 129));
+        panelOpcionesEditarPerfil.setBackground(new java.awt.Color(26, 96, 129));
 
-        BotonOpcionesPerfil.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        BotonOpcionesPerfil.setForeground(new java.awt.Color(255, 255, 255));
-        BotonOpcionesPerfil.setText("Editar Perfil");
-        BotonOpcionesPerfil.setContentAreaFilled(false);
-        BotonOpcionesPerfil.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        BotonOpcionesPerfil.setSelected(true);
-        BotonOpcionesPerfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonOpcionesPerfilActionPerformed(evt);
-            }
-        });
+        LabelEditarPerfil.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        LabelEditarPerfil.setForeground(new java.awt.Color(255, 255, 255));
+        LabelEditarPerfil.setText("Editar Perfil");
+        LabelEditarPerfil.setToolTipText("");
 
-        javax.swing.GroupLayout panelOpcionesPerfilLayout = new javax.swing.GroupLayout(panelOpcionesPerfil);
-        panelOpcionesPerfil.setLayout(panelOpcionesPerfilLayout);
-        panelOpcionesPerfilLayout.setHorizontalGroup(
-            panelOpcionesPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelOpcionesPerfilLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(BotonOpcionesPerfil)
-                .addGap(0, 0, Short.MAX_VALUE))
+        javax.swing.GroupLayout panelOpcionesEditarPerfilLayout = new javax.swing.GroupLayout(panelOpcionesEditarPerfil);
+        panelOpcionesEditarPerfil.setLayout(panelOpcionesEditarPerfilLayout);
+        panelOpcionesEditarPerfilLayout.setHorizontalGroup(
+            panelOpcionesEditarPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOpcionesEditarPerfilLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(LabelEditarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 978, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
-        panelOpcionesPerfilLayout.setVerticalGroup(
-            panelOpcionesPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelOpcionesPerfilLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(BotonOpcionesPerfil)
-                .addGap(32, 32, 32))
+        panelOpcionesEditarPerfilLayout.setVerticalGroup(
+            panelOpcionesEditarPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOpcionesEditarPerfilLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelEditarPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout panePerfilLayout = new javax.swing.GroupLayout(panePerfil);
         panePerfil.setLayout(panePerfilLayout);
         panePerfilLayout.setHorizontalGroup(
             panePerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelOpcionesPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panePerfilLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(panelOpcionesEditarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(panePerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panePerfilLayout.setVerticalGroup(
             panePerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panePerfilLayout.createSequentialGroup()
-                .addComponent(panelOpcionesPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 530, Short.MAX_VALUE))
+                .addComponent(panelOpcionesEditarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 415, Short.MAX_VALUE))
             .addGroup(panePerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jDesktopPane1.setLayer(paneReportes, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -1421,8 +1446,8 @@ public class MainViewUX extends javax.swing.JFrame {
             }
         });
 
-        txtPerfilUsuario.setForeground(new java.awt.Color(255, 255, 255));
         txtPerfilUsuario.setText("Usuario");
+        txtPerfilUsuario.setForeground(new java.awt.Color(255, 255, 255));
         txtPerfilUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         txtPerfilUsuario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
@@ -1750,14 +1775,6 @@ public class MainViewUX extends javax.swing.JFrame {
         ((CardLayout)paneReportesCards.getLayout()).show(paneReportesCards, ((String)cmbTipoReporte.getSelectedItem()));
     }//GEN-LAST:event_cmbTipoReporteActionPerformed
 
-    private void BotonActividadLista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonActividadLista1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BotonActividadLista1ActionPerformed
-
-    private void BotonOpcionesPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonOpcionesPerfilActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BotonOpcionesPerfilActionPerformed
-
     private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
          // TODO add your handling code here:
         paneReportes.setVisible(false);
@@ -1805,13 +1822,18 @@ public class MainViewUX extends javax.swing.JFrame {
         paneImportar.setVisible(true);
     }//GEN-LAST:event_jLabel3MouseClicked
 
+    private void BotonActividadLista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonActividadLista1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonActividadLista1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonActividadLista1;
     private javax.swing.JButton BotonActividades;
     private javax.swing.JButton BotonCerrarSesion;
     private javax.swing.JButton BotonImportar;
-    private javax.swing.JButton BotonOpcionesPerfil;
     private javax.swing.JLabel LabelActividades;
+    private javax.swing.JLabel LabelEditarPerfil;
+    private javax.swing.JLabel LabelImportar;
     private javax.swing.JPanel PanelCerrarSesion;
     private javax.swing.JPanel PanelImportar;
     private javax.swing.JPanel PanelPerfil;
@@ -1902,7 +1924,8 @@ public class MainViewUX extends javax.swing.JFrame {
     private javax.swing.JPanel paneReportesCards;
     private javax.swing.JPanel panelLateral;
     private javax.swing.JPanel panelOpcionesActividades;
-    private javax.swing.JPanel panelOpcionesPerfil;
+    private javax.swing.JPanel panelOpcionesEditarPerfil;
+    private javax.swing.JPanel panelOpcionesImportar;
     private javax.swing.JPanel panelOpcionesReportes;
     private javax.swing.JPanel panelReportes;
     private javax.swing.JPanel panelactividades;
