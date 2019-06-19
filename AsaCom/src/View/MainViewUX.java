@@ -60,7 +60,7 @@ public class MainViewUX extends javax.swing.JFrame {
         actividadesComboModel=new DefaultComboBoxModel<>();
         lstActividades.setModel(actividadesListModel);
         lstActividadAvances.setModel(avancesListModel);
-       cmbReporteActividad.setModel(actividadesComboModel);
+        cmbReporteActividad.setModel(actividadesComboModel);
         jList1.setModel(evidenciasListModel);
         fillActivitiesList();
         txtReporteUsuario.setText(String.valueOf(current_user.getIdUsuario()));
