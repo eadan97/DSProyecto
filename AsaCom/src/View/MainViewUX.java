@@ -51,8 +51,8 @@ public class MainViewUX extends javax.swing.JFrame {
         this.current_user = current_user;
         initComponents();
         setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
-
         txtPerfilUsuario.setText(current_user.getNombre());
+        txtPerfilUsuario2.setText(current_user.getNombre());
         txtPerfilCorreo.setText(current_user.getCorreo());
         actividadesListModel=new DefaultListModel();
         avancesListModel=new DefaultListModel();
@@ -60,10 +60,10 @@ public class MainViewUX extends javax.swing.JFrame {
         actividadesComboModel=new DefaultComboBoxModel<>();
         lstActividades.setModel(actividadesListModel);
         lstActividadAvances.setModel(avancesListModel);
-       cmbReporteActividad.setModel(actividadesComboModel);
+        cmbReporteActividad.setModel(actividadesComboModel);
         jList1.setModel(evidenciasListModel);
         fillActivitiesList();
-      //  txtReporteUsuario.setText(String.valueOf(current_user.getIdUsuario()));
+        txtReporteUsuario.setText(String.valueOf(current_user.getIdUsuario()));
         if (current_user.getRolUsuario()!=1){
           //  txtReporteUsuario.setEditable(false);
             PanelImportar.setVisible(false);
@@ -195,9 +195,10 @@ public class MainViewUX extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         btnImportarSeleccionar = new javax.swing.JButton();
+        panelOpcionesImportar = new javax.swing.JPanel();
+        LabelImportar = new javax.swing.JLabel();
         panePerfil = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel36 = new javax.swing.JLabel();
         jButton8 = new javax.swing.JButton();
         jLabel37 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
@@ -208,10 +209,12 @@ public class MainViewUX extends javax.swing.JFrame {
         pwdPerfilContra2 = new javax.swing.JPasswordField();
         jLabel46 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
+        panelOpcionesEditarPerfil = new javax.swing.JPanel();
+        LabelEditarPerfil = new javax.swing.JLabel();
         panelLateral = new javax.swing.JPanel();
         PanelPerfil = new javax.swing.JPanel();
         botonPerfil = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        txtPerfilUsuarioeditar = new javax.swing.JLabel();
         PanelImportar = new javax.swing.JPanel();
         BotonImportar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -224,8 +227,8 @@ public class MainViewUX extends javax.swing.JFrame {
         panelReportes = new javax.swing.JPanel();
         botonReportes = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        txtPerfilUsuario = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
+        txtPerfilUsuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -366,10 +369,10 @@ public class MainViewUX extends javax.swing.JFrame {
                 .addComponent(paneReportesCards, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
                 .addComponent(btnGenerarReporte)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(185, Short.MAX_VALUE))
         );
 
-        panelOpcionesReportes.setBackground(new java.awt.Color(28, 30, 63));
+        panelOpcionesReportes.setBackground(new java.awt.Color(26, 96, 129));
 
         BotonActividadLista1.setText("Reportes");
         BotonActividadLista1.setContentAreaFilled(false);
@@ -404,13 +407,13 @@ public class MainViewUX extends javax.swing.JFrame {
         paneReportes.setLayout(paneReportesLayout);
         paneReportesLayout.setHorizontalGroup(
             paneReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelOpcionesReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelOpcionesReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         paneReportesLayout.setVerticalGroup(
             paneReportesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(paneReportesLayout.createSequentialGroup()
-                .addComponent(panelOpcionesReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelOpcionesReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -931,11 +934,11 @@ public class MainViewUX extends javax.swing.JFrame {
 
         jPanel1.add(paneActividadesVerAvance, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 82, 1090, 520));
 
-        panelOpcionesActividades.setBackground(new java.awt.Color(28, 30, 63));
+        panelOpcionesActividades.setBackground(new java.awt.Color(26, 96, 129));
 
+        LabelActividades.setText("Actividades");
         LabelActividades.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         LabelActividades.setForeground(new java.awt.Color(255, 255, 255));
-        LabelActividades.setText("Actividades");
         LabelActividades.setToolTipText("");
 
         javax.swing.GroupLayout panelOpcionesActividadesLayout = new javax.swing.GroupLayout(panelOpcionesActividades);
@@ -995,6 +998,30 @@ public class MainViewUX extends javax.swing.JFrame {
             }
         });
 
+        panelOpcionesImportar.setBackground(new java.awt.Color(26, 96, 129));
+
+        LabelImportar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        LabelImportar.setForeground(new java.awt.Color(255, 255, 255));
+        LabelImportar.setText("Importar");
+        LabelImportar.setToolTipText("");
+
+        javax.swing.GroupLayout panelOpcionesImportarLayout = new javax.swing.GroupLayout(panelOpcionesImportar);
+        panelOpcionesImportar.setLayout(panelOpcionesImportarLayout);
+        panelOpcionesImportarLayout.setHorizontalGroup(
+            panelOpcionesImportarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOpcionesImportarLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(LabelImportar, javax.swing.GroupLayout.PREFERRED_SIZE, 978, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+        panelOpcionesImportarLayout.setVerticalGroup(
+            panelOpcionesImportarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOpcionesImportarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelImportar, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout paneImportarLayout = new javax.swing.GroupLayout(paneImportar);
         paneImportar.setLayout(paneImportarLayout);
         paneImportarLayout.setHorizontalGroup(
@@ -1012,12 +1039,16 @@ public class MainViewUX extends javax.swing.JFrame {
                         .addGroup(paneImportarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnImportarImportar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnImportarSeleccionar))))
-                .addContainerGap(357, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneImportarLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(panelOpcionesImportar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         paneImportarLayout.setVerticalGroup(
             paneImportarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paneImportarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelOpcionesImportar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
@@ -1037,8 +1068,6 @@ public class MainViewUX extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(781, 495));
         jPanel2.setOpaque(false);
-
-        jLabel36.setText("Editar perfil");
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/UntitledPEQUEno.png"))); // NOI18N
         jButton8.setText("Guardar cambios");
@@ -1078,37 +1107,32 @@ public class MainViewUX extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(181, Short.MAX_VALUE)
+                .addGap(135, 135, 135)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton8)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel44)
-                                    .addComponent(jLabel45)
-                                    .addComponent(jLabel46)
-                                    .addComponent(jLabel36)
-                                    .addComponent(jLabel37))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(pwdPerfilContra1)
-                                    .addComponent(txtPerfilCorreo, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPerfilUsuario2, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pwdPerfilContra2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(282, 282, 282))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel44)
+                            .addComponent(jLabel45)
+                            .addComponent(jLabel46)
+                            .addComponent(jLabel37))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(pwdPerfilContra1)
+                            .addComponent(txtPerfilCorreo, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPerfilUsuario2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pwdPerfilContra2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel34)
-                        .addGap(346, 346, 346))))
+                        .addGap(64, 64, 64)))
+                .addContainerGap(328, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(118, 118, 118)
                 .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel36)
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37)
                     .addComponent(txtPerfilUsuario2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1126,22 +1150,50 @@ public class MainViewUX extends javax.swing.JFrame {
                     .addComponent(jLabel46))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton8)
-                .addGap(192, 192, 192))
+                .addContainerGap(85, Short.MAX_VALUE))
+        );
+
+        panelOpcionesEditarPerfil.setBackground(new java.awt.Color(26, 96, 129));
+
+        LabelEditarPerfil.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        LabelEditarPerfil.setForeground(new java.awt.Color(255, 255, 255));
+        LabelEditarPerfil.setText("Editar Perfil");
+        LabelEditarPerfil.setToolTipText("");
+
+        javax.swing.GroupLayout panelOpcionesEditarPerfilLayout = new javax.swing.GroupLayout(panelOpcionesEditarPerfil);
+        panelOpcionesEditarPerfil.setLayout(panelOpcionesEditarPerfilLayout);
+        panelOpcionesEditarPerfilLayout.setHorizontalGroup(
+            panelOpcionesEditarPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOpcionesEditarPerfilLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(LabelEditarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 978, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+        panelOpcionesEditarPerfilLayout.setVerticalGroup(
+            panelOpcionesEditarPerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelOpcionesEditarPerfilLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelEditarPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout panePerfilLayout = new javax.swing.GroupLayout(panePerfil);
         panePerfil.setLayout(panePerfilLayout);
         panePerfilLayout.setHorizontalGroup(
             panePerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1090, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panePerfilLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(panelOpcionesEditarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(panePerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panePerfilLayout.setVerticalGroup(
             panePerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panePerfilLayout.createSequentialGroup()
+                .addComponent(panelOpcionesEditarPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 415, Short.MAX_VALUE))
             .addGroup(panePerfilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jDesktopPane1.setLayer(paneReportes, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -1199,9 +1251,14 @@ public class MainViewUX extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Perfil");
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        txtPerfilUsuarioeditar.setText("Perfil");
+        txtPerfilUsuarioeditar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtPerfilUsuarioeditar.setForeground(new java.awt.Color(255, 255, 255));
+        txtPerfilUsuarioeditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtPerfilUsuarioeditarMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelPerfilLayout = new javax.swing.GroupLayout(PanelPerfil);
         PanelPerfil.setLayout(PanelPerfilLayout);
@@ -1210,7 +1267,7 @@ public class MainViewUX extends javax.swing.JFrame {
             .addGroup(PanelPerfilLayout.createSequentialGroup()
                 .addComponent(botonPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPerfilUsuarioeditar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         PanelPerfilLayout.setVerticalGroup(
@@ -1218,7 +1275,7 @@ public class MainViewUX extends javax.swing.JFrame {
             .addComponent(botonPerfil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(PanelPerfilLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtPerfilUsuarioeditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1237,6 +1294,11 @@ public class MainViewUX extends javax.swing.JFrame {
         jLabel3.setText("Importar");
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelImportarLayout = new javax.swing.GroupLayout(PanelImportar);
         PanelImportar.setLayout(PanelImportarLayout);
@@ -1273,6 +1335,11 @@ public class MainViewUX extends javax.swing.JFrame {
         jLabel4.setText("Actividades");
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelactividadesLayout = new javax.swing.GroupLayout(panelactividades);
         panelactividades.setLayout(panelactividadesLayout);
@@ -1347,6 +1414,11 @@ public class MainViewUX extends javax.swing.JFrame {
         jLabel6.setText("Reportes");
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelReportesLayout = new javax.swing.GroupLayout(panelReportes);
         panelReportes.setLayout(panelReportesLayout);
@@ -1367,43 +1439,50 @@ public class MainViewUX extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_user_male_circle_104px.png"))); // NOI18N
+        jLabel35.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel35MouseClicked(evt);
+            }
+        });
+
         txtPerfilUsuario.setText("Usuario");
-        txtPerfilUsuario.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         txtPerfilUsuario.setForeground(new java.awt.Color(255, 255, 255));
         txtPerfilUsuario.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/icons8_user_male_circle_104px.png"))); // NOI18N
+        txtPerfilUsuario.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout panelLateralLayout = new javax.swing.GroupLayout(panelLateral);
         panelLateral.setLayout(panelLateralLayout);
         panelLateralLayout.setHorizontalGroup(
             panelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLateralLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(panelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelCerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PanelPerfil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelactividades, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(PanelImportar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panelReportes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelLateralLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PanelCerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PanelPerfil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelactividades, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(PanelImportar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelReportes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLateralLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLateralLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
-            .addGroup(panelLateralLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(txtPerfilUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txtPerfilUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
         panelLateralLayout.setVerticalGroup(
             panelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLateralLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel35)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPerfilUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addGap(26, 26, 26)
                 .addComponent(PanelPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelactividades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1436,7 +1515,7 @@ public class MainViewUX extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonPerfilActionPerformed
-       
+        
         paneReportes.setVisible(false);
         paneImportar.setVisible(false);
         paneActividadesBase.setVisible(false);
@@ -1696,6 +1775,53 @@ public class MainViewUX extends javax.swing.JFrame {
         ((CardLayout)paneReportesCards.getLayout()).show(paneReportesCards, ((String)cmbTipoReporte.getSelectedItem()));
     }//GEN-LAST:event_cmbTipoReporteActionPerformed
 
+    private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
+         // TODO add your handling code here:
+        paneReportes.setVisible(false);
+        paneImportar.setVisible(false);
+        paneActividadesBase.setVisible(false);
+        panePerfil.setVisible(true);
+    }//GEN-LAST:event_jLabel35MouseClicked
+
+    private void txtPerfilUsuarioeditarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPerfilUsuarioeditarMouseClicked
+          // TODO add your handling code here:
+        paneReportes.setVisible(false);
+        paneImportar.setVisible(false);
+        paneActividadesBase.setVisible(false);
+        panePerfil.setVisible(true);
+    }//GEN-LAST:event_txtPerfilUsuarioeditarMouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+         // TODO add your handling code here:
+        paneReportes.setVisible(false);
+        paneImportar.setVisible(false);        
+        panePerfil.setVisible(false);
+        paneActividadesBase.setVisible(true);
+        
+        
+             
+        paneActividadesActividad.setVisible(false);
+        paneActividadesVerAvance.setVisible(false);
+        paneActividadesAgregarAvance.setVisible(false);
+        paneActividadesLista.setVisible(true);  
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+         // TODO add your handling code here:
+        paneImportar.setVisible(false);
+        paneActividadesBase.setVisible(false);
+        panePerfil.setVisible(false);
+        paneReportes.setVisible(true);
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+          // TODO add your handling code here:
+        paneReportes.setVisible(false);        
+        paneActividadesBase.setVisible(false);
+        panePerfil.setVisible(false);
+        paneImportar.setVisible(true);
+    }//GEN-LAST:event_jLabel3MouseClicked
+
     private void BotonActividadLista1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonActividadLista1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BotonActividadLista1ActionPerformed
@@ -1706,6 +1832,8 @@ public class MainViewUX extends javax.swing.JFrame {
     private javax.swing.JButton BotonCerrarSesion;
     private javax.swing.JButton BotonImportar;
     private javax.swing.JLabel LabelActividades;
+    private javax.swing.JLabel LabelEditarPerfil;
+    private javax.swing.JLabel LabelImportar;
     private javax.swing.JPanel PanelCerrarSesion;
     private javax.swing.JPanel PanelImportar;
     private javax.swing.JPanel PanelPerfil;
@@ -1738,7 +1866,6 @@ public class MainViewUX extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -1756,7 +1883,6 @@ public class MainViewUX extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
@@ -1798,6 +1924,8 @@ public class MainViewUX extends javax.swing.JFrame {
     private javax.swing.JPanel paneReportesCards;
     private javax.swing.JPanel panelLateral;
     private javax.swing.JPanel panelOpcionesActividades;
+    private javax.swing.JPanel panelOpcionesEditarPerfil;
+    private javax.swing.JPanel panelOpcionesImportar;
     private javax.swing.JPanel panelOpcionesReportes;
     private javax.swing.JPanel panelReportes;
     private javax.swing.JPanel panelactividades;
@@ -1822,6 +1950,7 @@ public class MainViewUX extends javax.swing.JFrame {
     private javax.swing.JTextField txtPerfilCorreo;
     private javax.swing.JLabel txtPerfilUsuario;
     private javax.swing.JTextField txtPerfilUsuario2;
+    private javax.swing.JLabel txtPerfilUsuarioeditar;
     private com.github.lgooddatepicker.components.DatePicker txtReporteFecha1;
     private com.github.lgooddatepicker.components.DatePicker txtReporteFecha2;
     private javax.swing.JTextField txtReporteUsuario;
