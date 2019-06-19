@@ -50,7 +50,6 @@ public class RegisterUX extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(435, 84));
-        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -172,7 +171,7 @@ public class RegisterUX extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String codigoUsuario = "111111111117111153667",
+        String codigoUsuario = "1111111111171111536697",
                 nombre=txtNombre.getText(),
                 correo=txtCorreo.getText(),
                 contra=String.valueOf(pswContrasenia.getPassword());
@@ -212,9 +211,9 @@ public class RegisterUX extends javax.swing.JFrame {
 
     private void btnIrAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIrAtrasActionPerformed
         this.dispose();
-       //parent.show();
-       parent.toFront();
+       //parent.show();       
         parent.setVisible(true);
+        parent.toFront();
        // this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSED));
     }//GEN-LAST:event_btnIrAtrasActionPerformed
 
