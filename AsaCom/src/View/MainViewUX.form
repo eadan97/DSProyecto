@@ -33,7 +33,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="panelLateral" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="1110" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="1100" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
@@ -48,7 +48,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="panelLateral" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Component id="paneMaster" alignment="0" max="32767" attributes="0"/>
+              <Component id="paneMaster" alignment="0" pref="973" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -364,6 +364,9 @@
                               </StringArray>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbReporteActividadActionPerformed"/>
+                          </Events>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                           </AuxValues>
@@ -1726,7 +1729,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnImportarImportar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="791" max="32767" attributes="0"/>
+                      <EmptySpace pref="794" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -2054,7 +2057,6 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="PanelCerrarSesion" alignment="0" max="32767" attributes="0"/>
                       <Component id="PanelPerfil" alignment="1" max="32767" attributes="0"/>
                       <Component id="panelactividades" alignment="1" max="32767" attributes="0"/>
                       <Component id="PanelImportar" alignment="1" max="32767" attributes="0"/>
@@ -2071,6 +2073,10 @@
                                   <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="PanelCerrarSesion" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -2092,9 +2098,9 @@
                   <Component id="panelReportes" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="PanelImportar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="566" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="339" max="-2" attributes="0"/>
                   <Component id="PanelCerrarSesion" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="238" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

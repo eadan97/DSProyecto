@@ -351,6 +351,11 @@ public class MainViewUX extends javax.swing.JFrame {
         paneReporteActividad.setBackground(new java.awt.Color(255, 255, 255));
 
         cmbReporteActividad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbReporteActividad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbReporteActividadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout paneReporteActividadLayout = new javax.swing.GroupLayout(paneReporteActividad);
         paneReporteActividad.setLayout(paneReporteActividadLayout);
@@ -383,9 +388,9 @@ public class MainViewUX extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones Reporte"));
 
-        cbxActividad.setBackground(new java.awt.Color(255, 255, 255));
         cbxActividad.setSelected(true);
         cbxActividad.setText("IdActividad");
+        cbxActividad.setBackground(new java.awt.Color(255, 255, 255));
         cbxActividad.setContentAreaFilled(false);
         cbxActividad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -393,9 +398,9 @@ public class MainViewUX extends javax.swing.JFrame {
             }
         });
 
-        cbxResponsable.setBackground(new java.awt.Color(255, 255, 255));
         cbxResponsable.setSelected(true);
         cbxResponsable.setText("Responsable");
+        cbxResponsable.setBackground(new java.awt.Color(255, 255, 255));
         cbxResponsable.setContentAreaFilled(false);
         cbxResponsable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -403,9 +408,9 @@ public class MainViewUX extends javax.swing.JFrame {
             }
         });
 
-        cbxFechas.setBackground(new java.awt.Color(255, 255, 255));
         cbxFechas.setSelected(true);
         cbxFechas.setText("Fecha");
+        cbxFechas.setBackground(new java.awt.Color(255, 255, 255));
         cbxFechas.setContentAreaFilled(false);
         cbxFechas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -413,9 +418,9 @@ public class MainViewUX extends javax.swing.JFrame {
             }
         });
 
-        cbxHoras.setBackground(new java.awt.Color(255, 255, 255));
         cbxHoras.setSelected(true);
         cbxHoras.setText("Horas Dedicadas");
+        cbxHoras.setBackground(new java.awt.Color(255, 255, 255));
         cbxHoras.setContentAreaFilled(false);
         cbxHoras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -423,9 +428,9 @@ public class MainViewUX extends javax.swing.JFrame {
             }
         });
 
-        cbxDescrpcion.setBackground(new java.awt.Color(255, 255, 255));
         cbxDescrpcion.setSelected(true);
         cbxDescrpcion.setText("Descripción");
+        cbxDescrpcion.setBackground(new java.awt.Color(255, 255, 255));
         cbxDescrpcion.setContentAreaFilled(false);
         cbxDescrpcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -433,9 +438,9 @@ public class MainViewUX extends javax.swing.JFrame {
             }
         });
 
-        cbxCorreo.setBackground(new java.awt.Color(255, 255, 255));
         cbxCorreo.setSelected(true);
         cbxCorreo.setText("Correo");
+        cbxCorreo.setBackground(new java.awt.Color(255, 255, 255));
         cbxCorreo.setContentAreaFilled(false);
         cbxCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1291,7 +1296,7 @@ public class MainViewUX extends javax.swing.JFrame {
                     .addComponent(btnImportarSeleccionar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnImportarImportar)
-                .addContainerGap(791, Short.MAX_VALUE))
+                .addContainerGap(794, Short.MAX_VALUE))
         );
 
         paneMaster.add(paneImportar, "cardImportar");
@@ -1671,7 +1676,6 @@ public class MainViewUX extends javax.swing.JFrame {
             panelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLateralLayout.createSequentialGroup()
                 .addGroup(panelLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(PanelCerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PanelPerfil, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelactividades, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PanelImportar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1684,7 +1688,10 @@ public class MainViewUX extends javax.swing.JFrame {
                                 .addGap(35, 35, 35))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLateralLayout.createSequentialGroup()
                                 .addComponent(txtPerfilUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(55, 55, 55)))))
+                                .addGap(55, 55, 55))))
+                    .addGroup(panelLateralLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(PanelCerrarSesion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelLateralLayout.setVerticalGroup(
@@ -1702,9 +1709,9 @@ public class MainViewUX extends javax.swing.JFrame {
                 .addComponent(panelReportes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PanelImportar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 566, Short.MAX_VALUE)
+                .addGap(339, 339, 339)
                 .addComponent(PanelCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(238, 238, 238))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1713,7 +1720,7 @@ public class MainViewUX extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1110, Short.MAX_VALUE))
+                .addGap(0, 1100, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(206, 206, 206)
@@ -1724,7 +1731,7 @@ public class MainViewUX extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelLateral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(paneMaster, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(paneMaster, javax.swing.GroupLayout.DEFAULT_SIZE, 973, Short.MAX_VALUE))
         );
 
         pack();
@@ -2053,6 +2060,11 @@ public class MainViewUX extends javax.swing.JFrame {
     private void cbxCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCorreoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxCorreoActionPerformed
+
+    private void cmbReporteActividadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbReporteActividadActionPerformed
+         // TODO add your handling code here:
+         fillActivitiesList();
+    }//GEN-LAST:event_cmbReporteActividadActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonActividadLista1;
