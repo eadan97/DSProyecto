@@ -2,12 +2,10 @@ package Controller;
 
 import Model.FlatDecorator;
 import Model.TextDecorator.GeneradorBaseTexto;
-import Model.IDecorador;
 import Model.ItemReporte;
 import Model.TextDecorator.TextoHrDecorator;
 import Model.TextDecorator.TextoKeyDecorator;
 import Model.Reporte;
-import Model.GeneradorBasePdf;
 import Model.IDecorador;
 import java.io.*;
 import java.util.logging.Level;
