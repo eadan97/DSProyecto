@@ -1975,7 +1975,7 @@ public class MainViewUX extends javax.swing.JFrame {
             Logger.getLogger(MainViewUX.class.getName()).log(Level.SEVERE, null, ex);
         }
         actividadesComboModel = new DefaultComboBoxModel(actividadesListModel.toArray());
-   //     cmbReporteActividad.setModel(actividadesComboModel);
+        cmbReporteActividad.setModel(actividadesComboModel);
     }
 
     private int fillAvancesList() {
