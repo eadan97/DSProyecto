@@ -15,6 +15,7 @@ import Model.HtmlDecorator.HtmlPOpenDecorator;
 import Model.HtmlDecorator.HtmlTitleDecorator;
 import Model.IDecorador;
 import Model.ItemReporte;
+import Model.OpcionesReporte;
 import Model.Reporte;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,8 +26,10 @@ import java.util.logging.Logger;
 
 public class GeneradorHTML implements IGenerador {
 
-    public GeneradorHTML() {
+    public OpcionesReporte or;
 
+    public GeneradorHTML(OpcionesReporte or) {
+        this.or = or;
     }
 
     @Override
@@ -52,47 +55,55 @@ public class GeneradorHTML implements IGenerador {
                 dec = new HtmlH1Decorator(dec);
                 dec.setStr("Actividad " + i + " del reporte");
 
-                dec = new HtmlPOpenDecorator(dec);
-                dec = new HtmlKeyDecorator(dec);
-                dec.setStr("Responsable");
-                dec = new FlatDecorator(dec);
-                dec.setStr(itemReporte.getNombre());
-                dec = new HtmlPCloseDecorator(dec);
+                if (or.responsable) {
+                    dec = new HtmlPOpenDecorator(dec);
+                    dec = new HtmlKeyDecorator(dec);
+                    dec.setStr("Responsable");
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(itemReporte.getNombre());
+                    dec = new HtmlPCloseDecorator(dec);
+                }
+                if (or.idActividad) {
+                    dec = new HtmlPOpenDecorator(dec);
+                    dec = new HtmlKeyDecorator(dec);
+                    dec.setStr("Actividad");
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(String.valueOf(itemReporte.getIdActividad()));
+                    dec = new HtmlPCloseDecorator(dec);
+                }
+                if (or.fecha) {
+                    dec = new HtmlPOpenDecorator(dec);
+                    dec = new HtmlKeyDecorator(dec);
+                    dec.setStr("Fecha");
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(itemReporte.getFechaAvance().toString());
+                    dec = new HtmlPCloseDecorator(dec);
+                }
+                if (or.horasDedicadas) {
+                    dec = new HtmlPOpenDecorator(dec);
+                    dec = new HtmlKeyDecorator(dec);
+                    dec.setStr("HorasDedicadas");
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(String.valueOf(itemReporte.getHorasDedicadas()));
+                    dec = new HtmlPCloseDecorator(dec);
+                }
 
-                dec = new HtmlPOpenDecorator(dec);
-                dec = new HtmlKeyDecorator(dec);
-                dec.setStr("Actividad");
-                dec = new FlatDecorator(dec);
-                dec.setStr(String.valueOf(itemReporte.getIdActividad()));
-                dec = new HtmlPCloseDecorator(dec);
-
-                dec = new HtmlPOpenDecorator(dec);
-                dec = new HtmlKeyDecorator(dec);
-                dec.setStr("Fecha");
-                dec = new FlatDecorator(dec);
-                dec.setStr(itemReporte.getFechaAvance().toString());
-                dec = new HtmlPCloseDecorator(dec);
-
-                dec = new HtmlPOpenDecorator(dec);
-                dec = new HtmlKeyDecorator(dec);
-                dec.setStr("HorasDedicadas");
-                dec = new FlatDecorator(dec);
-                dec.setStr(String.valueOf(itemReporte.getHorasDedicadas()));
-                dec = new HtmlPCloseDecorator(dec);
-
-                dec = new HtmlPOpenDecorator(dec);
-                dec = new HtmlKeyDecorator(dec);
-                dec.setStr("Descripcion");
-                dec = new FlatDecorator(dec);
-                dec.setStr(itemReporte.getDescripcion());
-                dec = new HtmlPCloseDecorator(dec);
-
-                dec = new HtmlPOpenDecorator(dec);
-                dec = new HtmlKeyDecorator(dec);
-                dec.setStr("Correo");
-                dec = new FlatDecorator(dec);
-                dec.setStr(itemReporte.getCorreo());
-                dec = new HtmlPCloseDecorator(dec);
+                if (or.descripcion) {
+                    dec = new HtmlPOpenDecorator(dec);
+                    dec = new HtmlKeyDecorator(dec);
+                    dec.setStr("Descripcion");
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(itemReporte.getDescripcion());
+                    dec = new HtmlPCloseDecorator(dec);
+                }
+                if (or.correo) {
+                    dec = new HtmlPOpenDecorator(dec);
+                    dec = new HtmlKeyDecorator(dec);
+                    dec.setStr("Correo");
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(itemReporte.getCorreo());
+                    dec = new HtmlPCloseDecorator(dec);
+                }
 
                 dec = new HtmlBrDecorator(dec);
 

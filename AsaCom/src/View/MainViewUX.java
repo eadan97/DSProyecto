@@ -10,6 +10,7 @@ import Model.Actividad;
 import Model.Avance;
 import Model.Evidencia;
 import Model.ItemReporte;
+import Model.OpcionesReporte;
 import Model.Usuario;
 import static Utils.Utils.safeParseToString;
 import static Utils.Utils.sqlDate;
@@ -465,15 +466,16 @@ public class MainViewUX extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxActividad)
-                    .addComponent(cbxResponsable)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbxCorreo)
+                        .addComponent(cbxDescrpcion))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cbxHoras)
-                        .addComponent(cbxFechas)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbxCorreo)
-                            .addComponent(cbxDescrpcion))))
+                        .addComponent(cbxFechas))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbxActividad)
+                        .addComponent(cbxResponsable)))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -1886,7 +1888,7 @@ public class MainViewUX extends javax.swing.JFrame {
             evidenciasListModel.addElement(Ctrl.getDTOEvidencia().getUnaEvidencia());
             txtEvidenciaPath.setText("");
         } catch (IOException ex) {
-            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainViewUX.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnAgregarEvidenciaActionPerformed
 
@@ -1920,6 +1922,8 @@ public class MainViewUX extends javax.swing.JFrame {
         try {
             String tipo = (String) cmbTipoReporte.getSelectedItem();
             String extencion = (String) cmbFormato.getSelectedItem();
+            OpcionesReporte or = new OpcionesReporte(cbxResponsable.isSelected(), cbxActividad.isSelected(), cbxFechas.isSelected(), cbxHoras.isSelected(), cbxDescrpcion.isSelected(), cbxCorreo.isSelected());
+            
             switch (tipo) {
                 case "Actividad":
                     Ctrl.getDTOReporte().setIdActividad(((Actividad) cmbReporteActividad.getSelectedItem()).getIdActividad());
@@ -1934,7 +1938,7 @@ public class MainViewUX extends javax.swing.JFrame {
                     break;
             }
             Ctrl.CrearReporte(tipo);
-            Ctrl.ExportarReporte(extencion);
+            Ctrl.ExportarReporte(extencion, or);
             reporteListModel.clear();
             for (ItemReporte ir: Ctrl.getDTOReporte().getUnReporte().getItemReportes() ){                
                 reporteListModel.addElement(ItemReporteToString(ir));        
@@ -1944,7 +1948,7 @@ public class MainViewUX extends javax.swing.JFrame {
                     "Operación exitosa",
                     JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException ex) {
-            Logger.getLogger(MainView.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainViewUX.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnGenerarReporteActionPerformed
 

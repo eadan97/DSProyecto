@@ -9,6 +9,7 @@ import Model.FlatDecorator;
 import Model.TextDecorator.GeneradorBaseTexto;
 import Model.IDecorador;
 import Model.ItemReporte;
+import Model.OpcionesReporte;
 import Model.TextDecorator.TextoHrDecorator;
 import Model.TextDecorator.TextoKeyDecorator;
 import Model.Reporte;
@@ -21,18 +22,24 @@ import java.io.FileOutputStream;
  *
  * @author eadan
  */
-public class GeneradorPDF2 extends GeneradorPDF {
+public class GeneradorPDF2 implements IGenerador {
+
+    OpcionesReporte or;
+
+    public GeneradorPDF2(OpcionesReporte or) {
+        this.or = or;
+    }
 
     @Override
     public boolean GenerarReporte(Reporte Reporte) {
-        try{
-            
+        try {
+
             FileOutputStream fi = new FileOutputStream("Reporte X.pdf");
             Document doc = new Document();
             PdfWriter.getInstance(doc, fi);
             doc.open();
             //doc.add(new Paragraph("REPORTE DE AVANCES"));
-            
+
             //doc.add(new Paragraph());
             String infs = "";
             IDecorador dec = new GeneradorBaseTexto("REPORTE DE AVANCES");
@@ -42,49 +49,59 @@ public class GeneradorPDF2 extends GeneradorPDF {
             a = new ResponsableWrapper(a);
             if (responsable is in opciones)
             a = new ResponsableWrapper(a);*/
-            
+
             String parrafo;
             for (ItemReporte itemReporte : Reporte.getItemReportes()) {
                 //todo: Falta meter que sea opcional
-                
-                dec=new TextoHrDecorator(dec);
-                dec = new TextoKeyDecorator(dec);
-                dec.setStr("Responsable");
-                
-                dec= new FlatDecorator(dec);
-                dec.setStr(itemReporte.getNombre());
-                
-                dec = new TextoKeyDecorator(dec);
-                dec.setStr("Actividad");
-                
-                dec= new FlatDecorator(dec);
-                dec.setStr(String.valueOf(itemReporte.getIdActividad()));
-                
-                dec = new TextoKeyDecorator(dec);
-                dec.setStr("Fecha");
-                
-                dec= new FlatDecorator(dec);
-                dec.setStr(itemReporte.getFechaAvance().toString());
-                
-                dec = new TextoKeyDecorator(dec);
-                dec.setStr("HorasDedicadas");
-                
-                dec= new FlatDecorator(dec);
-                dec.setStr(String.valueOf(itemReporte.getHorasDedicadas()));
-                
-                dec = new TextoKeyDecorator(dec);
-                dec.setStr("Descripcion");
-                
-                dec= new FlatDecorator(dec);
-                dec.setStr(itemReporte.getDescripcion());
-                
-                dec = new TextoKeyDecorator(dec);
-                dec.setStr("Correo");
-                
-                dec= new FlatDecorator(dec);
-                dec.setStr(itemReporte.getCorreo());
-                
-                
+
+                dec = new TextoHrDecorator(dec);
+
+                if (or.responsable) {
+                    dec = new TextoKeyDecorator(dec);
+                    dec.setStr("Responsable");
+
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(itemReporte.getNombre());
+                }
+                if (or.idActividad) {
+                    dec = new TextoKeyDecorator(dec);
+                    dec.setStr("Actividad");
+
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(String.valueOf(itemReporte.getIdActividad()));
+                }
+
+                if (or.fecha) {
+                    dec = new TextoKeyDecorator(dec);
+                    dec.setStr("Fecha");
+
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(itemReporte.getFechaAvance().toString());
+                }
+
+                if (or.horasDedicadas) {
+                    dec = new TextoKeyDecorator(dec);
+                    dec.setStr("HorasDedicadas");
+
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(String.valueOf(itemReporte.getHorasDedicadas()));
+                }
+
+                if (or.descripcion) {
+                    dec = new TextoKeyDecorator(dec);
+                    dec.setStr("Descripcion");
+
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(itemReporte.getDescripcion());
+                }
+                if (or.correo) {
+                    dec = new TextoKeyDecorator(dec);
+                    dec.setStr("Correo");
+
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(itemReporte.getCorreo());
+                }
+
                 /*parrafo = "\n\n**************************************************";
                 parrafo+= "\nResponsable: " + itemReporte.getNombre();
                 parrafo+= "\nActividad: " + itemReporte.getIdActividad();
@@ -92,17 +109,15 @@ public class GeneradorPDF2 extends GeneradorPDF {
                 parrafo+= "\nHorasDedicadas: " + itemReporte.getHorasDedicadas();
                 parrafo+= "\nDescripcion: " + itemReporte.getDescripcion();
                 parrafo+= "\nCorreo: " + itemReporte.getCorreo();*/
-                
                 //infs += parrafo;
             }
             //infs += "\n**************************************************";
-            dec=new TextoHrDecorator(dec);
+            dec = new TextoHrDecorator(dec);
             //doc.add(new Paragraph(infs));
             doc.add(new Paragraph(dec.getSource()));
             doc.close();
             return true;
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             return false;
         }
     }

@@ -7,14 +7,17 @@ import Model.TextDecorator.TextoHrDecorator;
 import Model.TextDecorator.TextoKeyDecorator;
 import Model.Reporte;
 import Model.IDecorador;
+import Model.OpcionesReporte;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GeneradorTXT implements IGenerador {
 
-    public GeneradorTXT() {
+    public OpcionesReporte or;
 
+    public GeneradorTXT(OpcionesReporte or) {
+        this.or = or;
     }
 
     @Override
@@ -33,38 +36,49 @@ public class GeneradorTXT implements IGenerador {
             IDecorador dec = new GeneradorBaseTexto("REPORTE DE AVANCES");
             for (ItemReporte itemReporte : arg0.getItemReportes()) {
                 //todo: Falta meter que sea opcional
-                
-                dec=new TextoHrDecorator(dec);
-                dec = new TextoKeyDecorator(dec);
-                dec.setStr("Responsable");
-                
-                dec= new FlatDecorator(dec);
-                dec.setStr(itemReporte.getNombre());
-                dec = new TextoKeyDecorator(dec);
-                dec.setStr("Actividad");
-                dec= new FlatDecorator(dec);
-                dec.setStr(String.valueOf(itemReporte.getIdActividad()));
-                dec = new TextoKeyDecorator(dec);
-                dec.setStr("Fecha");
-                dec= new FlatDecorator(dec);
-                dec.setStr(itemReporte.getFechaAvance().toString());
-                dec = new TextoKeyDecorator(dec);
-                dec.setStr("HorasDedicadas");
-                dec= new FlatDecorator(dec);
-                dec.setStr(String.valueOf(itemReporte.getHorasDedicadas()));
-                dec = new TextoKeyDecorator(dec);
-                dec.setStr("Descripcion");
-                dec= new FlatDecorator(dec);
-                dec.setStr(itemReporte.getDescripcion());
-                dec = new TextoKeyDecorator(dec);
-                dec.setStr("Correo");
-                dec= new FlatDecorator(dec);
-                dec.setStr(itemReporte.getCorreo());
+
+                dec = new TextoHrDecorator(dec);
+
+                if (or.responsable) {
+                    dec = new TextoKeyDecorator(dec);
+                    dec.setStr("Responsable");
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(itemReporte.getNombre());
+                }
+                if (or.idActividad) {
+                    dec = new TextoKeyDecorator(dec);
+                    dec.setStr("Actividad");
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(String.valueOf(itemReporte.getIdActividad()));
+                }
+                if (or.fecha) {
+                    dec = new TextoKeyDecorator(dec);
+                    dec.setStr("Fecha");
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(itemReporte.getFechaAvance().toString());
+                }
+                if (or.horasDedicadas) {
+                    dec = new TextoKeyDecorator(dec);
+                    dec.setStr("HorasDedicadas");
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(String.valueOf(itemReporte.getHorasDedicadas()));
+                }
+                if (or.descripcion) {
+                    dec = new TextoKeyDecorator(dec);
+                    dec.setStr("Descripcion");
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(itemReporte.getDescripcion());
+                }
+                if (or.correo) {
+                    dec = new TextoKeyDecorator(dec);
+                    dec.setStr("Correo");
+                    dec = new FlatDecorator(dec);
+                    dec.setStr(itemReporte.getCorreo());
+                }
             }
-            dec=new TextoHrDecorator(dec);
+            dec = new TextoHrDecorator(dec);
 
             //String texto = "Prueba de archivo txt";
-
             escribir = new FileWriter(archivo);
             linea = new PrintWriter(escribir);
 
@@ -80,4 +94,3 @@ public class GeneradorTXT implements IGenerador {
 
     }
 }
-

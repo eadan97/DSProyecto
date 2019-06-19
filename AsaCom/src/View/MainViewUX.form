@@ -430,16 +430,18 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="cbxActividad" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="cbxResponsable" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="cbxCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbxDescrpcion" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="cbxHoras" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="cbxFechas" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                                          <Component id="cbxCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="cbxDescrpcion" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                  </Group>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="cbxActividad" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="cbxResponsable" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="30" max="32767" attributes="0"/>
@@ -450,11 +452,11 @@
                   <SubComponents>
                     <Component class="javax.swing.JCheckBox" name="cbxActividad">
                       <Properties>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="IdActividad"/>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="selected" type="boolean" value="true"/>
-                        <Property name="text" type="java.lang.String" value="IdActividad"/>
                         <Property name="contentAreaFilled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
@@ -463,11 +465,11 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="cbxResponsable">
                       <Properties>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="Responsable"/>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="selected" type="boolean" value="true"/>
-                        <Property name="text" type="java.lang.String" value="Responsable"/>
                         <Property name="contentAreaFilled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
@@ -476,11 +478,11 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="cbxFechas">
                       <Properties>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="Fecha"/>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="selected" type="boolean" value="true"/>
-                        <Property name="text" type="java.lang.String" value="Fecha"/>
                         <Property name="contentAreaFilled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
@@ -489,11 +491,11 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="cbxHoras">
                       <Properties>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="Horas Dedicadas"/>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="selected" type="boolean" value="true"/>
-                        <Property name="text" type="java.lang.String" value="Horas Dedicadas"/>
                         <Property name="contentAreaFilled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
@@ -502,11 +504,11 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="cbxDescrpcion">
                       <Properties>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="Descripci&#xf3;n"/>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="selected" type="boolean" value="true"/>
-                        <Property name="text" type="java.lang.String" value="Descripci&#xf3;n"/>
                         <Property name="contentAreaFilled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
@@ -515,11 +517,11 @@
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="cbxCorreo">
                       <Properties>
+                        <Property name="selected" type="boolean" value="true"/>
+                        <Property name="text" type="java.lang.String" value="Correo"/>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="ff" green="ff" red="ff" type="rgb"/>
                         </Property>
-                        <Property name="selected" type="boolean" value="true"/>
-                        <Property name="text" type="java.lang.String" value="Correo"/>
                         <Property name="contentAreaFilled" type="boolean" value="false"/>
                       </Properties>
                       <Events>
