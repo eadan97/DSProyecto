@@ -3,29 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Model.HtmlDecorator;
+
+import Model.GeneradorDecorator;
+import Model.IDecorador;
 
 /**
  *
  * @author eadan
  */
-public class PdfKeyDecorator extends GeneradorDecorator{
+public class HtmlHeadOpenDecorator extends GeneradorDecorator{
 
     
-    public PdfKeyDecorator(IDecorador wrappee) {
+    public HtmlHeadOpenDecorator(IDecorador wrappee) {
         super(wrappee);
     }
 
     @Override
     public void setStr(String str) {
-        this.str="\n"+str+": "; 
     }
 
     
- 
     @Override
     public String getSource() {
-        return wrappee.getSource()+str; //To change body of generated methods, choose Tools | Templates.
+        return wrappee.getSource()+"<head>"; //To change body of generated methods, choose Tools | Templates.
     }
     
 }

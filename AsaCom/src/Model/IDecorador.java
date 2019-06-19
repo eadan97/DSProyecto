@@ -10,7 +10,7 @@ package Model;
  * @author eadan
  */
 public abstract class IDecorador {
-    String str;
+    public String str;
 
     public abstract String getSource();
     public String getStr() {
