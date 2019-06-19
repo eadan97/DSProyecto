@@ -6,11 +6,11 @@
 package Controller;
 
 import Model.FlatDecorator;
-import Model.GeneradorBasePdf;
+import Model.TextDecorator.GeneradorBaseTexto;
 import Model.IDecorador;
 import Model.ItemReporte;
-import Model.PdfHrDecorator;
-import Model.PdfKeyDecorator;
+import Model.TextDecorator.TextoHrDecorator;
+import Model.TextDecorator.TextoKeyDecorator;
 import Model.Reporte;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
@@ -35,7 +35,7 @@ public class GeneradorPDF2 extends GeneradorPDF {
             
             //doc.add(new Paragraph());
             String infs = "";
-            IDecorador dec = new GeneradorBasePdf("REPORTE DE AVANCES");
+            IDecorador dec = new GeneradorBaseTexto("REPORTE DE AVANCES");
             /*if (responsable is in opciones)
             a = new ResponsableWrapper(a);
             if (responsable is in opciones)
@@ -47,30 +47,40 @@ public class GeneradorPDF2 extends GeneradorPDF {
             for (ItemReporte itemReporte : Reporte.getItemReportes()) {
                 //todo: Falta meter que sea opcional
                 
-                dec=new PdfHrDecorator(dec);
-                dec = new PdfKeyDecorator(dec);
+                dec=new TextoHrDecorator(dec);
+                dec = new TextoKeyDecorator(dec);
                 dec.setStr("Responsable");
                 
                 dec= new FlatDecorator(dec);
                 dec.setStr(itemReporte.getNombre());
-                dec = new PdfKeyDecorator(dec);
+                
+                dec = new TextoKeyDecorator(dec);
                 dec.setStr("Actividad");
+                
                 dec= new FlatDecorator(dec);
                 dec.setStr(String.valueOf(itemReporte.getIdActividad()));
-                dec = new PdfKeyDecorator(dec);
+                
+                dec = new TextoKeyDecorator(dec);
                 dec.setStr("Fecha");
+                
                 dec= new FlatDecorator(dec);
                 dec.setStr(itemReporte.getFechaAvance().toString());
-                dec = new PdfKeyDecorator(dec);
+                
+                dec = new TextoKeyDecorator(dec);
                 dec.setStr("HorasDedicadas");
+                
                 dec= new FlatDecorator(dec);
                 dec.setStr(String.valueOf(itemReporte.getHorasDedicadas()));
-                dec = new PdfKeyDecorator(dec);
+                
+                dec = new TextoKeyDecorator(dec);
                 dec.setStr("Descripcion");
+                
                 dec= new FlatDecorator(dec);
                 dec.setStr(itemReporte.getDescripcion());
-                dec = new PdfKeyDecorator(dec);
+                
+                dec = new TextoKeyDecorator(dec);
                 dec.setStr("Correo");
+                
                 dec= new FlatDecorator(dec);
                 dec.setStr(itemReporte.getCorreo());
                 
@@ -86,7 +96,7 @@ public class GeneradorPDF2 extends GeneradorPDF {
                 //infs += parrafo;
             }
             //infs += "\n**************************************************";
-            dec=new PdfHrDecorator(dec);
+            dec=new TextoHrDecorator(dec);
             //doc.add(new Paragraph(infs));
             doc.add(new Paragraph(dec.getSource()));
             doc.close();

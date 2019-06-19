@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Model.HtmlDecorator;
+
+import Model.GeneradorDecorator;
+import Model.IDecorador;
 
 /**
  *
  * @author eadan
  */
-public class PdfHrDecorator extends GeneradorDecorator{
+public class HtmlBodyOpenDecorator extends GeneradorDecorator{
 
     
-    public PdfHrDecorator(IDecorador wrappee) {
+    public HtmlBodyOpenDecorator(IDecorador wrappee) {
         super(wrappee);
-        str="\n*****************************";
     }
 
     @Override
@@ -22,10 +24,9 @@ public class PdfHrDecorator extends GeneradorDecorator{
     }
 
     
- 
     @Override
     public String getSource() {
-        return wrappee.getSource()+str; //To change body of generated methods, choose Tools | Templates.
+        return wrappee.getSource()+"<body>"; //To change body of generated methods, choose Tools | Templates.
     }
     
 }
