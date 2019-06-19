@@ -218,7 +218,7 @@ public class LoginUX extends javax.swing.JFrame {
             //
             System.out.println("Bienvenido " + Nombre);
             this.setVisible(false);
-            new View.MainViewUX1(this, Uingreso).setVisible(true);
+            new View.MainViewUX(this, Uingreso).setVisible(true);
         }
         
         new LoginUX().enable();
@@ -235,6 +235,7 @@ public class LoginUX extends javax.swing.JFrame {
         // TODO add your handling code here:
        this.setVisible(false);
         new RegisterUX(this).setVisible(true);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
