@@ -190,6 +190,7 @@ public class LoginUX extends javax.swing.JFrame {
 
     private void botonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonIniciarSesionActionPerformed
         // TODO add your handling code here:
+       
                 String IdUsuario = txtNombreUsuario.getText();
         Ctrl.getDTOUsuario().getUnUsuario().setNombre(IdUsuario);
         Ctrl.getDTOUsuario().getUnUsuario().setPassword(String.valueOf(txtPasswordUsuario.getPassword()));
@@ -217,7 +218,7 @@ public class LoginUX extends javax.swing.JFrame {
             //
             System.out.println("Bienvenido " + Nombre);
             this.setVisible(false);
-            new View.MainView(this, Uingreso).setVisible(true);
+            new View.MainViewUX1(this, Uingreso).setVisible(true);
         }
         
         new LoginUX().enable();
