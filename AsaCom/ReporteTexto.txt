@@ -1,0 +1,24 @@
+REPORTE DE AVANCES
+***************************************
+*****************************
+Responsable: test
+Actividad: 156
+Fecha: 2019-06-15
+HorasDedicadas: 0
+Descripcion: test
+Correo: test
+*****************************
+Responsable: test
+Actividad: 156
+Fecha: 2019-06-15
+HorasDedicadas: 0
+Descripcion: test
+Correo: test
+*****************************
+Responsable: test
+Actividad: 156
+Fecha: 2019-06-18
+HorasDedicadas: 1
+Descripcion: cosa
+Correo: test
+*****************************

@@ -33,10 +33,10 @@ public class Controladorcito extends Controlador{
                generador=new GeneradorTXT();
                break;
             case "HTML":
-               generador=new GeneradorPDF2();
+               generador=new GeneradorHTML();
                break;
             case "PDF":
-                generador=new GeneradorHTML();
+                generador=new GeneradorPDF2();
                 break;
            default:  
                super.ExportarReporte();

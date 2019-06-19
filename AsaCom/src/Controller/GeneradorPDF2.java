@@ -54,31 +54,31 @@ public class GeneradorPDF2 extends GeneradorPDF {
                 dec= new FlatDecorator(dec);
                 dec.setStr(itemReporte.getNombre());
                 
-                dec = new PdfKeyDecorator(dec);
+                dec = new TextoKeyDecorator(dec);
                 dec.setStr("Actividad");
                 
                 dec= new FlatDecorator(dec);
                 dec.setStr(String.valueOf(itemReporte.getIdActividad()));
                 
-                dec = new PdfKeyDecorator(dec);
+                dec = new TextoKeyDecorator(dec);
                 dec.setStr("Fecha");
                 
                 dec= new FlatDecorator(dec);
                 dec.setStr(itemReporte.getFechaAvance().toString());
                 
-                dec = new PdfKeyDecorator(dec);
+                dec = new TextoKeyDecorator(dec);
                 dec.setStr("HorasDedicadas");
                 
                 dec= new FlatDecorator(dec);
                 dec.setStr(String.valueOf(itemReporte.getHorasDedicadas()));
                 
-                dec = new PdfKeyDecorator(dec);
+                dec = new TextoKeyDecorator(dec);
                 dec.setStr("Descripcion");
                 
                 dec= new FlatDecorator(dec);
                 dec.setStr(itemReporte.getDescripcion());
                 
-                dec = new PdfKeyDecorator(dec);
+                dec = new TextoKeyDecorator(dec);
                 dec.setStr("Correo");
                 
                 dec= new FlatDecorator(dec);
